@@ -13,6 +13,7 @@ class App extends Component {
       <Router>
       <div className="App">
         <ButtonAppBar/>
+        {/* convention for nameing signin = login */}
         <Route path="/Sign-In" component={SignIn} />
         <Route path="/registration/" component={RegistrationForm}/>
       </div>
