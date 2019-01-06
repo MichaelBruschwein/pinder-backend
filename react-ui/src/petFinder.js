@@ -4,6 +4,6 @@ import './App.css';
 export default class petFinder extends Component {
     render() {
       return (
-          <div />
+          <div>petFinder</div> 
       )}
     }

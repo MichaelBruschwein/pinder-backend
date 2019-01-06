@@ -19,11 +19,11 @@ export default class App extends Component {
         <ButtonAppBar/>
         {/* convention for nameing signin = login */}
         <Route path="/Sign-In" component={SignIn} />
-        <Route path="/registration/" component={RegistrationForm}/>
+        <Route path="/registration" component={RegistrationForm}/>
         <Route path="/login/" component={Login}/>
-        <Route path="/petFinder/" component={PetFinder}/>
-        <Route path="/matches/" component={Matches}/>
-        <Route path="/" component={Home}/>
+        <Route path="/petFinder" component={PetFinder}/>
+        <Route path="/matches" component={Matches}/>
+        <Route exact path="/" component={Home}/>
       </div>
       </Router>
     );

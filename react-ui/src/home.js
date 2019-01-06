@@ -4,6 +4,6 @@ import './App.css';
 export default class home extends Component {
     render() {
       return (
-          <div />
+          <div>home</div>
       )}
     }
