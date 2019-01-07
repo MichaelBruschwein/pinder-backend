@@ -49,11 +49,11 @@ function MediaCard(props) {
                         container
                         alignItems="flex-end"
                     >
-                        <Button size="large" color="secondary">
+                        <Button size="large" variant="contained" color="secondary">
                             Dislike
         </Button>
                     </Grid>
-                    <Button size="large" color="primary">
+                    <Button size="large" variant="contained" color="primary">
                         Like
         </Button>
                 </CardActions>
