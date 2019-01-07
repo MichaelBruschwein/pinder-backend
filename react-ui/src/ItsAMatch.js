@@ -81,7 +81,7 @@ function ItsAMatch(props) {
                         </Button>
                     </Grid>
                         <Button size="large" variant="contained" color="primary">
-                        Go to Messages
+                        Go to Matches
                         </Button>
                 </CardActions>
             </CardActionArea>
