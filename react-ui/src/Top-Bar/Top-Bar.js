@@ -5,9 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { BrowserRouter as Link } from "react-router-dom";
+// import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
+import "./Top-Bar.css"
 
 const styles = {
   root: {
@@ -22,6 +23,7 @@ const styles = {
   },
 };
 
+
 function ButtonAppBar(props) {
   const { classes } = props;
   return (
@@ -31,8 +33,8 @@ function ButtonAppBar(props) {
             <Button variant="contained" color="secondary">Pinder</Button>
           <Typography variant="h6" color="inherit" className={classes.grow}>
           </Typography>
-          <Link to="/matches"><Button color="inherit">Matches</Button></Link>
           <Button color="inherit">Pet Finder</Button>
+          <Link to="/matches"><Button color="inherit">Matches</Button></Link>
           <Button color="inherit">Register</Button>
           <Button color="inherit">Login / Logout</Button>
         </Toolbar>

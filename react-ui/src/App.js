@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SignIn from './SignIn.js'
-import ButtonAppBar from './Top-Bar.js'
+import ButtonAppBar from './Top-Bar/Top-Bar.js'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import RegistrationForm from './RegistrationForm.js'
 import MediaCard from './Matches.js'
