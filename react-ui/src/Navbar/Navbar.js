@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import { BrowserRouter as Link } from "react-router-dom";
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
-import "./Top-Bar.css"
+import "./Navbar.css"
 
 const styles = {
   root: {
@@ -24,7 +24,7 @@ const styles = {
 };
 
 
-function ButtonAppBar(props) {
+function Navbar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -43,8 +43,8 @@ function ButtonAppBar(props) {
   );
 }
 
-ButtonAppBar.propTypes = {
+Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(Navbar);

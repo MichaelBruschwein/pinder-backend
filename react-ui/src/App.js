@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import SignIn from './SignIn.js'
-import ButtonAppBar from './Top-Bar/Top-Bar.js'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import RegistrationForm from './RegistrationForm.js'
 import MediaCard from './Matches.js'
+import Navbar from './Navbar/Navbar';
 
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
-        <ButtonAppBar/>
+        <Navbar/>
         {/* convention for nameing signin = login */}
         <Route path="/Sign-In" component={SignIn} />
         <Route path="/registration/" component={RegistrationForm}/>
