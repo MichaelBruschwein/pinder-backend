@@ -12,6 +12,7 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const styles = theme => ({
   main: {
@@ -45,7 +46,7 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
+function Login(props) {
   const { classes } = props;
 
   return (
@@ -80,6 +81,7 @@ function SignIn(props) {
           >
             Sign in
           </Button>
+          <Link to="/register">
           <Button
             type="submit"
             fullWidth
@@ -89,14 +91,15 @@ function SignIn(props) {
           >
             Not a Member? Click Here to Register
           </Button>
+          </Link>
         </form>
       </Paper>
     </main>
   );
 }
 
-SignIn.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Login);

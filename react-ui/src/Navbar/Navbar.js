@@ -30,13 +30,13 @@ function Navbar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-            <Button variant="contained" color="secondary">Pinder</Button>
+            <Link to="/"><Button variant="contained" color="secondary">Pinder</Button></Link>
           <Typography variant="h6" color="inherit" className={classes.grow}>
           </Typography>
           <Button color="inherit">Pet Finder</Button>
           <Link to="/matches"><Button color="inherit">Matches</Button></Link>
-          <Button color="inherit">Register</Button>
-          <Button color="inherit">Login / Logout</Button>
+          <Link to="/register"><Button color="inherit">Register</Button> </Link>
+          <Link to="/login"><Button color="inherit">Login / Logout</Button></Link>
         </Toolbar>
       </AppBar>
     </div>
