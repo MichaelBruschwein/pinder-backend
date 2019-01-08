@@ -92,6 +92,7 @@ class TextFields extends React.Component {
           value={this.state.name}
           onChange={this.handleChange('name')}
           margin="normal"
+          fullWidth
         />
         </CardContent>
         <TextField
@@ -100,6 +101,7 @@ class TextFields extends React.Component {
           value={this.state.username}
           onChange={this.handleChange('username')}
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Email"
@@ -108,6 +110,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('email')}
           type="email"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Email-Confirmation"
@@ -116,6 +119,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('confirm_email')}
           type="email"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Password"
@@ -124,6 +128,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('password')}
           type="password"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Password-Confirmation"
@@ -132,6 +137,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('confirm_password')}
           type="password"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Species"
@@ -140,6 +146,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('species')}
           type="text"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Sex"
@@ -148,6 +155,7 @@ class TextFields extends React.Component {
           value={this.state.sex}
           onChange={this.handleChange('sex')}
           margin="normal"
+          fullWidth
           >
           {sex.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -161,6 +169,7 @@ class TextFields extends React.Component {
           value={this.state.city}
           onChange={this.handleChange('city')}
           margin="normal"
+          fullWidth
         />
         <TextField
           id="State"
@@ -168,6 +177,7 @@ class TextFields extends React.Component {
           value={this.state.state}
           onChange={this.handleChange('state')}
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Age"
@@ -176,6 +186,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('age')}
           type="number"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Bio"
