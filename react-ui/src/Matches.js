@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { CardHeader } from '@material-ui/core';
 
 
 const styles = {
@@ -20,50 +21,77 @@ const styles = {
     },
 };
 
-function MediaCard(props) {
+function ItsAMatch(props) {
     const { classes } = props;
     return (
-        <Grid
-            container
-            justify="center"
-            alignItems="center">
-            <Card className={classes.card}>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
-                        title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Lizard
+        <Card>
+            <CardHeader
+                title="Congratulations its a Match!"
+            >
+            </CardHeader>
+
+            <Grid container spacing={32} justify="center">
+                <Grid item xs={6}>
+                    <Card className={classes.card}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    Lizard
           </Typography>
-                        <Typography component="p">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
+                                <Typography component="p">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
           </Typography>
-                    </CardContent>
-                </CardActionArea>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                {/* Break between cards for reference */}
+                <Grid item xs={6}>
+                    <Card className={classes.card}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image="http://rivista-cdn.reptilesmagazine.com/images/cache/cache_d/cache_5/cache_d/frilled-lizard-shutterstock_739998265-82048d5d.jpeg?ver=1542816872&aspectratio=1.5"
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    Lizard
+          </Typography>
+                                <Typography component="p">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
+          </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            </Grid>
+            <CardActionArea>
                 <CardActions>
-                    <Grid
-                        container
-                        alignItems="flex-end"
-                    >
+                    <Grid container alignItems="flex-end">
                         <Button size="large" variant="contained" color="secondary">
-                            Dislike
-        </Button>
+                            Contine Finding Pets
+                        </Button>
                     </Grid>
-                    <Button size="large" variant="contained" color="primary">
-                        Like
-        </Button>
+                        <Button size="large" variant="contained" color="primary">
+                        Go to Matches
+                        </Button>
                 </CardActions>
-            </Card>
-        </Grid>
+            </CardActionArea>
+        </Card>
+
     );
 }
 
-MediaCard.propTypes = {
+ItsAMatch.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MediaCard);
+export default withStyles(styles)(ItsAMatch);

@@ -33,7 +33,7 @@ function Navbar(props) {
             <Link to="/"><Button variant="contained" color="secondary">Pinder</Button></Link>
           <Typography variant="h6" color="inherit" className={classes.grow}>
           </Typography>
-          <Button color="inherit">Pet Finder</Button>
+          <Link to="/finder"><Button color="inherit">Finder</Button></Link>
           <Link to="/matches"><Button color="inherit">Matches</Button></Link>
           <Link to="/register"><Button color="inherit">Register</Button> </Link>
           <Link to="/login"><Button color="inherit">Login / Logout</Button></Link>

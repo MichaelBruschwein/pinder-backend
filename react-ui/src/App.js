@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from './Login.js'
 import { BrowserRouter as Router, Route} from "react-router-dom";
-import RegistrationForm from './RegistrationForm.js'
-import MediaCard from './Matches.js'
+import Register from './Register'
+import Finder from './Finder'
 import Navbar from './Navbar/Navbar.js';
-import ItsAMatch from './ItsAMatch.js';
+import Matches from './Matches';
 import Home from './Home.js';
 
 
@@ -18,9 +18,9 @@ class App extends Component {
         {/* convention for nameing signin = login */}
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
-        <Route path="/register" component={RegistrationForm}/>
-        <Route path="/matches" component={MediaCard}/>
-        <Route path="/itsAMatch" component={ItsAMatch}/>
+        <Route path="/register" component={Register}/>
+        <Route path="/finder" component={Finder}/>
+        <Route path="/matches" component={Matches}/>
       </div>
       </Router> 
     );
