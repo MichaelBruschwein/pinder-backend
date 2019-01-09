@@ -15,14 +15,13 @@ class App extends Component {
       <Router>
       <div className="App">
         <Navbar/>
-        {/* convention for nameing signin = login */}
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
         <Route path="/finder" component={Finder}/>
         <Route path="/matches" component={Matches}/>
       </div>
-      </Router> 
+      </Router>
     );
   }
 }
