@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const styles = theme => ({
@@ -69,7 +71,8 @@ class TextFields extends React.Component {
             confirm_password:'',
             species:'',
             sex:'',
-            location:'',
+            city:'',
+            state:'',
             age:0,
             bio:''
       })
@@ -81,27 +84,33 @@ class TextFields extends React.Component {
     const { classes } = this.props;
     return (
       <form className={classes.container} noValidate autoComplete="off">
+      <Card>
+        <CardContent>
         <TextField
           id="Name"
-          label="Name"
+          label="Name (ex. John Doe)"
           value={this.state.name}
           onChange={this.handleChange('name')}
           margin="normal"
+          fullWidth
         />
+        </CardContent>
         <TextField
           id="Username"
-          label="Username"
+          label="Username (ex. DogLover77)"
           value={this.state.username}
           onChange={this.handleChange('username')}
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Email"
-          label="Email"
+          label="Email (ex. John@gmail.com)"
           value={this.state.email}
           onChange={this.handleChange('email')}
           type="email"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Email-Confirmation"
@@ -110,6 +119,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('confirm_email')}
           type="email"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Password"
@@ -118,6 +128,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('password')}
           type="password"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Password-Confirmation"
@@ -126,14 +137,16 @@ class TextFields extends React.Component {
           onChange={this.handleChange('confirm_password')}
           type="password"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Species"
-          label="Species"
+          label="Species (ex. Cat)"
           value={this.state.species}
           onChange={this.handleChange('species')}
           type="text"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Sex"
@@ -142,6 +155,7 @@ class TextFields extends React.Component {
           value={this.state.sex}
           onChange={this.handleChange('sex')}
           margin="normal"
+          fullWidth
           >
           {sex.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -150,24 +164,33 @@ class TextFields extends React.Component {
           ))}
         </TextField>
         <TextField
-          id="Location"
-          label="Location"
-          value={this.state.location}
-          onChange={this.handleChange('location')}
-          type="location"
+          id="City"
+          label="City (ex. Bozeman)"
+          value={this.state.city}
+          onChange={this.handleChange('city')}
           margin="normal"
+          fullWidth
+        />
+        <TextField
+          id="State"
+          label="State (ex. MT)"
+          value={this.state.state}
+          onChange={this.handleChange('state')}
+          margin="normal"
+          fullWidth
         />
         <TextField
           id="Age"
-          label="Age"
+          label="Age of Pet"
           value={this.state.age}
           onChange={this.handleChange('age')}
           type="number"
           margin="normal"
+          fullWidth
         />
         <TextField
           id="Bio"
-          label="Bio"
+          label="Bio (Limit 500 Characters)"
           value={this.state.bio}
           onChange={this.handleChange('bio')}
           type="text"
@@ -185,6 +208,7 @@ class TextFields extends React.Component {
           >
             Submit
           </Button>
+          </Card>
       </form>
     );
   }

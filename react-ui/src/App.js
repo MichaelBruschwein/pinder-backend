@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import SignIn from './SignIn.js'
-import ButtonAppBar from './Top-Bar.js'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import RegistrationForm from './RegistrationForm.js'
-import Login from './login.js'
-import PetFinder from './petFinder.js'
-import Matches from './matches.js'
-import Home from './home.js'
+import Login from './Login.js'
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import Register from './Register'
+import Finder from './Finder'
+import Navbar from './Navbar/Navbar.js';
+import Matches from './Matches';
+import Home from './Home.js';
 
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <Router>
       <div className="App">
-        <ButtonAppBar/>
-        {/* convention for nameing signin = login */}
-        <Route path="/Sign-In" component={SignIn} />
-        <Route path="/registration" component={RegistrationForm}/>
-        <Route path="/login/" component={Login}/>
-        <Route path="/petFinder" component={PetFinder}/>
+        <Navbar/>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register}/>
+        <Route path="/finder" component={Finder}/>
         <Route path="/matches" component={Matches}/>
-        <Route exact path="/" component={Home}/>
       </div>
       </Router>
     );
   }
 }
 
+export default App;
