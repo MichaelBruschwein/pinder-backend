@@ -76,6 +76,7 @@ class TextFields extends React.Component {
             age:0,
             bio:''
       })
+      // axios.put call to backend.
       console.log(this.state)
   }
   
