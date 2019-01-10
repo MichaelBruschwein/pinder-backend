@@ -6,7 +6,7 @@ import Register from './Register'
 import Finder from './Finder'
 import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
-import Home from './Home.js';
+import Home from './Home';
 
 
 class App extends Component {
