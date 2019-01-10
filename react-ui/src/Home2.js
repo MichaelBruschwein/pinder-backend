@@ -20,7 +20,12 @@ export default class Home extends Component {
         this.setState({ random: this.state.random + rand });
     }
     componentDidMount(){
-        {this.pickRandom()}
+        {
+            if(this.pickRandom()===1){
+                
+            }
+            
+        }
     }
 
     render() {
