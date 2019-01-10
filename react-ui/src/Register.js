@@ -47,8 +47,9 @@ class TextFields extends React.Component {
             confirm_password:'',
             species:'',
             sex:'',
-            location:'',
-            age:0,
+            city:'',
+            state:'',
+            age:'',
             bio:''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -62,8 +63,6 @@ class TextFields extends React.Component {
     });
   };
   checkForm(){
-    //check to see if all input feilds have some value entered.
-    // console.log(Object.values(this.state))
     let counter = 0;
     Object.values(this.state).forEach((v)=>{
       if (v.length < 1){
@@ -71,38 +70,35 @@ class TextFields extends React.Component {
       }
     })
     if(counter >= 1){
-      console.log(this.state.sex)
+      console.log(counter)
       alert("please make sure all forms are filled out")
-      counter = 0;
+    }else if(counter === 0){
+      this.handleSubmit()
     }
-    //we want to go over each input to see if there is a value there.
-    //if there is a value there contine moving through all values.
-    //if there isnt a value there alert user that there must be a value there in order to contine submiting.
-    //if both conditions are met submit the form to database to add the user.
+    counter = 0;
   }
+  
   handleSubmit(){
-      console.log(this.state)
-      if (this.state.email === this.state.confirm_email && this.state.password === this.state.confirm_password){
-        console.log("hello")
-      }else{
-        console.log("not the same")
+      if(this.state.email !== this.state.confirm_email){
+        alert("please make sure that your emails match")
+      }else if(this.state.password !== this.state.confirm_password){
+        alert("please make sure that your passwords match")
+      } else{ // axios.put call to backend.
+        this.setState({
+                name: '',
+                username:'',
+                email:'',
+                confirm_email:'',
+                password:'',
+                confirm_password:'',
+                species:'',
+                sex:'',
+                city:'',
+                state:'',
+                age:'',
+                bio:''
+          })
       }
-      this.setState({
-            name: '',
-            username:'',
-            email:'',
-            confirm_email:'',
-            password:'',
-            confirm_password:'',
-            species:'',
-            sex:'',
-            city:'',
-            state:'',
-            age:0,
-            bio:''
-      })
-      // axios.put call to backend.
-      console.log(this.state)
   }
   
 
