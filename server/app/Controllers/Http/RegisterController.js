@@ -8,12 +8,19 @@ class RegisterController {
     }
     async store({request, session, response}){
         const user = User.create({
-            username: request.input('email'),
+            name: request.input('name'),
+            username: request.input('username'),
             email: request.input('email'),
-            password: request.input('password')
+            password: request.input('password'),
+            species: request.species('speices'),
+            sex: request.sex('sex'),
+            city: request.city('city'),
+            state:request.state('state'),
+            age: request.age('age'),
+            bio: request.bio('bio')
 
         })
-        session.flash({successMessage:"User was Added"})
+        response.send("user was subbmited to database")
     }
 }
 
