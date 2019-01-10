@@ -28,9 +28,20 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                Hello
-          </div>
-                  );
+                
+                {/* check for cookies
+                    if cookies exist
+                    check if user is logged in
+                    if user is logged in change route to finder
+                    if user is not logged in change route to login
+                    */}
+                {/* since we dont have a login yet lets randomly choose one or the other on loadin */}
+                {/* can random work within react */}
+
+                <div>The number is: {this.state.random}</div>
+
+            </div>
+        );
     }
 }
 
