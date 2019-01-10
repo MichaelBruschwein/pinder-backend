@@ -41,6 +41,7 @@ export default class Home extends Component {
                 <div>The number is: {this.state.random}</div>
 
             </div>
+            
         );
     }
 }
