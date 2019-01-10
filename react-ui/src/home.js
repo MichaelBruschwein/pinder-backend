@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
+ 
 
 export default class Home extends Component {
 
+
+    
     constructor(props) {
         super(props);
         this.pickRandom = this.pickRandom.bind(this)
@@ -13,7 +15,8 @@ export default class Home extends Component {
     pickRandom(){
         const min = 1;
         const max = 2;
-        const rand = min + Math.random() * (max - min);
+        const rand = Math.round(min + Math.random() * (max - min));
+        
         this.setState({ random: this.state.random + rand });
     }
     componentDidMount(){
@@ -32,8 +35,11 @@ export default class Home extends Component {
                     */}
                     {/* since we dont have a login yet lets randomly choose one or the other on loadin */}
                     {/* can random work within react */}
+
+                    
                     
                     <div>The number is: {this.state.random}</div>
+
           </div>
         );
     }
