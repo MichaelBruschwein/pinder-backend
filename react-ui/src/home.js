@@ -35,11 +35,9 @@ export default class Home extends Component {
                     */}
                     {/* since we dont have a login yet lets randomly choose one or the other on loadin */}
                     {/* can random work within react */}
-
-                    
                     
                     <div>The number is: {this.state.random}</div>
-
+                    
           </div>
         );
     }
