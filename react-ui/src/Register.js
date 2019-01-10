@@ -64,11 +64,17 @@ class TextFields extends React.Component {
   checkForm(){
     //check to see if all input feilds have some value entered.
     // console.log(Object.values(this.state))
+    let counter = 0;
     Object.values(this.state).forEach((v)=>{
       if (v.length < 1){
-        alert("Please Make Sure All Forms Are Filled Out")
+        counter++;
       }
     })
+    if(counter >= 1){
+      console.log(this.state.sex)
+      alert("please make sure all forms are filled out")
+      counter = 0;
+    }
     //we want to go over each input to see if there is a value there.
     //if there is a value there contine moving through all values.
     //if there isnt a value there alert user that there must be a value there in order to contine submiting.
