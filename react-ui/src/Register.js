@@ -52,6 +52,7 @@ class TextFields extends React.Component {
             bio:''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.checkForm = this.checkForm.bind(this)
 
   };
 
@@ -60,8 +61,26 @@ class TextFields extends React.Component {
       [name]: event.target.value,
     });
   };
+  checkForm(){
+    //check to see if all input feilds have some value entered.
+    // console.log(Object.values(this.state))
+    Object.values(this.state).forEach((v)=>{
+      if (v.length < 1){
+        alert("Please Make Sure All Forms Are Filled Out")
+      }
+    })
+    //we want to go over each input to see if there is a value there.
+    //if there is a value there contine moving through all values.
+    //if there isnt a value there alert user that there must be a value there in order to contine submiting.
+    //if both conditions are met submit the form to database to add the user.
+  }
   handleSubmit(){
       console.log(this.state)
+      if (this.state.email === this.state.confirm_email && this.state.password === this.state.confirm_password){
+        console.log("hello")
+      }else{
+        console.log("not the same")
+      }
       this.setState({
             name: '',
             username:'',
@@ -86,8 +105,8 @@ class TextFields extends React.Component {
     return (
       <form className={classes.container} noValidate autoComplete="off">
       <Card>
-        <CardContent>
         <TextField
+        required
           id="Name"
           label="Name (ex. John Doe)"
           value={this.state.name}
@@ -95,7 +114,6 @@ class TextFields extends React.Component {
           margin="normal"
           fullWidth
         />
-        </CardContent>
         <TextField
           id="Username"
           label="Username (ex. DogLover77)"
@@ -103,6 +121,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('username')}
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Email"
@@ -112,6 +131,7 @@ class TextFields extends React.Component {
           type="email"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Email-Confirmation"
@@ -121,6 +141,7 @@ class TextFields extends React.Component {
           type="email"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Password"
@@ -130,6 +151,7 @@ class TextFields extends React.Component {
           type="password"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Password-Confirmation"
@@ -139,6 +161,7 @@ class TextFields extends React.Component {
           type="password"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Species"
@@ -148,6 +171,7 @@ class TextFields extends React.Component {
           type="text"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Sex"
@@ -157,6 +181,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('sex')}
           margin="normal"
           fullWidth
+          required
           >
           {sex.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -171,6 +196,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('city')}
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="State"
@@ -179,6 +205,7 @@ class TextFields extends React.Component {
           onChange={this.handleChange('state')}
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Age"
@@ -188,6 +215,7 @@ class TextFields extends React.Component {
           type="number"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           id="Bio"
@@ -197,6 +225,7 @@ class TextFields extends React.Component {
           type="text"
           margin="normal"
           multiline
+          required
           fullWidth
         />
         <Button
@@ -205,7 +234,7 @@ class TextFields extends React.Component {
             variant="contained"
             color="primary"
             // className={classes.submit}
-            onClick={this.handleSubmit}
+            onClick={this.checkForm}
           >
             Submit
           </Button>
