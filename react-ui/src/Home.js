@@ -34,6 +34,7 @@ export default class Home extends Component {
         }
         return (
             <div>
+                
                 {/* check for cookies
                     if cookies exist
                     check if user is logged in
