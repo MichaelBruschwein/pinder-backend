@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Redirect } from 'react-router-dom'
 
 
 export default class Home extends Component {
@@ -24,8 +25,13 @@ export default class Home extends Component {
         
     }
 
-export default class Home extends Component {
     render() {
+        //the next line would need to be changed to check and see if user is logged in
+        if (this.state.random === 1) {
+            return <Redirect to='/login' />
+        }else if(this.state.random === 2) {
+            return <Redirect to='/register' />
+        }
         return (
             <div>
                 
