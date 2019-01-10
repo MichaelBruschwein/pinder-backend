@@ -22,6 +22,7 @@ export default class Home extends Component {
     componentDidMount() {
         //call the random number generator for the reroute temp function
         this.pickRandom()
+        
     }
 
     render() {
