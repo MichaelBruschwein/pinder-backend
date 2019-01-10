@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './Login'
 import { BrowserRouter as Router, Route} from "react-router-dom";
+import Login from './Login'
 import Register from './Register'
 import Finder from './Finder'
 import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
-import Home from './Home.js';
+import Home from './Home';
 
 
 class App extends Component {
