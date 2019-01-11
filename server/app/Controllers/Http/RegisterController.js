@@ -12,7 +12,7 @@ class RegisterController {
             username: request.input('username'),
             email: request.input('email'),
             password: request.input('password'),
-            species: request.species('speices'),
+            species: request.species('species'),
             sex: request.sex('sex'),
             city: request.city('city'),
             state:request.state('state'),
