@@ -3,24 +3,31 @@
 const User = use("App/Models/User")
 
 class RegisterController {
-    Create(){
+    // Create(){
 
-    }
-    async store({request, session, response}){
-        const user = User.create({
+    // }
+    async store({ request, session, response }) {
+        const user = await User.create({
             name: request.input('name'),
             username: request.input('username'),
             email: request.input('email'),
             password: request.input('password'),
-            species: request.species('species'),
-            sex: request.sex('sex'),
-            city: request.city('city'),
-            state:request.state('state'),
-            age: request.age('age'),
-            bio: request.bio('bio')
-
+            species: request.input('species'),
+            sex: request.input('sex'),
+            city: request.input('city'),
+            state: request.input('state'),
+            age: request.input('age'),
+            bio: request.input('bio')
         })
-        response.send("user was subbmited to database")
+        //const newUser = await User.create({ name, username, email, password, species, sex, city, state, age, bio })
+        // await user.save()
+        response.send(request.input('name'))
+        // const {name, username, email, password, species, sex, city, state, age, bio} = request.post()
+        //const newUser = await User.create({ name, username, email, password, species, sex, city, state, age, bio })
+        // let users = await User.all()
+
+        // response.send({users:user})
+
     }
 }
 

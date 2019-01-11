@@ -20,4 +20,4 @@ const Route = use('Route')
 Route.get('/', () => 'Hello world')
 Route.post('/create', "UserController.createUser")
 
-Route.post('/register', 'RegisterController.store').as('register.store')
+Route.post('/register', 'RegisterController.store') //.as('register.store')
