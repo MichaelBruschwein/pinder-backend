@@ -30,7 +30,7 @@ export default class Home extends Component {
         if (this.state.random === 1) {
             return <Redirect to='/login' />
         }else if(this.state.random === 2) {
-            return <Redirect to='/register' />
+            return <Redirect to='/finder' />
         }
         return (
             <div>
