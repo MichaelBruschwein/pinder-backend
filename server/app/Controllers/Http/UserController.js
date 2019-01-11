@@ -8,6 +8,13 @@ class UserController {
             users: users
         })
     }
+
+    async createUser({request,response}){
+        response.send('create user text')
+    }
+
+
+
 }
 
 module.exports = UserController
