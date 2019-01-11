@@ -25,4 +25,4 @@ Route
   .get('users/:id', 'RegisterController.show')
   .middleware('auth')
 
-Route.post('/login', 'RegisterController.login')
+Route.post('/handleLogin', 'RegisterController.login')
