@@ -12,12 +12,12 @@ class RegisterController {
             username: request.input('username'),
             email: request.input('email'),
             password: request.input('password'),
-            species: request.species('species'),
-            sex: request.sex('sex'),
-            city: request.city('city'),
-            state:request.state('state'),
-            age: request.age('age'),
-            bio: request.bio('bio')
+            species: request.input('species'),
+            sex: request.input('sex'),
+            city: request.input('city'),
+            state:request.input('state'),
+            age: request.input('age'),
+            bio: request.input('bio')
 
         })
         response.send("user was subbmited to database")
