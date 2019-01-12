@@ -26,3 +26,5 @@ Route
   .middleware('auth')
 
 Route.post('/handleLogin', 'RegisterController.login')
+Route.delete('/deleteUser/:id', "UserController.deleteUser")
+Route.put('/updateUser/:id', "UserController.updateUser")
