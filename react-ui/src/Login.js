@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from "react-router-dom";
 import axios from "axios"
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   main: {
@@ -66,18 +67,23 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
-      if(response.data === "user not found"){
+      if (response.data === "user not found") {
         console.log('user not found')
-      }else if(response.data === "password did not match"){
-        console.log("password did not match")
-      }else{
-      console.log("user has logged in!");
+      } else if (response.data === "password did not match") {
+        alert("Password did not match please try again")
+      } else {
+        this.props.changeStatus()
+        // this.setState({ email: "", password: "" })
       }
+    }.bind(this))
+    .catch((error)=>{
+      console.log(error)
+      alert("Error: User not found please check your credentials")
     })
   }
   render() {
-    if (this.state.loggedIn === true) {
-      return (<h1 user logged in></h1>)
+    if (this.props.userStatus === true) {
+      return <Redirect to='/finder'/>
     } else {
       return (
         <main className={this.props.classes.main}>

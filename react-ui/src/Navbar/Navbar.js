@@ -23,24 +23,36 @@ const styles = {
   },
 };
 
-
-function Navbar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
+class Navbar extends React.Component {
+  // constructor(props) {
+  //   super(props)
+  //   // this.classes = props;
+  // }
+  changeLoginOrLogout(){
+    if(!this.props.userStatus){
+      return <Link to="/login" ><Button color="inherit">Login</Button></Link>
+    }else{
+      return <Link to="/login" ><Button onClick={this.props.logout} color="inherit">Logout</Button></Link>
+    }
+  }
+  render() {
+    return (
+      <div className={this.props.classes.root}>
+        <AppBar position="static">
+          <Toolbar>
             <Link to="/"><Button variant="contained" color="secondary">Pinder</Button></Link>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-          </Typography>
-          <Link to="/finder"><Button color="inherit">Finder</Button></Link>
-          <Link to="/matches"><Button color="inherit">Matches</Button></Link>
-          <Link to="/register"><Button color="inherit">Register</Button> </Link>
-          <Link to="/login"><Button color="inherit">Login / Logout</Button></Link>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+            <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
+            </Typography>
+            <Link to="/finder"><Button color="inherit">Finder</Button></Link>
+            <Link to="/matches"><Button color="inherit">Matches</Button></Link>
+            <Link to="/register"><Button color="inherit">Register</Button> </Link>
+            {this.changeLoginOrLogout()}
+            {/* <Link to="/login" ><Button color="inherit">Login / Logout</Button></Link> */}
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 Navbar.propTypes = {

@@ -23,20 +23,20 @@ class RegisterController {
 
     }
     async login({ request, auth, response, session }) {
-        
-        const {email,password,remember} = request.all()
+        console.log(auth)
+        const { email, password, remember } = request.all()
         const user = await Database.query()
             .table('users')
             .where('email', email)
-
         if (user) {
             const passwordVerified = await Hash.verify(password, user[0].password)
             if (passwordVerified) {
+                // auth.remember(!!remember).login(user)
                 return response.send("user has logged in")
-            }else{
+            } else {
                 return response.send("password did not match")
             }
-        }else{
+        } else {
             response.send("we couldn't find user")
         }
 
