@@ -22,16 +22,18 @@ export default class Home extends Component {
     componentDidMount() {
         //call the random number generator for the reroute temp function
         this.pickRandom()
-        
+
     }
 
     render() {
         //the next line would need to be changed to check and see if user is logged in
-        if (this.state.random === 1) {
+        // if (this.state.random === 1) {
+        if (true) {
             return <Redirect to='/login' />
-        }else if(this.state.random === 2) {
-            return <Redirect to='/finder' />
         }
+        // }else if(this.state.random === 2) {
+        //     return <Redirect to='/finder' />
+        // }
         return (
             <div>
                 {/* Athentication Adonis
@@ -49,7 +51,7 @@ export default class Home extends Component {
                 <div>The number is: {this.state.random}</div>
 
             </div>
-            
+
         );
     }
 }
