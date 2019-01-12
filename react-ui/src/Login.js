@@ -49,12 +49,12 @@ const styles = theme => ({
 class Login extends React.Component {
   constructor(props) {
     super(props)
-     this.classes = props;
-     this.state = {
-       email:"",
-       password:""
-     }
-     this.handleSubmit = this.handleSubmit.bind(this)
+    this.classes = props;
+    this.state = {
+      email: "",
+      password: ""
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleChange = name => event => {
     this.setState({
@@ -62,7 +62,7 @@ class Login extends React.Component {
     });
   };
   handleSubmit() {
-    axios.post('/handleLogin',{
+    axios.post('/handleLogin', {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
@@ -70,54 +70,58 @@ class Login extends React.Component {
     })
   }
   render() {
-    return (
-      <main className={this.props.classes.main}>
-        <CssBaseline />
-        <Paper className={this.props.classes.paper}>
-          <Avatar className={this.props.classes.avatar}>
-            <LockIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+    if (this.state.loggedIn === true) {
+      return (<h1 user logged in></h1>)
+    } else {
+      return (
+        <main className={this.props.classes.main}>
+          <CssBaseline />
+          <Paper className={this.props.classes.paper}>
+            <Avatar className={this.props.classes.avatar}>
+              <LockIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
         </Typography>
-          <form className={this.props.classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" onChange={this.handleChange('email')} name="email" autoComplete="email" autoFocus />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" onChange={this.handleChange('password')} type="password" id="password" autoComplete="current-password" />
-            </FormControl>
-            {/* <FormControlLabel
+            <form className={this.props.classes.form}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Email Address</InputLabel>
+                <Input id="email" onChange={this.handleChange('email')} name="email" autoComplete="email" autoFocus />
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input name="password" onChange={this.handleChange('password')} type="password" id="password" autoComplete="current-password" />
+              </FormControl>
+              {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
-            <Button
-              // type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={this.props.classes.submit}
-              onClick={this.handleSubmit}
-            >
-              Sign in
-          </Button>
-            <Link to="/register">
               <Button
-                type="submit"
+                // type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={this.props.classes.submit}
+                onClick={this.handleSubmit}
               >
-                Not a Member? Click Here to Register
+                Sign in
           </Button>
-            </Link>
-          </form>
-        </Paper>
-      </main>
-    );
+              <Link to="/register">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={this.props.classes.submit}
+                >
+                  Not a Member? Click Here to Register
+          </Button>
+              </Link>
+            </form>
+          </Paper>
+        </main>
+      );
+    }
   }
 }
 
