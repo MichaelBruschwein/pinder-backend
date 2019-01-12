@@ -27,7 +27,37 @@ class UserController {
         response.send('create user text')
     }
 
+    async deleteUser({ request, response, params: { id } }) {
+        var deleteUserById = await User.find(id)
+        await deleteUserById.delete()
+        let users = await User.all()
+        response.json({
+            Message: "Who let the dawg's out!",
+            users: users
+        })
+    }
 
+    async updateUser({ request, response, params: { id } }) {
+        var userToUpdate = await User.find(id)
+        const { name, username, email, password, species, sex, city, state, age, bio } = request.post()
+        userToUpdate.name = name
+        userToUpdate.username = username
+        userToUpdate.email = email
+        userToUpdate.password = password
+        userToUpdate.species = species
+        userToUpdate.sex = sex
+        userToUpdate.city = city
+        userToUpdate.state = state
+        userToUpdate.age = age
+        userToUpdate.bio = bio
+
+        await userToUpdate.save()
+        let users = await User.all()
+        response.send({
+            users: users
+        })
+
+    }
 
 }
 
