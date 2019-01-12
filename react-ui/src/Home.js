@@ -34,7 +34,9 @@ export default class Home extends Component {
         }
         return (
             <div>
+                {/* Athentication Adonis
                 
+                */}
                 {/* check for cookies
                     if cookies exist
                     check if user is logged in

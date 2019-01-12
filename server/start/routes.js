@@ -17,7 +17,12 @@
 const Route = use('Route')
 
 // Route.get('/register', 'RegisterController.create').as('register.create')
-Route.get('/', () => 'Hello world')
-Route.post('/create', "UserController.createUser")
+// Route.get('/', () => 'Hello world')
+// Route.post('/create', "UserController.createUser")
 
-Route.post('/register', 'RegisterController.store') //.as('register.store')
+Route.post('/user', 'RegisterController.store') //.as('register.store')
+Route
+  .get('users/:id', 'RegisterController.show')
+  .middleware('auth')
+
+Route.post('/handleLogin', 'RegisterController.login')

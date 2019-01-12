@@ -1,9 +1,10 @@
 'use strict'
 
 const User = use("App/Models/User")
-
+const Hash = use("Hash")
+const Database = use("Database")
 class RegisterController {
-    
+
     async store({ request, session, response }) {
         const user = await User.create({
             name: request.input('name'),
@@ -17,10 +18,31 @@ class RegisterController {
             age: request.input('age'),
             bio: request.input('bio')
         })
-        
+
         response.send(request.input('name'))
 
     }
+    async login({ request, auth, response, session }) {
+        
+        const {email,password,remember} = request.all()
+        const user = await Database.query()
+            .table('users')
+            .where('email', email)
+
+        if (user) {
+            const passwordVerified = await Hash.verify(password, user[0].password)
+            if (passwordVerified) {
+                return response.send("user has logged in")
+            }
+        }
+
+    }
+    // show ({ auth, params }) {
+    //     if (auth.user.id !== Number(params.id)) {
+    //       return 'You cannot see someone else\'s profile'
+    //     }
+    //     return auth.user
+    //   }
 }
 
 module.exports = RegisterController
