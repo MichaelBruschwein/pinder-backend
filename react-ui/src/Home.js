@@ -26,6 +26,7 @@ export default class Home extends Component {
     }
 
     render() {
+        console.log(this.props.userStatus)
         //the next line would need to be changed to check and see if user is logged in
         // if (this.state.random === 1) {
         if (true) {

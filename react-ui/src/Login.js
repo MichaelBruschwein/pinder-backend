@@ -66,7 +66,13 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
-      console.log(response);
+      if(response.data === "user not found"){
+        console.log('user not found')
+      }else if(response.data === "password did not match"){
+        console.log("password did not match")
+      }else{
+      console.log("user has logged in!");
+      }
     })
   }
   render() {

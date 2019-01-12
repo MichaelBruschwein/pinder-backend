@@ -10,8 +10,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { CardHeader } from '@material-ui/core';
+import { Redirect } from 'react-router-dom'
 
-  
+
 const styles = {
     card: {
         maxWidth: 750,
@@ -21,73 +22,90 @@ const styles = {
     },
 };
 
-function ItsAMatch(props) {
-    const { classes } = props;
-    return (
-        <Card>
-            <CardHeader
-                title="Congratulations its a Match!"
-            >
-            </CardHeader>
+class ItsAMatch extends React.Component {
+    constructor(props) {
+        super(props)
+        this.classes = props
+    }
 
-            <Grid container spacing={32} justify="center">
-                <Grid item xs={6}>
-                    <Card className={classes.card}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    Lizard
+    render() {
+        if (!this.props.userStatus) {
+            return <Redirect to='/login' />
+        } else {
+            return (
+                <Card>
+                    <CardHeader
+                        title="Congratulations its a Match!"
+                    >
+                    </CardHeader>
+
+                    <Grid container spacing={32} justify="center">
+                        <Grid item xs={6}>
+                            <Card className={this.props.classes.card}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={this.props.classes.media}
+                                        image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
+                                        title="Contemplative Reptile"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            Lizard
           </Typography>
-                                <Typography component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                        <Typography component="p">
+                                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                            across all continents except Antarctica
           </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                {/* Break between cards for reference */}
-                <Grid item xs={6}>
-                    <Card className={classes.card}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image="http://rivista-cdn.reptilesmagazine.com/images/cache/cache_d/cache_5/cache_d/frilled-lizard-shutterstock_739998265-82048d5d.jpeg?ver=1542816872&aspectratio=1.5"
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    Lizard
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                        {/* Break between cards for reference */}
+                        <Grid item xs={6}>
+                            <Card className={this.props.classes.card}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={this.props.classes.media}
+                                        image="http://rivista-cdn.reptilesmagazine.com/images/cache/cache_d/cache_5/cache_d/frilled-lizard-shutterstock_739998265-82048d5d.jpeg?ver=1542816872&aspectratio=1.5"
+                                        title="Contemplative Reptile"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            Lizard
           </Typography>
-                                <Typography component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
+                                        <Typography component="p">
+                                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                            across all continents except Antarctica
           </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            </Grid>
-            <CardActionArea>
-                <CardActions>
-                    <Grid container alignItems="flex-end">
-                        <Button size="large" variant="contained" color="secondary">
-                            Contine Finding Pets
-                        </Button>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
                     </Grid>
-                        <Button size="large" variant="contained" color="primary">
-                        Go to Matches
+                    <CardActionArea>
+                        <CardActions>
+                            <Grid container alignItems="flex-end">
+                            </Grid>
+                        </CardActions>
+                    </CardActionArea>
+                    <Grid container justify="space-between">
+                        <Grid item>
+                            <Button size="large" variant="contained" color="secondary">
+                                Contine Finding Pets
                         </Button>
-                </CardActions>
-            </CardActionArea>
-        </Card>
+                        </Grid>
+                        <Grid item>
+                            <Button size="large" variant="contained" color="primary">
+                                Go to Matches
+                        </Button>
+                        </Grid>
+                    </Grid>
+                </Card>
 
-    );
+
+            );
+        }
+    }
 }
 
 ItsAMatch.propTypes = {

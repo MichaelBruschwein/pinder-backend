@@ -33,7 +33,11 @@ class RegisterController {
             const passwordVerified = await Hash.verify(password, user[0].password)
             if (passwordVerified) {
                 return response.send("user has logged in")
+            }else{
+                return response.send("password did not match")
             }
+        }else{
+            response.send("we couldn't find user")
         }
 
     }

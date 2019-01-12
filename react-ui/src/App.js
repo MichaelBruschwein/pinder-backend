@@ -10,16 +10,22 @@ import Home from './Home';
 
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      userLoggedIn:false
+    }
+  }
   render() {
     return (
       <Router>
       <div className="App">
         <Navbar/>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register}/>
-        <Route path="/finder" component={Finder}/>
-        <Route path="/matches" component={Matches}/>
+        <Route exact path="/"render={(props) => <Home {...props} userStatus={this.state.userLoggedIn} />} />
+        <Route path="/login" render={(props) => <Login {...props} userStatus={this.state.userLoggedIn} />} />
+        <Route path="/register" render={(props) => <Register {...props} userStatus={this.state.userLoggedIn} />}/>
+        <Route path="/finder" render={(props) => <Finder {...props} userStatus={this.state.userLoggedIn} />}/>
+        <Route path="/matches" render={(props) => <Matches {...props} userStatus={this.state.userLoggedIn} />}/>
       </div>
       </Router>
     );
