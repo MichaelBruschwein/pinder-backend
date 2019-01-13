@@ -23,7 +23,6 @@ class RegisterController {
 
     }
     async login({ request, auth, response, session }) {
-        console.log(auth)
         const { email, password, remember } = request.all()
         const user = await Database.query()
             .table('users')
