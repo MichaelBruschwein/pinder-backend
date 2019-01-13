@@ -7,6 +7,7 @@ import Finder from './Finder'
 import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
 import Home from './Home';
+import Profile from './Profile';
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ render() {
         <Route path="/register" render={(props) => <Register {...props} userStatus={this.state.userLoggedIn} />} />
         <Route path="/finder" render={(props) => <Finder {...props} userStatus={this.state.userLoggedIn} />} />
         <Route path="/matches" render={(props) => <Matches {...props} userStatus={this.state.userLoggedIn} />} />
+        <Route path="/profile" render={(props) => <Profile {...props} userStatus={this.state.userLoggedIn} />} />
       </div>
     </Router>
   );

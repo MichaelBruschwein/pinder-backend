@@ -45,7 +45,7 @@ class Navbar extends React.Component {
             </Typography>
             <Link to="/finder"><Button color="inherit">Finder</Button></Link>
             <Link to="/matches"><Button color="inherit">Matches</Button></Link>
-            <Link to="/matches"><Button color="inherit">Profile</Button></Link>
+            <Link to="/profile"><Button color="inherit">Profile</Button></Link>
             <Link to="/register"><Button color="inherit">Register</Button> </Link>
             {this.changeLoginOrLogout()}
             {/* <Link to="/login" ><Button color="inherit">Login / Logout</Button></Link> */}
