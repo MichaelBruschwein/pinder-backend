@@ -31,7 +31,6 @@ class RegisterController {
         if (user) {
             const passwordVerified = await Hash.verify(password, user[0].password)
             if (passwordVerified) {
-                // auth.remember(!!remember).login(user)
                 return response.send("user has logged in")
             } else {
                 return response.send("password did not match")
