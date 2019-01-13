@@ -7,6 +7,7 @@ import Finder from './Finder'
 import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
 import Home from './Home';
+import axios from 'axios'
 
 
 class App extends Component {
@@ -23,6 +24,12 @@ class App extends Component {
   }
   userLogout() {
     this.setState({ userLoggedIn: false })
+  }
+  findMatches(){
+    axios.get('/finder')
+    .then((response)=>{
+      console.log(response)
+    })
   }
 render() {
   return (
