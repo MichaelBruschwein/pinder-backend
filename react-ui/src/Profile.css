@@ -1,0 +1,11 @@
+
+.inline{
+    color: black;
+    border: 1px solid gray;
+    font-weight: bold;
+    font-size: 150%;
+    white-space: nowrap;
+  }
+  .inline *{
+    display: inline;
+  }
