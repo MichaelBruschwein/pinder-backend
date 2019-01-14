@@ -52,6 +52,7 @@ render() {
         <Route path="/login" render={(props) => <Login {...props} changeStatus={this.changeUserStatus} userStatus={this.state.userLoggedIn} />} />
         <Route path="/register" render={(props) => <Register {...props} userStatus={this.state.userLoggedIn} />} />
         <Route path="/finder" render={(props) => <Finder {...props} userStatus={this.state.userLoggedIn} />} />
+        <Route path="/profile" render={(props) => <Profile {...props} userStatus={this.state.userLoggedIn} userInfo={this.state.user} />} />
         <Route path="/matches" render={(props) => <Matches {...props} userStatus={this.state.userLoggedIn} />} />
       </div>
     </Router>
