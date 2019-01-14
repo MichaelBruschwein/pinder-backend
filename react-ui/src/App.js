@@ -8,13 +8,25 @@ import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
 import Home from './Home';
 import axios from 'axios'
+import Profile from './Profile';
 
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      userLoggedIn: false
+      userLoggedIn: false,
+      user:{
+      name: 'testname',
+      username: 'testusername',
+      email: 'test@test.com',
+      password: 'pass',
+      species: 'Dog',
+      sex: 'Male',
+      city: 'boz',
+      state: 'montana',
+      age: '3',
+      bio: 'Hello World'}
     }
     this.changeUserStatus = this.changeUserStatus.bind(this)
     this.userLogout = this.userLogout.bind(this)
