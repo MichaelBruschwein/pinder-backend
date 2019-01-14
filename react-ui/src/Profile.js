@@ -29,19 +29,19 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
                     onFocusOut={this._handleFocusOut}
                 />
-                <FormLabel labelPlacement='top'>Hello</FormLabel>
+                <FormLabel>Hello</FormLabel>
                 <EditableLabel text={this.state.username}
                     labelClassName='myLabelClass'
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -52,7 +52,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -63,7 +63,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -74,7 +74,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -85,7 +85,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -96,7 +96,7 @@ export default class Profile extends Component {
                 inputClassName='myInputClass'
                 inputWidth='200px'
                 inputHeight='25px'
-                inputMaxLength='50'
+                inputMaxLength={50}
                 labelFontWeight='bold'
                 inputFontWeight='bold'
                 onFocus={this._handleFocus}
@@ -107,7 +107,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -118,7 +118,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
@@ -129,7 +129,7 @@ export default class Profile extends Component {
                     inputClassName='myInputClass'
                     inputWidth='200px'
                     inputHeight='25px'
-                    inputMaxLength='50'
+                    inputMaxLength={50}
                     labelFontWeight='bold'
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
