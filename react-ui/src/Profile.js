@@ -34,7 +34,7 @@ export default class Profile extends Component {
                     inputFontWeight='bold'
                     onFocus={this._handleFocus}
                     onFocusOut={this._handleFocusOut}
-                >
+                />
                 <FormLabel labelPlacement='top'>Hello</FormLabel>
                 <EditableLabel text={this.state.username}
                     labelClassName='myLabelClass'
