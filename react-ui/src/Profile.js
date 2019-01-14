@@ -16,6 +16,7 @@ export default class Profile extends Component {
     }
 
     _handleFocusOut(text) {
+        // this is where the current state would be sent to axios post
         console.log('Left editor with text: ' + text);
     }
 
