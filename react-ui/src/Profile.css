@@ -1,12 +1,28 @@
 
-.inline{
-    color: black;
+
+
+.item{
+    color:forestgreen;
     border: 1px solid gray;
     font-weight: bold;
     font-size: 150%;
-    white-space: nowrap;
+    padding: 10px;
+    /* position: fixed; */
   }
-  .inline *{
-    display: inline;
-  }
-  
+.item *{
+    display: inline-block;
+}
+.container{
+    background-color: blueviolet;
+    display: block;
+    width: 60%;
+    margin: auto;
+    border: 1px solid red;
+}
+.label{
+    float: left;
+    border: 1px solid blue;
+}
+.myLabelClass{
+    border: 1px dotted orange;
+}
