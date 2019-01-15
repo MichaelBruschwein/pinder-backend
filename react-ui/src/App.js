@@ -33,20 +33,38 @@ class App extends Component {
     this.userLogout = this.userLogout.bind(this)
   }
   userLogin(userData) {
-    this.setState({ 
-      userLoggedIn: true,
-      user:userData
-     })
-     console.log(this.state)
+    axios.get('/findPets', {
+      params: {
+        sex: userData.sex
+      }
+    })
+      .then((response) => {
+        this.setState({
+          userMatches: response.data,
+          userLoggedIn: true,
+          user: userData
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   userLogout() {
-    this.setState({ userLoggedIn: false })
-  }
-  findMatches() {
-    axios.get('/finder')
-      .then((response) => {
-        console.log(response)
-      })
+    this.setState({
+      userLoggedIn: false,
+      user: {
+        name: 'testname',
+        username: 'testusername',
+        email: 'test@test.com',
+        password: 'pass',
+        species: 'Dog',
+        sex: 'Male',
+        city: 'boz',
+        state: 'montana',
+        age: '3',
+        bio: 'Hello World'
+      }
+    })
   }
   render() {
     return (
@@ -56,7 +74,7 @@ class App extends Component {
           <Route exact path="/" render={(props) => <Home {...props} userStatus={this.state.userLoggedIn} />} />
           <Route path="/login" render={(props) => <Login {...props} changeStatus={this.userLogin} userStatus={this.state.userLoggedIn} />} />
           <Route path="/register" render={(props) => <Register {...props} userStatus={this.state.userLoggedIn} />} />
-          <Route path="/finder" render={(props) => <Finder {...props} userStatus={this.state.userLoggedIn} />} />
+          <Route path="/finder" render={(props) => <Finder {...props} matches={this.state.userMatches} userStatus={this.state.userLoggedIn} />} />
           <Route path="/profile" render={(props) => <Profile {...props} userStatus={this.state.userLoggedIn} userInfo={this.state.user} />} />
           <Route path="/matches" render={(props) => <Matches {...props} userStatus={this.state.userLoggedIn} />} />
         </div>
