@@ -1,0 +1,31 @@
+
+
+
+.item{
+    color:blue;
+    border: 1px solid gray;
+    font-weight: bold;
+    font-size: 150%;
+    padding: 10px;
+  }
+.item *{
+    display: inline-block;
+}
+.container{
+    /* background-color: blueviolet; */
+    display: block;
+    width: 60%;
+    margin: auto;
+    /* border: 1px solid red; */
+}
+.label{
+    float: left;
+    /* border: 1px solid blue; */
+}
+.myInputClass{
+    border: 2px solid green;
+}
+.myLabelClass{
+    margin: auto;
+    /* border: 1px dotted orange; */
+}

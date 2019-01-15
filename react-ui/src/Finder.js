@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 
 
 const styles = {
@@ -24,7 +25,29 @@ class MediaCard extends React.Component {
     constructor(props) {
         super(props)
         this.classes = props;
+        this.state = {
+            matchesUserData: [{
+                name: "loading please wait...",
+                sex: "loading please wait...",
+                age: "loading please wait...",
+                city: "loading please wait...",
+                state: "loading please wait...",
+                bio: "loading please wait..."
+            }]
+        }
     }
+    // componentDidMount() {
+    //     axios.get('/findPets', {
+    //         sex: "Male"
+    //     })
+    //         .then((response) => {
+    //             this.setState({ matchesUserData: response.data })
+    //             console.log(this.state.matchesUserData)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // }
     render() {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
@@ -43,12 +66,15 @@ class MediaCard extends React.Component {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Lizard
-          </Typography>
+                                    {this.checkForData}
+                                    {this.state.matchesUserData[0].name},
+                                    {this.state.matchesUserData[0].sex},
+                                    {this.state.matchesUserData[0].age},
+                                    {this.state.matchesUserData[0].city + " " + this.state.matchesUserData[0].state}
+                                </Typography>
                                 <Typography component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-          </Typography>
+                                    {this.state.matchesUserData[0].bio}
+                                </Typography>
                             </CardContent>
                         </CardActionArea>
                         <CardActions>

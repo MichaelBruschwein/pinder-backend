@@ -72,18 +72,18 @@ class Login extends React.Component {
       } else if (response.data === "password did not match") {
         alert("Password did not match please try again")
       } else {
-        this.props.changeStatus()
+        this.props.changeStatus(response.data[0])
         // this.setState({ email: "", password: "" })
       }
     }.bind(this))
-    .catch((error)=>{
-      console.log(error)
-      alert("Error: User not found please check your credentials")
-    })
+      .catch((error) => {
+        console.log(error)
+        alert("Error: User not found please check your credentials")
+      })
   }
   render() {
     if (this.props.userStatus === true) {
-      return <Redirect to='/finder'/>
+      return <Redirect to='/finder' />
     } else {
       return (
         <main className={this.props.classes.main}>
