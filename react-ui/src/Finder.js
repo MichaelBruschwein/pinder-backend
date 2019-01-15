@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom'
-import axios from 'axios'
 
 
 const styles = {
@@ -26,28 +25,28 @@ class MediaCard extends React.Component {
         super(props)
         this.classes = props;
         this.state = {
-            matchesUserData: [{
-                name: "loading please wait...",
-                sex: "loading please wait...",
-                age: "loading please wait...",
-                city: "loading please wait...",
-                state: "loading please wait...",
-                bio: "loading please wait..."
-            }]
+            counter:0,
+            // matchesUserData: [{
+            //     name: "loading please wait...",
+            //     sex: "loading please wait...",
+            //     age: "loading please wait...",
+            //     city: "loading please wait...",
+            //     state: "loading please wait...",
+            //     bio: "loading please wait..."
+            // }],
+            matchesUserData:this.props.matches
         }
+        this.changeCounter = this.changeCounter.bind(this)
     }
-    // componentDidMount() {
-    //     axios.get('/findPets', {
-    //         sex: "Male"
-    //     })
-    //         .then((response) => {
-    //             this.setState({ matchesUserData: response.data })
-    //             console.log(this.state.matchesUserData)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
-    // }
+    changeCounter(){
+        if(this.state.counter === this.state.matchesUserData.length - 1){
+            this.setState({counter:0})
+        }else{
+        this.setState({counter:this.state.counter + 1})
+        }
+
+    }
+    
     render() {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
@@ -66,14 +65,13 @@ class MediaCard extends React.Component {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    {this.checkForData}
-                                    {this.state.matchesUserData[0].name},
-                                    {this.state.matchesUserData[0].sex},
-                                    {this.state.matchesUserData[0].age},
-                                    {this.state.matchesUserData[0].city + " " + this.state.matchesUserData[0].state}
+                                    {this.state.matchesUserData[this.state.counter].name},
+                                    {this.state.matchesUserData[this.state.counter].sex},
+                                    {this.state.matchesUserData[this.state.counter].age},
+                                    {this.state.matchesUserData[this.state.counter].city + " " + this.state.matchesUserData[this.state.counter].state}
                                 </Typography>
                                 <Typography component="p">
-                                    {this.state.matchesUserData[0].bio}
+                                    {this.state.matchesUserData[this.state.counter].bio}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -86,7 +84,7 @@ class MediaCard extends React.Component {
                                     Dislike
         </Button>
                             </Grid>
-                            <Button size="large" variant="contained" color="primary">
+                            <Button onClick={this.changeCounter} size="large" variant="contained" color="primary">
                                 Like
         </Button>
                         </CardActions>
