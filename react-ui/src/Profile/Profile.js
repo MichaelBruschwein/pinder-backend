@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Profile.css';
 import EditableLabel from 'react-inline-editing'
+import { Redirect } from 'react-router-dom'
 
 export default class Profile extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class Profile extends Component {
     }
 
     _handleFocusOut(text) {
-        // this is where the current state would be sent to axios post
+        // this is where the current state would be sent to axios put
         console.log('Left editor with text: ' + text);
     }
     composeList() {
@@ -35,7 +36,9 @@ export default class Profile extends Component {
         )
     }
     render() {
-        this.composeList();
+        if (!this.props.userStatus) {
+        return <Redirect to='/login' />
+    } else {
         return (
             <div className="container">
                 <div className="item">
@@ -162,6 +165,7 @@ export default class Profile extends Component {
             </div>
         )
     }
+}
 
 }
 
