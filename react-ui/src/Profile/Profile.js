@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Profile.css';
-import EditableLabel from 'react-inline-editing'
+import EditableLabel from 'react-inline-editing';
+import { Redirect } from 'react-router-dom';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -15,152 +16,46 @@ export default class Profile extends Component {
     }
 
     _handleFocusOut(text) {
-        // this is where the current state would be sent to axios post
+        // this is where the current state would be sent to axios put
         console.log('Left editor with text: ' + text);
     }
     composeList() {
-        // Object.keys
         let i = 0;
-        let arrKey = [];
-        let arrVal = [];
+        return (
+            Object.values(this.state).map(
+                (val) => {
+                    var key = Object.keys(this.state)[i]
+                    i++
 
-        Object.values(this.state).forEach(
-            (val) => {
-                var key = Object.keys(this.state)[i]
-                console.log(key,val)
-                arrKey.push(key)
-                arrVal.push(val)
-                i++
-            }
+                    return (
+                        <div className="item">
+                            <span className="label">{key} </span>
+                            <EditableLabel
+                                text={val}
+                                labelClassName='myLabelClass'
+                                inputClassName='myInputClass'
+                                inputWidth='100%'
+                                inputHeight='100%'
+                                inputMaxLength={50}
+                                onFocus={this._handleFocus}
+                                onFocusOut={this._handleFocusOut}
+                            />
+                        </div>
+                    )
+                })
         )
+
     }
     render() {
-        this.composeList();
-        return (
-            <div className="container">
-                <div className="item">
-                    <span className="label">Name: </span>
-                    <EditableLabel
-                        text={this.state.name}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
+        if (!this.props.userStatus) {
+            return <Redirect to='/login' />
+        } else {
+            return (
+                <div className="container">
+                    {this.composeList()}
                 </div>
-                <div className="item">
-                    <span className="label">Username: </span>
-                    <EditableLabel text={this.state.username}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-
-                <div className="item">
-                    <span className="label">Email: </span>
-                    <EditableLabel text={this.state.email}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">Password: </span>
-                    <EditableLabel text={this.state.password}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">Species: </span>
-                    <EditableLabel text={this.state.species}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">Sex: </span>
-                    <EditableLabel text={this.state.sex}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">City: </span>
-                    <EditableLabel text={this.state.city}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">State: </span>
-                    <EditableLabel text={this.state.state}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">Age: </span>
-                    <EditableLabel text={this.state.age}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    />
-                </div>
-                <div className="item">
-                    <span className="label">Bio: </span>
-                    <EditableLabel text={this.state.bio}
-                        labelClassName='myLabelClass'
-                        inputClassName='myInputClass'
-                        inputWidth='100%'
-                        inputHeight='100%'
-                        inputMaxLength={50}
-                        onFocus={this._handleFocus}
-                        onFocusOut={this._handleFocusOut}
-                    /></div>
-            </div>
-        )
+            )
+        }
     }
 
 }
