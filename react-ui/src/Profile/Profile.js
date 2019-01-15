@@ -8,6 +8,7 @@ export default class Profile extends Component {
         this.state = this.props.userInfo;
         this._handleFocus = this._handleFocus.bind(this);
         this._handleFocusOut = this._handleFocusOut.bind(this);
+        this.composeList = this.composeList.bind(this);
     }
     _handleFocus(text) {
         console.log('Focused with text: ' + text);
@@ -17,11 +18,26 @@ export default class Profile extends Component {
         // this is where the current state would be sent to axios post
         console.log('Left editor with text: ' + text);
     }
+    composeList() {
+        // Object.keys
+        let i = 0;
+        let arrKey = [];
+        let arrVal = [];
 
+        Object.values(this.state).forEach(
+            (val) => {
+                var key = Object.keys(this.state)[i]
+                console.log(key,val)
+                arrKey.push(key)
+                arrVal.push(val)
+                i++
+            }
+        )
+    }
     render() {
+        this.composeList();
         return (
             <div className="container">
-            <grid>
                 <div className="item">
                     <span className="label">Name: </span>
                     <EditableLabel
@@ -143,7 +159,6 @@ export default class Profile extends Component {
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     /></div>
-                    </grid>
             </div>
         )
     }
