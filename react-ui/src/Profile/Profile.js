@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './Profile.css';
 import EditableLabel from 'react-inline-editing'
-import FormLabel from '@material-ui/core/FormLabel';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -58,8 +56,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -72,8 +68,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -86,8 +80,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -100,8 +92,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -114,8 +104,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -128,8 +116,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -142,8 +128,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     />
@@ -156,8 +140,6 @@ export default class Profile extends Component {
                         inputWidth='100%'
                         inputHeight='100%'
                         inputMaxLength={50}
-                        labelFontWeight='bold'
-                        inputFontWeight='bold'
                         onFocus={this._handleFocus}
                         onFocusOut={this._handleFocusOut}
                     /></div>

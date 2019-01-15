@@ -8,7 +8,7 @@ import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
 import Home from './Home';
 import axios from 'axios'
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 
 
 class App extends Component {
