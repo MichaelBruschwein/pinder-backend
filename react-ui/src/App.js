@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
       userLoggedIn: false,
       user: {
+        id: '0',
         name: 'testname',
         username: 'testusername',
         email: 'test@test.com',
@@ -26,7 +27,9 @@ class App extends Component {
         city: 'boz',
         state: 'montana',
         age: '3',
-        bio: 'Hello World'
+        bio: 'Hello World',
+        created_at: '12-12',
+        updated_at: '12-12'
       }
     }
     this.userLogin = this.userLogin.bind(this)

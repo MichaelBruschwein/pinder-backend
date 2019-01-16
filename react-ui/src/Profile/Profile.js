@@ -27,36 +27,39 @@ export default class Profile extends Component {
                     var key = Object.keys(this.state)[i]
                     i++
                     console.log(key)
-
-                    return (
-                        <div className="item">
-                            <span className="label">{key} </span>
-                            <EditableLabel
-                                text={val}
-                                labelClassName='myLabelClass'
-                                inputClassName='myInputClass'
-                                inputWidth='100%'
-                                inputHeight='100%'
-                                inputMaxLength={50}
-                                onFocus={this._handleFocus}
-                                onFocusOut={this._handleFocusOut}
-                            />
-                        </div>
-                    )
+                    if (key=='id' || key=='created_at' || key=='updated_at') {
+                        // if you wanted to use these properties you could do so here. but we dont want to display them
+                    } else {
+                        return (
+                            <div className="item">
+                                <span className="label">{key} </span>
+                                <EditableLabel
+                                    text={val}
+                                    labelClassName='myLabelClass'
+                                    inputClassName='myInputClass'
+                                    inputWidth='100%'
+                                    inputHeight='100%'
+                                    inputMaxLength={50}
+                                    onFocus={this._handleFocus}
+                                    onFocusOut={this._handleFocusOut}
+                                />
+                            </div>
+                        )
+                    }
                 })
         )
 
     }
     render() {
-        if (!this.props.userStatus) {
-            return <Redirect to='/login' />
-        } else {
-            return (
-                <div className="container">
-                    {this.composeList()}
-                </div>
-            )
-        }
+        // if (!this.props.userStatus) {
+        //     return <Redirect to='/login' />
+        // } else {
+        return (
+            <div className="container">
+                {this.composeList()}
+            </div>
+        )
+        // }
     }
 
 }

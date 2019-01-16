@@ -2,7 +2,7 @@
 
 
 .item{
-    color:blue;
+    color:black;
     border: 1px solid gray;
     font-weight: bold;
     font-size: 150%;
@@ -22,10 +22,12 @@
     float: left;
     /* border: 1px solid blue; */
 }
+
 .myInputClass{
+    float: right;
     border: 2px solid green;
 }
 .myLabelClass{
-    margin: auto;
-    /* border: 1px dotted orange; */
+    float: right;
+    border: 1px dotted orange;
 }
