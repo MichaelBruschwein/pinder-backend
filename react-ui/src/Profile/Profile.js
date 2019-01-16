@@ -30,19 +30,20 @@ export default class Profile extends Component {
     }
     composeList() {
         let i = 0;
+        let displayValue =''
         return (
             Object.values(this.state).map(
                 (val) => {
                     let key = Object.keys(this.state)[i]
                     i++
 
-                    if (key == 'password') {
-                        var displayValue = '************';
+                    if (key === 'password') {
+                        displayValue = '************';
                     } else {
-                        var displayValue = val;
+                        displayValue = val;
                     }
 
-                    if (key == 'id' || key == 'created_at' || key == 'updated_at') {
+                    if (key === 'id' || key === 'created_at' || key === 'updated_at') {
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
                         return (
@@ -55,7 +56,7 @@ export default class Profile extends Component {
 
                                     <div className="column">
                                         <EditableLabel
-                                            text={displayValue}
+                                            text={displayValue.toString()}
                                             labelClassName='myLabelClass'
                                             inputClassName='myInputClass'
                                         key    inputMaxLength={50}
@@ -69,34 +70,33 @@ export default class Profile extends Component {
                             </div>
                         )
                     }
+                    return <div></div>
                 })
         )
 
     }
     render() {
-        // if (!this.props.userStatus) {
-        //     return <Redirect to='/login' />
-        // } else {
+        if (!this.props.userStatus) {
+            return <Redirect to='/login' />
+        } else {
         return (
             <div className="container">
                 <Card className="card">
-                    <Typography>
                         {this.composeList()}
-                    </Typography>
                     <CardActionArea>
                         <CardActions>
-                            <Button size="small" color="primary">
+                            {/* <Button size="small" color="primary">
                                 Share
                     </Button>
                             <Button size="small" color="primary">
                                 Learn More
-                    </Button>
+                    </Button> */}
                         </CardActions>
                     </CardActionArea>
                 </Card >
             </div >
         )
-        // } // this is for login redirect
+        } // this is for login redirect
     }
 
 }

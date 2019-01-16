@@ -61,54 +61,54 @@ export default class PhotoUploader extends Component {
 
 //Cute little widget.
 
-function showUploadWidget() {
-  PhotoUploader.openUploadWidget(
-    {
-      cloudName: "abcm2019mcba",
-      uploadPreset: "hhblxxm0",
-      sources: [
-        "local",
-        "url",
-        "camera",
-        "image_search",
-        "facebook",
-        "dropbox",
-        "instagram"
-      ],
-      googleApiKey: "<image_search_google_api_key>",
-      showAdvancedOptions: true,
-      cropping: true,
-      multiple: false,
-      defaultSource: "local",
-      styles: {
-        palette: {
-          window: "#000000",
-          sourceBg: "#000000",
-          windowBorder: "#8E9FBF",
-          tabIcon: "#FFFFFF",
-          inactiveTabIcon: "#8E9FBF",
-          menuIcons: "#2AD9FF",
-          link: "#08C0FF",
-          action: "#336BFF",
-          inProgress: "#00BFFF",
-          complete: "#33ff00",
-          error: "#EA2727",
-          textDark: "#000000",
-          textLight: "#FFFFFF"
-        },
-        fonts: {
-          default: null,
-          "'Acme', sans-serif": {
-            url: "https://fonts.googleapis.com/css?family=Acme",
-            active: true
-          }
-        }
-      }
-    },
-    (err, info) => {
-      if (!err) {
-        console.log("Upload Widget event - ", info);
-      }
-    }
-  );
-}
+// function showUploadWidget() {
+//   PhotoUploader.openUploadWidget(
+//     {
+//       cloudName: "abcm2019mcba",
+//       uploadPreset: "hhblxxm0",
+//       sources: [
+//         "local",
+//         "url",
+//         "camera",
+//         "image_search",
+//         "facebook",
+//         "dropbox",
+//         "instagram"
+//       ],
+//       googleApiKey: "<image_search_google_api_key>",
+//       showAdvancedOptions: true,
+//       cropping: true,
+//       multiple: false,
+//       defaultSource: "local",
+//       styles: {
+//         palette: {
+//           window: "#000000",
+//           sourceBg: "#000000",
+//           windowBorder: "#8E9FBF",
+//           tabIcon: "#FFFFFF",
+//           inactiveTabIcon: "#8E9FBF",
+//           menuIcons: "#2AD9FF",
+//           link: "#08C0FF",
+//           action: "#336BFF",
+//           inProgress: "#00BFFF",
+//           complete: "#33ff00",
+//           error: "#EA2727",
+//           textDark: "#000000",
+//           textLight: "#FFFFFF"
+//         },
+//         fonts: {
+//           default: null,
+//           "'Acme', sans-serif": {
+//             url: "https://fonts.googleapis.com/css?family=Acme",
+//             active: true
+//           }
+//         }
+//       }
+//     },
+//     (err, info) => {
+//       if (!err) {
+//         console.log("Upload Widget event - ", info);
+//       }
+//     }
+//   );
+// }
