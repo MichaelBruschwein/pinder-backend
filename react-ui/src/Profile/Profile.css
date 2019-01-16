@@ -1,31 +1,42 @@
 
-
-
-.item{
-    color:blue;
-    border: 1px solid gray;
-    font-weight: bold;
-    font-size: 150%;
-    padding: 10px;
-  }
-.item *{
-    display: inline-block;
+/* inner card padding */
+.card{
+    padding: 10%;
 }
+
+/* this one refers to the full card but not values within */
 .container{
-    /* background-color: blueviolet; */
     display: block;
-    width: 60%;
+    width: 40%;
     margin: auto;
-    /* border: 1px solid red; */
 }
-.label{
+
+/* this one refers to both key and value pairs */
+.column {
     float: left;
-    /* border: 1px solid blue; */
+    width: 50%;
+    font-size: 25px;
+    text-align: left;
+    font-weight: bold;
 }
-.myInputClass{
-    border: 2px solid green;
+.row{
+    padding: 20px;
 }
+/* Just refer to the label side */
+.label{
+    text-transform: capitalize;
+    cursor: not-allowed;
+}
+
+/* for the displayed editable info */
 .myLabelClass{
-    margin: auto;
-    /* border: 1px dotted orange; */
+    cursor: text;
 }
+.myLabelClass:hover{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: lightblue;
+}
+
+
+  
