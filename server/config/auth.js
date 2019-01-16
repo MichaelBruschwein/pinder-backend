@@ -8,7 +8,7 @@ module.exports = {
   |--------------------------------------------------------------------------
   | Authenticator
   |--------------------------------------------------------------------------
-  |
+  |git
   | Authentication is a combination of serializer and scheme with extra
   | config to define on how to authenticate a user.
   |
@@ -16,7 +16,7 @@ module.exports = {
   | Available Serializers - lucid, database
   |
   */
-  authenticator: 'session',
+  authenticator: 'jwt',
 
   /*
   |--------------------------------------------------------------------------

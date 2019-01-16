@@ -22,7 +22,9 @@ Route
   .get('users/:id', 'RegisterController.show')
   .middleware('auth')
 
-Route.post('/handleLogin', 'RegisterController.login')
+Route.post('/login', 'UserController.login')
+
+Route.post('/handleLogin', 'RegisterController.login' )
 
 Route.delete('/deleteUser/:id', "UserController.deleteUser")
 
