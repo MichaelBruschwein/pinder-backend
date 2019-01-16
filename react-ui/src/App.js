@@ -36,8 +36,6 @@ class App extends Component {
     this.userLogout = this.userLogout.bind(this)
   }
   userLogin(userData) {
-    console.log(userData)
-    debugger
     this.setState({
       userLoggedIn: true,
       user: userData.user,
