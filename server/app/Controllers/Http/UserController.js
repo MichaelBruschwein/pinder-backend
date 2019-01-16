@@ -54,7 +54,7 @@ class UserController {
         await userToUpdate.save()
         let users = await User.all()
         response.send({
-            users: users
+            users: userToUpdate
         })
 
     }

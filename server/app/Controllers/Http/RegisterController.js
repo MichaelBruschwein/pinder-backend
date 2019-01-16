@@ -19,7 +19,10 @@ class RegisterController {
             bio: request.input('bio')
         })
 
-        response.send(request.input('name'))
+        //response.send(request.input('username'))
+        response.send({
+            user: user
+        })
 
     }
     async login({ request, auth, response, session }) {
