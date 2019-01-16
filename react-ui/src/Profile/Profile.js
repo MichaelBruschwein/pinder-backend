@@ -26,6 +26,7 @@ export default class Profile extends Component {
                 (val) => {
                     var key = Object.keys(this.state)[i]
                     i++
+                    console.log(key)
 
                     return (
                         <div className="item">
