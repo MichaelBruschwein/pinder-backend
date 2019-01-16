@@ -33,22 +33,30 @@ class App extends Component {
     this.userLogout = this.userLogout.bind(this)
   }
   userLogin(userData) {
-    axios.get('/findPets', {
-      params: {
-        sex: userData.sex
-      }
+    console.log(userData)
+    debugger
+    this.setState({
+      userLoggedIn: true,
+      user: userData.user,
+      token: userData.access_token.token
     })
-      .then((response) => {
-        this.setState({
-          userMatches: response.data,
-          userLoggedIn: true,
-          user: userData
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
+  //   axios.get('/findPets', {
+  //     params: {
+  //       sex: userData.sex
+  //     }
+  //   })
+  //     .then((response) => {
+  //       this.setState({
+  //         userMatches: response.data,
+  //         userLoggedIn: true,
+  //         user: userData
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }
   userLogout() {
     this.setState({
       userLoggedIn: false,

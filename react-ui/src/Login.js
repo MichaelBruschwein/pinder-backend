@@ -63,27 +63,24 @@ class Login extends React.Component {
     });
   };
   handleSubmit() {
-    axios.post('/handleLogin', {
+    axios.post('/loginn', {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
-      if (response.data === "user not found") {
-        console.log('user not found')
-      } else if (response.data === "password did not match") {
-        alert("Password did not match please try again")
-      } else {
-        this.props.changeStatus(response.data[0])
-        // this.setState({ email: "", password: "" })
+      console.log(response)
+      if (response.data.message === "success") {
+        this.props.changeStatus(response.data)
+      } else{
+        alert("We were unable to verify you credentials please try again")
       }
     }.bind(this))
       .catch((error) => {
         console.log(error)
-        alert("Error: User not found please check your credentials")
       })
   }
   render() {
     if (this.props.userStatus === true) {
-      return <Redirect to='/finder' />
+      return <Redirect to='/profile' />
     } else {
       return (
         <main className={this.props.classes.main}>

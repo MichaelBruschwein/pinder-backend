@@ -22,6 +22,7 @@ class RegisterController {
         response.send(request.input('name'))
 
     }
+    
     async login({ request, auth, response, session }) {
         const { email, password, remember } = request.all()
         const user = await Database.query()
