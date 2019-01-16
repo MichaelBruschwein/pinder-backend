@@ -7,7 +7,7 @@ import Finder from './Finder'
 import Navbar from './Navbar/Navbar.js';
 import Matches from './Matches';
 import Home from './Home';
-import axios from 'axios'
+// import axios from 'axios'
 import Profile from './Profile/Profile';
 
 
