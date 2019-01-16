@@ -19,6 +19,11 @@ class FinderController {
             response.send(pets)
         }
     }
+    async match({request,response,auth}){
+        response.send(auth.user)
+        // const {user} = request.all()
+
+    }
 }
 
 module.exports = FinderController
