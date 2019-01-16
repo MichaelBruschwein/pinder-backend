@@ -36,6 +36,15 @@ class App extends Component {
     this.userLogout = this.userLogout.bind(this)
   }
   userLogin(userData) {
+    var testObject = {token:userData.access_token.token};
+    // Put the object into storage
+    localStorage.setItem('token', JSON.stringify(testObject.token));
+
+    // Retrieve the object from storage
+    var retrievedObject = localStorage.getItem('token');
+
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    
     this.setState({
       userLoggedIn: true,
       user: userData.user,
@@ -59,19 +68,21 @@ class App extends Component {
   //     })
   // }
   userLogout() {
+    localStorage.clear();
     this.setState({
+      token:"",
       userLoggedIn: false,
       user: {
-        name: 'testname',
-        username: 'testusername',
-        email: 'test@test.com',
-        password: 'pass',
-        species: 'Dog',
-        sex: 'Male',
-        city: 'boz',
-        state: 'montana',
-        age: '3',
-        bio: 'Hello World'
+        // name: 'testname',
+        // username: 'testusername',
+        // email: 'test@test.com',
+        // password: 'pass',
+        // species: 'Dog',
+        // sex: 'Male',
+        // city: 'boz',
+        // state: 'montana',
+        // age: '3',
+        // bio: 'Hello World'
       }
     })
   }
