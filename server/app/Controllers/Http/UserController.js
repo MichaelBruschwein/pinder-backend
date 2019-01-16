@@ -3,11 +3,21 @@ const User = use('App/Models/User')
 
 class UserController {
     // this part is needed for login remembering
-    async login({ request, auth }) {
+    async login({ request, auth, response }) {
         const { email, password } = request.all()
         await auth.attempt(email, password)
+        await auth.getUser(auth.user)
 
-        return 'Logged in successfully'
+        const user = await User.find(email)
+
+        await auth.generate(user)
+        response.send(user)
+        // try {
+        //     await auth.getUser()
+        //   } catch (error) {
+        //     response.send('Missing or invalid api token')
+        //   }
+
     }
     show({ auth, params }) {
         if (auth.user.id !== Number(params.id)) {
