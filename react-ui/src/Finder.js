@@ -25,7 +25,7 @@ class MediaCard extends React.Component {
         super(props)
         this.classes = props;
         this.state = {
-            counter:0,
+            counter: 0,
             // matchesUserData: [{
             //     name: "loading please wait...",
             //     sex: "loading please wait...",
@@ -34,63 +34,69 @@ class MediaCard extends React.Component {
             //     state: "loading please wait...",
             //     bio: "loading please wait..."
             // }],
-            matchesUserData:this.props.matches
+            matchesUserData: this.props.matches
         }
         this.changeCounter = this.changeCounter.bind(this)
     }
-    changeCounter(){
-        if(this.state.counter === this.state.matchesUserData.length - 1){
-            this.setState({counter:0})
-        }else{
-        this.setState({counter:this.state.counter + 1})
+    changeCounter() {
+        if (this.state.counter === this.state.matchesUserData.length - 1) {
+            this.setState({ counter: 0 })
+        } else {
+            this.setState({ counter: this.state.counter + 1 })
         }
 
     }
-    
+
     render() {
         console.log(this.state.matchesUserData.name)
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
         } else {
             return (
-                <Grid
-                    container
-                    justify="center"
-                    alignItems="center">
-                    <Card className={this.props.classes.card}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={this.props.classes.media}
-                                image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {this.state.matchesUserData.name},
+                <div
+                    style={{
+                        paddingTop: '5%'
+                    }}
+                >
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center">
+                        <Card className={this.props.classes.card}>
+                            <CardActionArea>
+                                <CardMedia
+                                    className={this.props.classes.media}
+                                    image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
+                                    title="Contemplative Reptile"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {this.state.matchesUserData.name},
                                     {this.state.matchesUserData.sex},
                                     {this.state.matchesUserData.age},
                                     {this.state.matchesUserData.city + " " + this.state.matchesUserData.state}
-                                </Typography>
-                                <Typography component="p">
-                                    {this.state.matchesUserData.bio}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Grid
-                                container
-                                alignItems="flex-end"
-                            >
-                                <Button size="large" variant="contained" color="secondary">
-                                    Dislike
+                                    </Typography>
+                                    <Typography component="p">
+                                        {this.state.matchesUserData.bio}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions>
+                                <Grid
+                                    container
+                                    alignItems="flex-end"
+                                >
+                                    <Button size="large" variant="contained" color="secondary">
+                                        Dislike
         </Button>
-                            </Grid>
-                            <Button onClick={this.changeCounter} size="large" variant="contained" color="primary">
-                                Like
+                                </Grid>
+                                <Button onClick={this.changeCounter} size="large" variant="contained" color="primary">
+                                    Like
         </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                </div>
             );
         }
     }
