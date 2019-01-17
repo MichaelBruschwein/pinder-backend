@@ -16,7 +16,6 @@ class App extends Component {
     super()
     this.rememberMe = localStorage.getItem('remember_me')
     this.rememberMe = JSON.parse(this.rememberMe)
-    console.log(this.rememberMe)
     if(this.rememberMe === null){
       this.state = {
         userLoggedIn:false,
