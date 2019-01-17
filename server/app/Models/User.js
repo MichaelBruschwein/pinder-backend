@@ -38,7 +38,6 @@ class User extends Model {
   match() {
     return this
       .belongsToMany('App/Models/User')
-      .pivotModel('App/Models/Match')
   }
 }
 

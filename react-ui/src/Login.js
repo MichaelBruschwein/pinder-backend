@@ -67,11 +67,10 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
-      console.log(response)
       if (response.data.message === "success") {
         this.props.changeStatus(response.data)
       } else{
-        alert("We were unable to verify you credentials please try again")
+        alert("We were unable to verify your credentials please try again")
       }
     }.bind(this))
       .catch((error) => {

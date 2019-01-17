@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Match extends Model {
+    user() {
+        return this
+          .belongsToMany('App/Models/User')
+      }
     
 }
 
