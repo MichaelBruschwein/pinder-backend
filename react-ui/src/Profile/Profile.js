@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import Modal from '@material-ui/core/Modal';
+import Dialog from './Dialog.js'
 
 export default class Profile extends Component {
     constructor(props) {
@@ -48,7 +48,7 @@ export default class Profile extends Component {
 
     deleteProfile() {
         //verify if they want to delete
-
+        console.log('hi')
         //then delete
         axios.delete(`/deleteUser/${this.state.id}`, {})
             .then((response) => {
@@ -64,43 +64,21 @@ export default class Profile extends Component {
 
     }
     updateProfile() {
-        //Route.put('/updateUser/:id', "UserController.updateUser")
-        //this is the axios call
-        // axios.delete(`/updateUser/${this.state.id}`, {
-
-
-        // })
-        //     .then((response) => {
-        //         //set the state to empty currently not working
-        //         this.setState({})
-
-        //         //force logout
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-
-        <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={this.state.open}
-            onClose={this.handleClose}
-        >
-        </Modal>
-
-
-
-
-        alert("you clicked update")
+        console.log('here')
+        // return (
+        //     <div>
+        //         <Dialog />
+        //     </div>
+        // )
     }
 
     composeList() {
         let i = 0;
         let displayValue = ''
         return (
-            Object.values(this.state).map(
+            Object.values(this.state.user).map(
                 (val) => {
-                    let key = Object.keys(this.state)[i]
+                    let key = Object.keys(this.state.user)[i]
                     i++
 
                     if (key === 'password') {
