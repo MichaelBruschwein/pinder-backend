@@ -3,7 +3,6 @@ import './Profile.css';
 import EditableLabel from 'react-inline-editing';
 import { Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
@@ -39,37 +38,51 @@ export default class Profile extends Component {
     }
 
     _handleFocusOut(key, text) {
-        // this is where the current state would be sent to axios put
-        //this is where we update the state
-        // also would need to check and see if its for password in which case we double check
+        //update state
+        console.log(this.state)
+        console.log({user:{[key]: text}})
+
+// this is where i left off... just need to lift the state
+
+
+
+        this.setState({user:{[key]: text}})
         console.log('Left editor with text: ' + text);
-        console.log(key)
+        console.log(this.state)
     }
 
-    deleteProfile() {
-        //verify if they want to delete
-        console.log('hi')
-        //then delete
-        axios.delete(`/deleteUser/${this.state.id}`, {})
+    deleteProfile(user) {
+        axios.delete(`/deleteUser/${user.id}`, {})
             .then((response) => {
-                //set the state to empty currently not working
-
-
-                //force logout
+                this.props.userLogout()
             })
             .catch(function (error) {
                 console.log(error);
             });
-        this.props.userLogout()
 
     }
-    updateProfile() {
-        console.log('here')
-        // return (
-        //     <div>
-        //         <Dialog />
-        //     </div>
-        // )
+    updateProfile(user) {
+        console.log(user)
+        axios.put(`/updateUser/${user.id}`, {
+            username:user.username,
+            email:user.email,
+            password:user.password,
+            name:user.name,
+            species:user.species,
+            sex:user.sex,
+            city:user.city,
+            state:user.state,
+            age:user.age,
+            bio:user.bio
+        })
+            .then((response) => {
+                // this.props.userLogout()
+                //this.setState({ dinosaurs: response.data.dinos })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            
     }
 
     composeList() {
@@ -133,14 +146,10 @@ export default class Profile extends Component {
                         {this.composeList()}
                         <Grid container justify="space-between">
                             <Grid item>
-                                <Button size="medium" variant="contained" color="primary" onClick={this.updateProfile}>
-                                    Update Profile
-                                </Button>
+                                <Dialog buttonName={'Update Profile'} title={'Update?'} dialog={'Are you sure you want to Update'} confirm={'Yepper'} deny={'Nope'} action={this.updateProfile} user={this.state.user}/>
                             </Grid>
                             <Grid item>
-                                <Button size="medium" variant="contained" color="secondary" onClick={this.deleteProfile}>
-                                    Delete Profile
-                                </Button>
+                                <Dialog buttonName={'Delete Profile'} title={'Delete?'} dialog={'Are you sure you want to Delete'} confirm={'Yas'} deny={'Na'} action={this.deleteProfile} user={this.state.user} />
                             </Grid>
                         </Grid>
                     </Card >

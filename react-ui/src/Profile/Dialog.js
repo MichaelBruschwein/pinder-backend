@@ -12,23 +12,44 @@ function Transition(props) {
 }
 
 export default class AlertDialogSlide extends React.Component {
-  state = {
-    open: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      buttonName: this.props.buttonName,
+      title: this.props.title,
+      dialog: this.props.dialog,
+      confirm: this.props.confirm,
+      deny: this.props.deny
+    };
+  }
 
+//for opening the dialog
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-
+//just for closing the dialog
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleDeny = () => {
+    this.handleClose()
+
+  };
+
+  handleConfirm = () => {
+    this.props.action(this.props.user)
+    this.handleClose()
+  };
+
+
 
   render() {
     return (
       <div>
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Slide in alert dialog
+          {this.state.buttonName}
         </Button>
         <Dialog
           open={this.state.open}
@@ -39,20 +60,19 @@ export default class AlertDialogSlide extends React.Component {
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            {"Use Google's location service?"}
+            {this.state.title}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              {this.state.dialog}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Disagree
+            <Button onClick={this.handleDeny} color="primary">
+              {this.state.deny}
             </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Agree
+            <Button onClick={this.handleConfirm} color="primary">
+              {this.state.confirm}
             </Button>
           </DialogActions>
         </Dialog>
