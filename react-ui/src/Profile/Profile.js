@@ -7,20 +7,32 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-
+import Modal from '@material-ui/core/Modal';
 
 export default class Profile extends Component {
     constructor(props) {
         super(props);
 
 
-        this.state = this.props.userInfo;
+        this.state = {
+            user: this.props.userInfo,
+            open: false,
+        }
+
         this._handleFocus = this._handleFocus.bind(this);
         this._handleFocusOut = this._handleFocusOut.bind(this);
         this.deleteProfile = this.deleteProfile.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
         this.composeList = this.composeList.bind(this);
     }
+
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: true });
+    };
     _handleFocus(key, text) {
         console.log('Focused with text: ' + text);
         console.log(key)
@@ -48,25 +60,37 @@ export default class Profile extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-            this.props.userLogout()
+        this.props.userLogout()
 
     }
     updateProfile() {
         //Route.put('/updateUser/:id', "UserController.updateUser")
         //this is the axios call
-        axios.delete(`/updateUser/${this.state.id}`, {
+        // axios.delete(`/updateUser/${this.state.id}`, {
 
 
-        })
-            .then((response) => {
-                //set the state to empty currently not working
-                this.setState({})
+        // })
+        //     .then((response) => {
+        //         //set the state to empty currently not working
+        //         this.setState({})
 
-                //force logout
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        //         //force logout
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+
+        <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.handleClose}
+        >
+        </Modal>
+
+
+
+
         alert("you clicked update")
     }
 
