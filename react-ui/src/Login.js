@@ -70,7 +70,7 @@ class Login extends React.Component {
       console.log(response)
       if (response.data.message === "success") {
         this.props.changeStatus(response.data)
-      } else{
+      } else {
         alert("We were unable to verify you credentials please try again")
       }
     }.bind(this))
@@ -91,7 +91,7 @@ class Login extends React.Component {
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
-        </Typography>
+            </Typography>
             <form className={this.props.classes.form}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>

@@ -33,76 +33,81 @@ class ItsAMatch extends React.Component {
             return <Redirect to='/login' />
         } else {
             return (
-                <Card>
-                    <CardHeader
-                        title="Congratulations its a Match!"
+                <div
+                    style={{
+                        paddingTop: '5%'
+                    }}
                     >
-                    </CardHeader>
+                <Card>
+                        <CardHeader
+                            title="Congratulations its a Match!"
+                        >
+                        </CardHeader>
 
-                    <Grid container spacing={32} justify="center">
-                        <Grid item xs={6}>
-                            <Card className={this.props.classes.card}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={this.props.classes.media}
-                                        image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
-                                        title="Contemplative Reptile"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Lizard
+                        <Grid container spacing={32} justify="center">
+                            <Grid item xs={6}>
+                                <Card className={this.props.classes.card}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={this.props.classes.media}
+                                            image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
+                                            title="Contemplative Reptile"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Lizard
           </Typography>
-                                        <Typography component="p">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                            across all continents except Antarctica
+                                            <Typography component="p">
+                                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                                across all continents except Antarctica
           </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        {/* Break between cards for reference */}
-                        <Grid item xs={6}>
-                            <Card className={this.props.classes.card}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={this.props.classes.media}
-                                        image="http://rivista-cdn.reptilesmagazine.com/images/cache/cache_d/cache_5/cache_d/frilled-lizard-shutterstock_739998265-82048d5d.jpeg?ver=1542816872&aspectratio=1.5"
-                                        title="Contemplative Reptile"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Lizard
-          </Typography>
-                                        <Typography component="p">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                            across all continents except Antarctica
-          </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                    <CardActionArea>
-                        <CardActions>
-                            <Grid container alignItems="flex-end">
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
                             </Grid>
-                        </CardActions>
-                    </CardActionArea>
-                    <Grid container justify="space-between">
-                        <Grid item>
-                            <Button size="large" variant="contained" color="secondary">
-                                Contine Finding Pets
-                        </Button>
+                            {/* Break between cards for reference */}
+                            <Grid item xs={6}>
+                                <Card className={this.props.classes.card}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={this.props.classes.media}
+                                            image="http://rivista-cdn.reptilesmagazine.com/images/cache/cache_d/cache_5/cache_d/frilled-lizard-shutterstock_739998265-82048d5d.jpeg?ver=1542816872&aspectratio=1.5"
+                                            title="Contemplative Reptile"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Lizard
+          </Typography>
+                                            <Typography component="p">
+                                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                                across all continents except Antarctica
+          </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Button size="large" variant="contained" color="primary">
-                                Go to Matches
+                        <CardActionArea>
+                            <CardActions>
+                                <Grid container alignItems="flex-end">
+                                </Grid>
+                            </CardActions>
+                        </CardActionArea>
+                        <Grid container justify="space-between">
+                            <Grid item>
+                                <Button size="large" variant="contained" color="secondary">
+                                    Contine Finding Pets
                         </Button>
+                            </Grid>
+                            <Grid item>
+                                <Button size="large" variant="contained" color="primary">
+                                    Go to Matches
+                        </Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Card>
+                    </Card>
 
-
+                </div>
             );
         }
     }
