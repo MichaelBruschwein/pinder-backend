@@ -26,6 +26,8 @@ Route.post('/loginn', 'UserController.login')
 
 // Route.post('/handleLogin', 'RegisterController.login' )
 
+Route.get('/user', "UserController.getUser")
+
 Route.delete('/deleteUser/:id', "UserController.deleteUser")
 
 Route.put('/updateUser/:id', "UserController.updateUser")
