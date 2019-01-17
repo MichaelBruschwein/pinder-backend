@@ -18,11 +18,11 @@ class UserSeeder {
   async run() {
     const userArray = [
       { name: 'Mike Bruschwein', username: 'Mike_Bruschwein_16', email: 'm.bruschwein16@gmail.com', password: 'password', species: 'Bernese Mountain Dog', sex: 'Male', city: 'Billings', state: 'MT', age: '5', bio: 'Loves long walks on the beach and beef jerkey' },
-      { name: 'Robert Crum', username: 'gargansa', email: 'gargansa@hotmail.com', password: 'password', species: 'corgi', sex: 'male', city: 'Avon', state: 'MT', age: '7', bio: 'Did you know corgis butts look like a loaf of bread?' },
-      { name: 'Angela Montanye', username: 'AngieAnge', email: 'amontanye@aol.com', password: 'password', species: 'Shar pei', sex: 'female', city: 'Helena', state: 'MT', age: '4', bio: 'Loves waking up early to watch Disney cartoons' },
-      { name: 'Cory Cotterell', username: 'CorrDawg', email: 'corrdawg13@askjeeves.com', password: 'password', species: 'French Bulldog', sex: 'male', city: 'Bozeman', state: 'MT', age: '0', bio: 'Loves staying up late hanging out with the females' },
-      { name: 'Doggo MaGee', username: 'doggo', email: 'dog@diggitydog.com', password: 'password', species: 'Golden Retriever', sex: 'female', city: 'Bozeman', state: 'MT', age: '5', bio: 'Shut up and throw the frisbee already' },
-      { name: 'Chinchita', username: 'Chichi', email: 'chinchita@churro.com', password: 'password', species: 'Chihuahua', sex: 'female', city: 'Bozeman', state: 'MT', age: '3', bio: 'Yo quiero Taco Bell' }
+      { name: 'Robert Crum', username: 'gargansa', email: 'gargansa@hotmail.com', password: 'password', species: 'corgi', sex: 'Male', city: 'Avon', state: 'MT', age: '7', bio: 'Did you know corgis butts look like a loaf of bread?' },
+      { name: 'Angela Montanye', username: 'AngieAnge', email: 'amontanye@aol.com', password: 'password', species: 'Shar pei', sex: 'Female', city: 'Helena', state: 'MT', age: '4', bio: 'Loves waking up early to watch Disney cartoons' },
+      { name: 'Cory Cotterell', username: 'CorrDawg', email: 'corrdawg13@askjeeves.com', password: 'password', species: 'French Bulldog', sex: 'Male', city: 'Bozeman', state: 'MT', age: '0', bio: 'Loves staying up late hanging out with the females' },
+      { name: 'Doggo MaGee', username: 'doggo', email: 'dog@diggitydog.com', password: 'password', species: 'Golden Retriever', sex: 'Female', city: 'Bozeman', state: 'MT', age: '5', bio: 'Shut up and throw the frisbee already' },
+      { name: 'Chinchita', username: 'Chichi', email: 'chinchita@churro.com', password: 'password', species: 'Chihuahua', sex: 'Female', city: 'Bozeman', state: 'MT', age: '3', bio: 'Yo quiero Taco Bell' }
     ]
     for (var i = 0; i < userArray.length; i++) {
       await Factory.model('App/Models/User').create({ name: userArray[i].name, username: userArray[i].username, email: userArray[i].email, password: userArray[i].password, species: userArray[i].species, sex: userArray[i].sex, city: userArray[i].city, state: userArray[i].state, age: userArray[i].age, bio: userArray[i].bio })
