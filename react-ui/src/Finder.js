@@ -48,6 +48,7 @@ class MediaCard extends React.Component {
     }
     
     render() {
+        console.log(this.state.matchesUserData.name)
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
         } else {
@@ -65,13 +66,13 @@ class MediaCard extends React.Component {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    {this.state.matchesUserData[this.state.counter].name},
-                                    {this.state.matchesUserData[this.state.counter].sex},
-                                    {this.state.matchesUserData[this.state.counter].age},
-                                    {this.state.matchesUserData[this.state.counter].city + " " + this.state.matchesUserData[this.state.counter].state}
+                                    {this.state.matchesUserData.name},
+                                    {this.state.matchesUserData.sex},
+                                    {this.state.matchesUserData.age},
+                                    {this.state.matchesUserData.city + " " + this.state.matchesUserData.state}
                                 </Typography>
                                 <Typography component="p">
-                                    {this.state.matchesUserData[this.state.counter].bio}
+                                    {this.state.matchesUserData.bio}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
