@@ -6,10 +6,14 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import axios from 'axios';
+
 
 export default class Profile extends Component {
     constructor(props) {
         super(props);
+
+
         this.state = this.props.userInfo;
         this._handleFocus = this._handleFocus.bind(this);
         this._handleFocusOut = this._handleFocusOut.bind(this);
@@ -24,15 +28,45 @@ export default class Profile extends Component {
 
     _handleFocusOut(key, text) {
         // this is where the current state would be sent to axios put
+        //this is where we update the state
         // also would need to check and see if its for password in which case we double check
         console.log('Left editor with text: ' + text);
         console.log(key)
     }
 
     deleteProfile() {
-        alert("you clicked delete")
+        //verify if they want to delete
+
+        //then delete
+        axios.delete(`/deleteUser/${this.state.id}`, {})
+            .then((response) => {
+                //set the state to empty currently not working
+
+
+                //force logout
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            this.props.userLogout()
+
     }
     updateProfile() {
+        //Route.put('/updateUser/:id', "UserController.updateUser")
+        //this is the axios call
+        axios.delete(`/updateUser/${this.state.id}`, {
+
+
+        })
+            .then((response) => {
+                //set the state to empty currently not working
+                this.setState({})
+
+                //force logout
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         alert("you clicked update")
     }
 
@@ -89,11 +123,11 @@ export default class Profile extends Component {
         } else {
             return (
                 <div className="container"
-                style={{
-                    paddingTop: '5%'
-                }}>
+                    style={{
+                        paddingTop: '5%'
+                    }}>
                     <Card className="card"
-                        >
+                    >
                         {this.composeList()}
                         <Grid container justify="space-between">
                             <Grid item>

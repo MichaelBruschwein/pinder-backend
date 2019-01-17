@@ -61,7 +61,7 @@ class App extends Component {
             <Route path="/login" render={(props) => <Login {...props} changeStatus={this.userLogin} userStatus={this.state.userLoggedIn} />} />
             <Route path="/register" render={(props) => <Register {...props} userStatus={this.state.userLoggedIn} />} />
             <Route path="/finder" render={(props) => <Finder {...props} matches={this.state.user} userStatus={this.state.userLoggedIn} />} />
-            <Route path="/profile" render={(props) => <Profile {...props} userStatus={this.state.userLoggedIn} userInfo={this.state.user} />} />
+            <Route path="/profile" render={(props) => <Profile {...props} userLogout={this.userLogout} userStatus={this.state.userLoggedIn} userInfo={this.state.user} />} />
             <Route path="/matches" render={(props) => <Matches {...props} userStatus={this.state.userLoggedIn} />} />
           </div>
         </Router>
