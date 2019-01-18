@@ -12,7 +12,7 @@ class MatchController {
         }else{
             sex = "Male"
         }
-        
+
         let previosMatches = await Database.query().table('matches').where('user1_id', user.id)
         let matches = await Database.query().table('users').where('Sex', sex)
 
