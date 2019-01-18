@@ -21,7 +21,7 @@ export default class Profile extends Component {
         this._handleFocusOut = this._handleFocusOut.bind(this);
         this.deleteProfile = this.deleteProfile.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
-        this.composeList = this.composeList.bind(this);
+        this.profileItems = this.profileItems.bind(this);
     }
 
     _handleFocus(key, text) {
@@ -69,29 +69,31 @@ export default class Profile extends Component {
             });
     }
 
-    composeList() {
+    profileItems() {
         let i = 0;
         let displayValue = ''
         return (
             Object.values(this.state.user).map(
                 (val) => {
-                    let key = Object.keys(this.state.user)[i]
+                    let keyName = Object.keys(this.state.user)[i]
                     i++
 
-                    if (key === 'password') {
+                    if (keyName === 'password') {
                         displayValue = '************';
                     } else {
                         displayValue = val;
                     }
                     // Emit the following keys
-                    if (key === 'id' || key === 'created_at' || key === 'updated_at') {
-                        return(<div></div>)
+                    if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
+                        // key is important for react to keep track of what updated
+                        return (<div key={i.toString()}></div>)
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
                         return (
-                            <div className='row'>
+                            // key is important for react to keep track of what updated
+                            <div className='row' key={i.toString()}> 
                                 <div className="column">
-                                    <span className="label">{key} </span>
+                                    <span className="label">{keyName} </span>
                                     <Divider />
                                 </div>
                                 <div className="column">
@@ -99,16 +101,15 @@ export default class Profile extends Component {
                                         text={displayValue.toString()}
                                         labelClassName='myLabelClass'
                                         inputClassName='myInputClass'
-                                        key inputMaxLength={50}
-                                        onFocus={this._handleFocus.bind(this, key)}
-                                        onFocusOut={this._handleFocusOut.bind(this, key)}
+                                        inputMaxLength={50}
+                                        onFocus={this._handleFocus.bind(this, keyName)}
+                                        onFocusOut={this._handleFocusOut.bind(this, keyName)}
                                     />
                                     <Divider />
                                 </div>
                             </div>
                         )
                     }
-                    // return <div></div>
                 })
         )
     }
@@ -120,7 +121,7 @@ export default class Profile extends Component {
                 <div className="container"
                     style={{ paddingTop: '5%' }}>
                     <Card className="card">
-                        {this.composeList()}
+                        {this.profileItems()}
                         <Grid container justify="space-between">
                             <Grid item>
                                 <Dialog
