@@ -10,13 +10,12 @@ class UserController {
             if (await auth.attempt(email, password)) {
                 let user = await User.findBy('email', email)
                 let accessToken = await auth.generate(user)
-        
-                return response.json({ "message":"success", "user": user, "access_token": accessToken })
+                return response.json({ "message": "success", "user": user, "access_token": accessToken })
             }
 
         }
         catch (e) {
-            
+
             return response.json({ message: "Please try again we weren't able to login" })
         }
     }
