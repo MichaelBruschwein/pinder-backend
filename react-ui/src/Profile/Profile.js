@@ -146,10 +146,10 @@ export default class Profile extends Component {
                         {this.composeList()}
                         <Grid container justify="space-between">
                         <Grid item>
-                                <Dialog buttonName={'Delete Profile'} title={'Delete?'} dialog={'Are you sure you want to Delete'} confirm={'Yas'} deny={'Na'} action={this.deleteProfile} user={this.state.user} />
+                                <Dialog buttonName={'Delete Profile'}  buttonType={'primary'} title={'Delete?'} dialog={'Are you sure you want to Delete'} confirm={'Yas'} deny={'Na'} action={this.deleteProfile} user={this.state.user} />
                             </Grid>
                             <Grid item>
-                                <Dialog buttonName={'Update Profile'} title={'Update?'} dialog={'Are you sure you want to Update'} confirm={'Yepper'} deny={'Nope'} action={this.updateProfile} user={this.state.user}/>
+                                <Dialog buttonName={'Update Profile'} buttonType={'secondary'} title={'Update?'} dialog={'Are you sure you want to Update'} confirm={'Yepper'} deny={'Nope'} action={this.updateProfile} user={this.state.user}/>
                             </Grid>
                         </Grid>
                     </Card >
