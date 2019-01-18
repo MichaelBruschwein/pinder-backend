@@ -70,7 +70,7 @@ class MediaCard extends React.Component {
             return <Redirect to='/login' />
         } else if(this.state.matchesFound.length === 0){
             console.log(this.state.matchesFound.length === 0)
-            return <div><h1 no matches found try refreshing page></h1></div>
+            return <div><h1> no matches found try refreshing page</h1></div>
         }else{
             return (
                 <div

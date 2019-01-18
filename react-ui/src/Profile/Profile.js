@@ -85,10 +85,11 @@ export default class Profile extends Component {
                     }
                     // Emit the following keys
                     if (key === 'id' || key === 'created_at' || key === 'updated_at') {
+                        return(<div></div>)
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
                         return (
-                            <div className="row">
+                            <div className='row'>
                                 <div className="column">
                                     <span className="label">{key} </span>
                                     <Divider />
@@ -107,7 +108,7 @@ export default class Profile extends Component {
                             </div>
                         )
                     }
-                    return <div></div>
+                    // return <div></div>
                 })
         )
     }
