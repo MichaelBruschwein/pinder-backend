@@ -16,6 +16,7 @@ class MatchController {
         let previosMatches = await Database.query().table('matches').where('user1_id', user.id)
         let matches = await Database.query().table('users').where('Sex', sex)
         let usersToMatches = await Database.query().table('matches').where('user1_id', user.id).where('user1_approval', null)
+        console.log(previosMatches)
         // The user clicks some button saying find matches.
         // An axios call is called to ping to our database.
         // in this controller we want to take in the user.
@@ -46,10 +47,10 @@ class MatchController {
                         user1_id: user.id,
                         user2_id: user2.id
                     })
-                    response.send(usersToMatches.map((e)=>e.id))
                 })
+                response.send(usersToMatches.map((e) => e.id))
             } else { //NOTE: The user had no new matches
-                response.send("There Was No New Matches Check Back Later")
+                response.send(usersToMatches.map((e) => e.id))
             }
 
         } else { //NOTE: The user had no previous matches
@@ -58,10 +59,22 @@ class MatchController {
                     user1_id: user.id,
                     user2_id: user2.id,
                 })
-                response.send(usersToMatches.map((e)=>e.id))
             })
+            response.send(usersToMatches.map((e) => e.id))
         }
 
+    }
+    async like({ request, response }) {
+        const user1 = request.input('user1')
+        const user2 = request.input('user2')
+        let findUserToUpdate = await Database.query()
+            .table('matches')
+            .where('user1_id', user1)
+            .where('user2_id', user2)
+        var matchToUpdate = await Match.find(findUserToUpdate[0].id)
+        matchToUpdate.user1_approval = true
+        await matchToUpdate.save()
+        response.send('User was liked')
     }
 
 }

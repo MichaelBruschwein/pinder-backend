@@ -38,6 +38,10 @@ class UserController {
         }
         return auth.user
     }
+    async getUserById({params:{id},response}){
+        let user = await User.find(id)
+        response.send(user)
+    }
 
     async getUser({ request, response }) {
         let users = await User.all()
