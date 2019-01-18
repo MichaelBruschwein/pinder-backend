@@ -6,8 +6,7 @@ tmp
 
 # Environment variables, never commit this file
 .env
-.bash_profile
-fonts 
+fonts
 
 # The development sqlite file
 database/development.sqlite
