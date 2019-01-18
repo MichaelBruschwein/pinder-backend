@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import Dialog from './Dialog.js';
+import Dialog from './../Dialog.js';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -62,6 +62,7 @@ export default class Profile extends Component {
             bio: user.bio
         })
             .then((response) => {
+                console.log('Updated Profile')
             })
             .catch(function (error) {
                 console.log(error);
@@ -109,7 +110,6 @@ export default class Profile extends Component {
                     return <div></div>
                 })
         )
-
     }
     render() {
         if (!this.props.userStatus) {
