@@ -17,6 +17,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  palette: {
+    type: 'dark',
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,

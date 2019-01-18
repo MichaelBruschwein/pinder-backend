@@ -48,7 +48,7 @@ export default class AlertDialogSlide extends React.Component {
   render() {
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
           {this.state.buttonName}
         </Button>
         <Dialog
@@ -68,10 +68,10 @@ export default class AlertDialogSlide extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleDeny} color="primary">
+            <Button onClick={this.handleDeny} variant="contained" color="primary">
               {this.state.deny}
             </Button>
-            <Button onClick={this.handleConfirm} color="primary">
+            <Button onClick={this.handleConfirm} variant="contained" color="primary">
               {this.state.confirm}
             </Button>
           </DialogActions>
