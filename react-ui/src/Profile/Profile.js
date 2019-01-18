@@ -8,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Dialog from './Dialog.js'
 
+
+// added a handleChange function to each text field. that way you can change just the text feild you want to edit
 export default class Profile extends Component {
     constructor(props) {
         super(props);
