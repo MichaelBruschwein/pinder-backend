@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import Dialog from './Dialog.js'
+import Dialog from './Dialog.js';
 
 
 // added a handleChange function to each text field. that way you can change just the text feild you want to edit
@@ -36,21 +36,21 @@ export default class Profile extends Component {
     };
     _handleFocus(key, text) {
         console.log('Focused with text: ' + text);
-        console.log(key)
+        console.log(key);
     }
 
     _handleFocusOut(key, text) {
         //update state
-        console.log(this.state)
-        console.log({user:{[key]: text}})
+        console.log(this.state);
+        console.log({ user: { [key]: text } });
 
-// this is where i left off... just need to lift the state
+        // this is where i left off... just need to lift the state
+        this.props.updateState(this.state)
 
 
-
-        this.setState({user:{[key]: text}})
+        this.setState({ user: { [key]: text } });
         console.log('Left editor with text: ' + text);
-        console.log(this.state)
+        console.log(this.state);
     }
 
     deleteProfile(user) {
@@ -66,16 +66,16 @@ export default class Profile extends Component {
     updateProfile(user) {
         console.log(user)
         axios.put(`/updateUser/${user.id}`, {
-            username:user.username,
-            email:user.email,
-            password:user.password,
-            name:user.name,
-            species:user.species,
-            sex:user.sex,
-            city:user.city,
-            state:user.state,
-            age:user.age,
-            bio:user.bio
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            name: user.name,
+            species: user.species,
+            sex: user.sex,
+            city: user.city,
+            state: user.state,
+            age: user.age,
+            bio: user.bio
         })
             .then((response) => {
                 // this.props.userLogout()
@@ -84,7 +84,7 @@ export default class Profile extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-            
+
     }
 
     composeList() {
@@ -105,7 +105,9 @@ export default class Profile extends Component {
                     if (key === 'id' || key === 'created_at' || key === 'updated_at') {
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
+                        
                         return (
+                            
                             <div>
                                 <div className="row">
                                     <div className="column">
@@ -147,11 +149,11 @@ export default class Profile extends Component {
                     >
                         {this.composeList()}
                         <Grid container justify="space-between">
-                        <Grid item>
-                                <Dialog buttonName={'Delete Profile'}  buttonType={'primary'} title={'Delete?'} dialog={'Are you sure you want to Delete'} confirm={'Yas'} deny={'Na'} action={this.deleteProfile} user={this.state.user} />
+                            <Grid item>
+                                <Dialog buttonName={'Delete Profile'} buttonType={'primary'} title={'Delete?'} dialog={'Are you sure you want to Delete'} confirm={'Yas'} deny={'Na'} action={this.deleteProfile} user={this.state.user} />
                             </Grid>
                             <Grid item>
-                                <Dialog buttonName={'Update Profile'} buttonType={'secondary'} title={'Update?'} dialog={'Are you sure you want to Update'} confirm={'Yepper'} deny={'Nope'} action={this.updateProfile} user={this.state.user}/>
+                                <Dialog buttonName={'Update Profile'} buttonType={'secondary'} title={'Update?'} dialog={'Are you sure you want to Update'} confirm={'Yepper'} deny={'Nope'} action={this.updateProfile} user={this.state.user} />
                             </Grid>
                         </Grid>
                     </Card >

@@ -68,7 +68,7 @@ class Login extends React.Component {
       password: this.state.password,
     }).then(function (response) {
       if (response.data.message === "success") {
-        this.props.changeStatus(response.data)
+        this.props.userLogin(response.data)
       } else{
         alert("We were unable to verify your credentials please try again")
       }
