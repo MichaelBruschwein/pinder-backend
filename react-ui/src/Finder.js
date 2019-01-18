@@ -107,3 +107,6 @@ MediaCard.propTypes = {
 };
 
 export default withStyles(styles)(MediaCard);
+//Make a axios post call to database to create and search for matches
+//We get a response from database and setstate of matches to equal the ids from database
+//
