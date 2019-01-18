@@ -10,7 +10,7 @@ import Home from './Home';
 // import axios from 'axios'
 import Profile from './Profile/Profile';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { green, blue} from '@material-ui/core/colors'
+import { green, blue } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
   palette: {
@@ -41,11 +41,18 @@ class App extends Component {
   }
 
   updateState(userData) {
-    this.setState({
-      userLoggedIn: true,
-      user: userData.user
-      
-    })
+    // this.setState({
+
+    //   user: userData.user
+
+    // })
+    this.setState(prevState => (
+      {
+        ...prevState,
+        user: { userData }
+      }
+    ))
+
   }
 
   userLogin(userData) {
@@ -56,7 +63,7 @@ class App extends Component {
     localStorage.setItem('remember_me', JSON.stringify(testObject));
     this.updateState(userData) // broken out into a seperate function so it can be used to set state from other components
     this.setState({
-      
+      userLoggedIn: true,
       token: userData.access_token.token
     })
   }
