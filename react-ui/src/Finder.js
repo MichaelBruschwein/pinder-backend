@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 
 
 const styles = {
@@ -26,6 +27,7 @@ class MediaCard extends React.Component {
         this.classes = props;
         this.state = {
             counter: 0,
+            matchesFound:1,
             // matchesUserData: [{
             //     name: "loading please wait...",
             //     sex: "loading please wait...",
@@ -34,24 +36,42 @@ class MediaCard extends React.Component {
             //     state: "loading please wait...",
             //     bio: "loading please wait..."
             // }],
-            matchesUserData: this.props.matches
+            matchesUserData: this.props.matches.id
         }
-        this.changeCounter = this.changeCounter.bind(this)
+        this.likesUser = this.likesUser.bind(this)
     }
-    changeCounter() {
-        if (this.state.counter === this.state.matchesUserData.length - 1) {
-            this.setState({ counter: 0 })
-        } else {
-            this.setState({ counter: this.state.counter + 1 })
-        }
-
+    componentDidMount(){
+        axios.post('/match',{
+            id:this.state.matchesUserData
+        }).then((response)=>{
+            console.log(response)
+            axios.get(`/user/${response.data[0]}`)
+            .then((response)=>{
+                this.setState({
+                    matchesUserData:this.state.matchesUserData,
+                    matchesFound:response.data
+                })
+            })
+        })
+    }
+    likesUser() {
+        console.log(this.state.matchesUserData,this.state.matchesFound)
+        axios.put('/like',{
+            user1:this.state.matchesUserData,
+            user2:this.state.matchesFound.id
+        }).then((response)=>{
+            console.log(response)
+        }).catch((error)=>{
+            console.log(error)
+        })
     }
 
     render() {
-        console.log(this.state.matchesUserData.name)
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
-        } else {
+        } else if(this.state.matchesFound.length === 0){
+            return <div><h1> no matches found try refreshing page</h1></div>
+        }else{
             return (
                 <div
                     style={{
@@ -71,13 +91,13 @@ class MediaCard extends React.Component {
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        {this.state.matchesUserData.name},
-                                    {this.state.matchesUserData.sex},
-                                    {this.state.matchesUserData.age},
-                                    {this.state.matchesUserData.city + " " + this.state.matchesUserData.state}
+                                        {this.state.matchesFound.name},
+                                    {this.state.matchesFound.sex},
+                                    {this.state.matchesFound.age},
+                                    {this.state.matchesFound.city + " " + this.state.matchesFound.state}
                                     </Typography>
                                     <Typography component="p">
-                                        {this.state.matchesUserData.bio}
+                                        {this.state.matchesFound.bio}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -90,7 +110,7 @@ class MediaCard extends React.Component {
                                         Dislike
         </Button>
                                 </Grid>
-                                <Button onClick={this.changeCounter} size="large" variant="contained" color="primary">
+                                <Button onClick={this.likesUser} size="large" variant="contained" color="primary">
                                     Like
         </Button>
                             </CardActions>
@@ -107,3 +127,6 @@ MediaCard.propTypes = {
 };
 
 export default withStyles(styles)(MediaCard);
+//Make a axios post call to database to create and search for matches
+//We get a response from database and setstate of matches to equal the ids from database
+//

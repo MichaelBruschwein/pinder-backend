@@ -11,15 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { CardHeader } from '@material-ui/core';
 import { Redirect } from 'react-router-dom'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {green,blue} from '@material-ui/core/colors'
 
-const theme = createMuiTheme({
-    palette: {
-      primary: blue,
-      secondary: green
-    },
-  });
 const styles = {
     card: {
         maxWidth: 750,
