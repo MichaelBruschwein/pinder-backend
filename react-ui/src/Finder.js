@@ -15,10 +15,10 @@ import axios from 'axios'
 
 const styles = {
     card: {
-        maxWidth: 750,
+        maxWidth: 850,
     },
     media: {
-        height: 450,
+        paddingTop: '56.25%',
     },
 };
 class MediaCard extends React.Component {
