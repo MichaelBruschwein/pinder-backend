@@ -26,7 +26,6 @@ class MediaCard extends React.Component {
         super(props)
         this.classes = props;
         this.state = {
-            counter: 0,
             user2: {
                 name: "loading please wait...",
                 sex: "loading please wait...",
@@ -39,26 +38,27 @@ class MediaCard extends React.Component {
         }
         this.likesUser = this.likesUser.bind(this)
     }
-    componentDidMount(){
+    componentDidMount() {
         //grabs the data of all the matched users
         //change to only grab one match
-        axios.post('/match',{
-            id:this.state.userId
-        }).then((response)=>{
+        axios.post('/match', {
+            id: this.state.userId
+        }).then((response) => {
             console.log(response.data.user2)
             this.setState({
-            user2:response.data.user2
+                user2: response.data.user2
             })
         })
     }
-    likesUser() {
-        console.log(this.state.userId,this.state.user2)
-        axios.put('/like',{
-            user1:this.state.userId,
-            user2:this.state.user2.id
-        }).then((response)=>{
+    likesUser(like) {
+        console.log(this.state.userId, this.state.user2)
+        axios.put('/like', {
+            user1: this.state.userId,
+            user2: this.state.user2.id,
+            like: like
+        }).then((response) => {
             console.log(response)
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error)
         })
     }
@@ -66,7 +66,7 @@ class MediaCard extends React.Component {
     render() {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
-        }else{
+        } else {
             return (
                 <div
                     style={{
@@ -85,13 +85,13 @@ class MediaCard extends React.Component {
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
-                                    
+
                                     {this.state.user2.name},
                                     {this.state.user2.sex},
                                     {this.state.user2.age},
                                     {this.state.user2.city + " " + this.state.user2.state},
                                     {this.state.user2.bio}
-                                    
+
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
@@ -99,13 +99,13 @@ class MediaCard extends React.Component {
                                     container
                                     alignItems="flex-end"
                                 >
-                                    <Button size="large" variant="contained" color="secondary">
+                                    <Button onClick={(e)=>this.likesUser(false)} size="large" variant="contained" color="secondary">
                                         Dislike
-        </Button>
+                                    </Button>
                                 </Grid>
-                                <Button onClick={this.likesUser} size="large" variant="contained" color="primary">
+                                <Button onClick={(e)=>this.likesUser(true)} size="large" variant="contained" color="primary">
                                     Like
-        </Button>
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>

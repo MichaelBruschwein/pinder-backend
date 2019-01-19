@@ -46,7 +46,8 @@ class MatchController {
 
 
 
-    async like({ request, response }) {
+    async like({ request, response}) {
+        const like = request.input('like')
         const user1 = request.input('user1')
         const user2 = request.input('user2')
         let findUserToUpdate = await Database.query()
@@ -55,10 +56,11 @@ class MatchController {
             .where('user2_id', user2)
         console.log(findUserToUpdate)
         var matchToUpdate = await Match.find(findUserToUpdate[0].id)
-        matchToUpdate.user1_approval = true
+        matchToUpdate.user1_approval = like
         await matchToUpdate.save()
         response.send('User was liked')
     }
+
 
 }
 
