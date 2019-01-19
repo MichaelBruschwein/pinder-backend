@@ -28,7 +28,7 @@ class MediaCard extends React.Component {
         this.state = {
             counter: 0,
             matchesFound:1,
-            // matchesUserData: [{
+            // userId: [{
             //     name: "loading please wait...",
             //     sex: "loading please wait...",
             //     age: "loading please wait...",
@@ -36,28 +36,31 @@ class MediaCard extends React.Component {
             //     state: "loading please wait...",
             //     bio: "loading please wait..."
             // }],
-            matchesUserData: this.props.matches.id
+            userId: this.props.matches.id
         }
         this.likesUser = this.likesUser.bind(this)
     }
     componentDidMount(){
+        //grabs the data of all the matched users
+        //change to only grab one match
         axios.post('/match',{
-            id:this.state.matchesUserData
+            id:this.state.userId
         }).then((response)=>{
             console.log(response)
             axios.get(`/user/${response.data[0]}`)
             .then((response)=>{
+                console.log(response)
                 this.setState({
-                    matchesUserData:this.state.matchesUserData,
+                    userId:this.state.userId,
                     matchesFound:response.data
                 })
             })
         })
     }
     likesUser() {
-        console.log(this.state.matchesUserData,this.state.matchesFound)
+        console.log(this.state.userId,this.state.matchesFound)
         axios.put('/like',{
-            user1:this.state.matchesUserData,
+            user1:this.state.userId,
             user2:this.state.matchesFound.id
         }).then((response)=>{
             console.log(response)
