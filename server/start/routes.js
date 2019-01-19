@@ -29,8 +29,12 @@ Route.post('/match', 'MatchController.match')
 
 Route.get('/user', "UserController.getUser")
 
+Route.get('/user/:id', 'UserController.getUserById')
+
 Route.delete('/deleteUser/:id', "UserController.deleteUser")
 
 Route.put('/updateUser/:id', "UserController.updateUser")
 
 Route.get('/findPets', "FinderController.findPets")
+
+Route.put('/like', 'MatchController.like')

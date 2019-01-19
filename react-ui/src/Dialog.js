@@ -25,25 +25,45 @@ export default class AlertDialogSlide extends React.Component {
     };
   }
 
-//for opening the dialog
+  //for opening the dialog
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-//just for closing the dialog
+  //just for closing the dialog
   handleClose = () => {
     this.setState({ open: false });
   };
 
   handleDeny = () => {
     this.handleClose()
-
   };
 
   handleConfirm = () => {
+    if (this.props.action){
     this.props.action(this.props.user)
+    }
     this.handleClose()
   };
+  //seperated the buttons so they only show up if they contain something making dialog more useful
+  confirmButton = (display) => {
+    if (display) {
+      return (
+        <Button onClick={this.handleConfirm} variant="contained" color="primary">
+          {display}
+        </Button>
+      )
+    }
+  }
 
+  denyButton = (display) => {
+    if (display) {
+      return (
+        <Button onClick={this.handleDeny} variant="contained" color="secondary">
+          {display}
+        </Button>
+      )
+    }
+  }
 
 
   render() {
@@ -69,12 +89,10 @@ export default class AlertDialogSlide extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleDeny} variant="contained" color="secondary">
-              {this.state.deny}
-            </Button>
-            <Button onClick={this.handleConfirm} variant="contained" color="primary">
-              {this.state.confirm}
-            </Button>
+
+            {this.denyButton(this.state.deny)}
+            {this.confirmButton(this.state.confirm)}
+
           </DialogActions>
         </Dialog>
       </div>

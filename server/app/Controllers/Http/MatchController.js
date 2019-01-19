@@ -7,17 +7,19 @@ class MatchController {
         const id = await request.input('id')
         let user = await User.find(id)
         let sex
-        if(user.sex === "Male"){
+        if (user.sex === "Male") {
             sex = "Female"
-        }else{
+        } else {
             sex = "Male"
         }
+
+        let previosMatches = await Database.query().table('matches').where('user1_id', user.id)
+        let matches = await Database.query().table('users').where('Sex', sex)
+        let usersToMatches = await Database.query().table('matches').where('user1_id', user.id).where('user1_approval', null)
         // The user clicks some button saying find matches.
         // An axios call is called to ping to our database.
         // in this controller we want to take in the user.
         // if there is a match where user1 is matched with user2 then we want to skip that create.
-        let previosMatches = await Database.query().table('matches').where('user1_id', user.id)
-        let matches = await Database.query().table('users').where('Sex', sex)
         //we take the current users in the database compare to previous matches
         //then we want to filter if pervious matches are equal to current users omit them
         //the send the filtered uses into matches.
@@ -25,10 +27,9 @@ class MatchController {
         if (previosMatches.length >= 1) {
 
             function checkValue(value) {
-                // console.log(matches)
                 let check = true
                 previosMatches.forEach(element => {
-                    // console.log(element.user2_id === value.id)
+
                     if (element.user2_id === value.id) {
                         check = false
                     }
@@ -37,7 +38,7 @@ class MatchController {
             }
             let newMatches = matches.filter(checkValue)
 
-            if (newMatches.length >= 1) {
+            if (newMatches.length >= 1) { //NOTE: The user had previous matches but there was a new person added 
 
                 await newMatches.forEach((user2) => {
 
@@ -45,56 +46,45 @@ class MatchController {
                         user1_id: user.id,
                         user2_id: user2.id
                     })
+                    response.send(usersToMatches.map((e) => e.user2_id))
                 })
-            } else {
-                response.send("no new matches")
+                // response.send(usersToMatches.map((e) => e.id))
+            } else { //NOTE: The user had no new matches
+                response.send(usersToMatches.map((e) => e.user2_id))
             }
 
-        } else {
+        } else { //NOTE: The user had no previous matches
             await matches.forEach((user2) => {
                 Match.create({
                     user1_id: user.id,
                     user2_id: user2.id,
                 })
+                response.send(usersToMatches.map((e) => e.user2_id))
             })
         }
 
-
-        // previosMatches.forEach((e,i) =>{
-        //     matches.filter(checkValue)
-
-        // })
-        // console.log(previosMatches[0].user2_id)
-        // if (matches.length >= 1) { // checks to see if there is any matches in database
-        //     let test = matches.map((data, i) => { // checks to see if the matches in the database already exist
-        //         // console.log(previosMatches[i].user2_id)
-        //         if (data.user2_id !== previosMatches[i].user2_id) {
-        //             return data.user2_id
-        //         } else {
-        //             return null
-        //         }
-        //     })
-        //     let make = await test.forEach((user2) => {
-        //         // console.log(user2)
-        //         if (user2 === null) {
-        //             return
-        //         } else {
-        //             Match.create({
-        //                 user1_id: user.id,
-        //                 user2_id: user2.id,
-        //             })
-        //         }
-        //     })
-        // } else{
-        //      await matches.forEach((user2)=>{
-        //             Match.create({
-        //                 user1_id:user.id,
-        //                 user2_id:user2.id,
-        //             })
-        //         })
-        // }
+    }
+    async like({ request, response }) {
+        const user1 = request.input('user1')
+        const user2 = request.input('user2')
+        let findUserToUpdate = await Database.query()
+            .table('matches')
+            .where('user1_id', user1)
+            .where('user2_id', user2)
+        console.log(findUserToUpdate)
+        var matchToUpdate = await Match.find(findUserToUpdate[0].id)
+        matchToUpdate.user1_approval = true
+        await matchToUpdate.save()
+        response.send('User was liked')
     }
 
 }
 
 module.exports = MatchController
+//First The user will be logged in and click on finder component
+//Then we send a post call to the database to create matches for the user
+//The backend creates the matches
+//Then after we create the matches we send back the matches if the user hasn't already said yes or no.
+//If the user1 has said either yes or no to user2 then we would send the response of no new matches check back later
+//Else we send back to the front end the matches
+

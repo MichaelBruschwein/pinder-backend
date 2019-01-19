@@ -6,14 +6,11 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import Dialog from './Dialog.js'
+import Dialog from './../Dialog.js';
 
-
-// added a handleChange function to each text field. that way you can change just the text feild you want to edit
 export default class Profile extends Component {
     constructor(props) {
         super(props);
-
 
         this.state = {
             user: this.props.userInfo,
@@ -24,33 +21,21 @@ export default class Profile extends Component {
         this._handleFocusOut = this._handleFocusOut.bind(this);
         this.deleteProfile = this.deleteProfile.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
-        this.composeList = this.composeList.bind(this);
+        this.profileItems = this.profileItems.bind(this);
     }
 
-    handleOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: true });
-    };
     _handleFocus(key, text) {
-        console.log('Focused with text: ' + text);
-        console.log(key)
+        console.log('Focused on ' + key + ' which contains ' + text);
     }
 
     _handleFocusOut(key, text) {
-        //update state
-        console.log(this.state)
-        console.log({user:{[key]: text}})
-
-// this is where i left off... just need to lift the state
-
-
-
-        this.setState({user:{[key]: text}})
-        console.log('Left editor with text: ' + text);
-        console.log(this.state)
+        this.setState(prevState => ({
+            user: {
+                ...prevState.user,
+                [key]: text
+            }
+        }))
+        this.props.updateState(this.state)
     }
 
     deleteProfile(user) {
@@ -61,78 +46,72 @@ export default class Profile extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-
     }
+
     updateProfile(user) {
-        console.log(user)
         axios.put(`/updateUser/${user.id}`, {
-            username:user.username,
-            email:user.email,
-            password:user.password,
-            name:user.name,
-            species:user.species,
-            sex:user.sex,
-            city:user.city,
-            state:user.state,
-            age:user.age,
-            bio:user.bio
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            name: user.name,
+            species: user.species,
+            sex: user.sex,
+            city: user.city,
+            state: user.state,
+            age: user.age,
+            bio: user.bio
         })
             .then((response) => {
-                // this.props.userLogout()
-                //this.setState({ dinosaurs: response.data.dinos })
+                console.log('Updated Profile')
             })
             .catch(function (error) {
                 console.log(error);
             });
-            
     }
 
-    composeList() {
+    profileItems() {
         let i = 0;
         let displayValue = ''
         return (
             Object.values(this.state.user).map(
                 (val) => {
-                    let key = Object.keys(this.state.user)[i]
+                    let keyName = Object.keys(this.state.user)[i]
                     i++
 
-                    if (key === 'password') {
+                    if (keyName === 'password') {
                         displayValue = '************';
                     } else {
                         displayValue = val;
                     }
-
-                    if (key === 'id' || key === 'created_at' || key === 'updated_at') {
+                    // Emit the following keys
+                    if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
+                        // key is important for react to keep track of what updated
+                        return (<div key={i.toString()}></div>)
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
                         return (
-                            <div>
-                                <div className="row">
-                                    <div className="column">
-                                        <span className="label">{key} </span>
-                                        <Divider />
-                                    </div>
-
-                                    <div className="column">
-                                        <EditableLabel
-                                            text={displayValue.toString()}
-                                            labelClassName='myLabelClass'
-                                            inputClassName='myInputClass'
-                                            key inputMaxLength={50}
-                                            onFocus={this._handleFocus.bind(this, key)}
-                                            onFocusOut={this._handleFocusOut.bind(this, key)}
-                                        />
-                                        <Divider />
-                                    </div>
+                            // key is important for react to keep track of what updated
+                            <div className='row' key={i.toString()}> 
+                                <div className="column">
+                                    <span className="label">{keyName} </span>
+                                    <Divider />
                                 </div>
-
+                                <div className="column">
+                                    <EditableLabel
+                                        text={displayValue.toString()}
+                                        labelClassName='myLabelClass'
+                                        inputClassName='myInputClass'
+                                        inputMaxLength={50}
+                                        onFocus={this._handleFocus.bind(this, keyName)}
+                                        onFocusOut={this._handleFocusOut.bind(this, keyName)}
+                                    />
+                                    <Divider />
+                                </div>
                             </div>
                         )
                     }
-                    return <div></div>
                 })
         )
-
     }
     render() {
         if (!this.props.userStatus) {
@@ -140,25 +119,38 @@ export default class Profile extends Component {
         } else {
             return (
                 <div className="container"
-                    style={{
-                        paddingTop: '5%'
-                    }}>
-                    <Card className="card"
-                    >
-                        {this.composeList()}
+                    style={{ paddingTop: '5%' }}>
+                    <Card className="card">
+                        {this.profileItems()}
                         <Grid container justify="space-between">
-                        <Grid item>
-                                <Dialog buttonName={'Delete Profile'}  buttonType={'primary'} title={'Delete?'} dialog={'Are you sure you want to Delete'} confirm={'Yas'} deny={'Na'} action={this.deleteProfile} user={this.state.user} />
+                            <Grid item>
+                                <Dialog
+                                    buttonName={'Delete Profile'}
+                                    buttonType={'primary'}
+                                    title={'Delete Profile'}
+                                    dialog={'Are you sure you want to Delete Your Profile? This cannot be Undone!'}
+                                    confirm={'Delete'} deny={'Cancel'}
+                                    action={this.deleteProfile}
+                                    user={this.state.user}
+                                />
                             </Grid>
                             <Grid item>
-                                <Dialog buttonName={'Update Profile'} buttonType={'secondary'} title={'Update?'} dialog={'Are you sure you want to Update'} confirm={'Yepper'} deny={'Nope'} action={this.updateProfile} user={this.state.user}/>
+                                <Dialog
+                                    buttonName={'Update Profile'}
+                                    buttonType={'secondary'}
+                                    title={'Update Profile'}
+                                    dialog={'Are you sure you want to Update Your Profile?'}
+                                    confirm={'Update'}
+                                    deny={'Cancel'}
+                                    action={this.updateProfile}
+                                    user={this.state.user}
+                                />
                             </Grid>
                         </Grid>
                     </Card >
                 </div >
             )
-        } // this is for login redirect
+        }
     }
-
 }
 
