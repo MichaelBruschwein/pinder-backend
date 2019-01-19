@@ -44,17 +44,18 @@ class MediaCard extends React.Component {
         axios.post('/match',{
             id:this.state.matchesUserData
         }).then((response)=>{
+            console.log(response)
             axios.get(`/user/${response.data[0]}`)
             .then((response)=>{
                 this.setState({
                     matchesUserData:this.state.matchesUserData,
                     matchesFound:response.data
                 })
-                console.log(this.state.matchesFound)
             })
         })
     }
     likesUser() {
+        console.log(this.state.matchesUserData,this.state.matchesFound)
         axios.put('/like',{
             user1:this.state.matchesUserData,
             user2:this.state.matchesFound.id
@@ -69,7 +70,6 @@ class MediaCard extends React.Component {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
         } else if(this.state.matchesFound.length === 0){
-            console.log(this.state.matchesFound.length === 0)
             return <div><h1> no matches found try refreshing page</h1></div>
         }else{
             return (
