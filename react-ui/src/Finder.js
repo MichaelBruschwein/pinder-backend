@@ -27,15 +27,14 @@ class MediaCard extends React.Component {
         this.classes = props;
         this.state = {
             counter: 0,
-            matchesFound:1,
-            // userId: [{
-            //     name: "loading please wait...",
-            //     sex: "loading please wait...",
-            //     age: "loading please wait...",
-            //     city: "loading please wait...",
-            //     state: "loading please wait...",
-            //     bio: "loading please wait..."
-            // }],
+            user2: {
+                name: "loading please wait...",
+                sex: "loading please wait...",
+                age: "loading please wait...",
+                city: "loading please wait...",
+                state: "loading please wait...",
+                bio: "loading please wait..."
+            },
             userId: this.props.matches.id
         }
         this.likesUser = this.likesUser.bind(this)
@@ -46,22 +45,17 @@ class MediaCard extends React.Component {
         axios.post('/match',{
             id:this.state.userId
         }).then((response)=>{
-            console.log(response)
-            axios.get(`/user/${response.data[0]}`)
-            .then((response)=>{
-                console.log(response)
-                this.setState({
-                    userId:this.state.userId,
-                    matchesFound:response.data
-                })
+            console.log(response.data.user2)
+            this.setState({
+            user2:response.data.user2
             })
         })
     }
     likesUser() {
-        console.log(this.state.userId,this.state.matchesFound)
+        console.log(this.state.userId,this.state.user2)
         axios.put('/like',{
             user1:this.state.userId,
-            user2:this.state.matchesFound.id
+            user2:this.state.user2.id
         }).then((response)=>{
             console.log(response)
         }).catch((error)=>{
@@ -72,8 +66,6 @@ class MediaCard extends React.Component {
     render() {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
-        } else if(this.state.matchesFound.length === 0){
-            return <div><h1> no matches found try refreshing page</h1></div>
         }else{
             return (
                 <div
@@ -93,15 +85,13 @@ class MediaCard extends React.Component {
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {this.state.matchesFound.name},
-                                    {this.state.matchesFound.sex},
-                                    {this.state.matchesFound.age},
-                                    {this.state.matchesFound.city + " " + this.state.matchesFound.state}
-                                    </Typography>
-                                    <Typography component="p">
-                                        {this.state.matchesFound.bio}
-                                    </Typography>
+                                    
+                                    {this.state.user2.name},
+                                    {this.state.user2.sex},
+                                    {this.state.user2.age},
+                                    {this.state.user2.city + " " + this.state.user2.state},
+                                    {this.state.user2.bio}
+                                    
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
