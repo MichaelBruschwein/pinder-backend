@@ -6,31 +6,23 @@ const Database = use('Database')
 
 class MatchController {
 
-
-
     async match({ request, response, auth }) {
         const id = parseInt(request.input('id'))
-        let allUsers = await User.all()
-        let qtyUsers = allUsers.rows.length-1
+        let allUsers = await Database.query().table('users').whereNot('id',id)
+        console.log(allUsers)
+        //qtyUsers is the quantity of all the users, except us
         let matchesForUser = await Database.query().table('matches').where('user1_id', id).orWhere('user2_id',id)
-        // response.send({qtyUsers,matchesForUser:matchesForUser.length})
-        if (qtyUsers===matchesForUser.length){
-            response.send("No new matches available at this point")
-        }else{
+        //Creating an array of numbers for each instance that it finds an ID for either user1 or user2()
+        if (allUsers.length === matchesForUser.length) {
+            response.send("that's ruff man, no more matches!")
+        } else {
             await this.findUserTwo(id,allUsers,response)
         }
     }
 
     async findUserTwo(id,allUsers,response) {
-        let randomNumber = id
-        if (allUsers.rows.length > 1) {
-            while (randomNumber === id) {
-                randomNumber = Math.floor(Math.random() * allUsers.rows.length)
-            }
-        } else {
-            response.send("man thats ruff no matches :( ")
-        }
-        let user2 = allUsers.rows[randomNumber]
+        let randomNumber = Math.floor(Math.random() * allUsers.length)
+        let user2 = allUsers[randomNumber]
         //Checks to see if a table exist for the user to user2 relationship
         //returns empty array if it doesnt exist
         let matchExists1 = await Database.query().table('matches').where('user1_id', id).where('user2_id', user2.id)
