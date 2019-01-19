@@ -29,7 +29,7 @@ Route.post('/match', 'MatchController.match')
 
 Route.get('/user', "UserController.getUser")
 
-Route.get('user/:id', 'UserController.getUserById')
+Route.get('/user/:id', 'UserController.getUserById')
 
 Route.delete('/deleteUser/:id', "UserController.deleteUser")
 
