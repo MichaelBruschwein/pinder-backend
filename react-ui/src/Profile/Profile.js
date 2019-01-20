@@ -11,7 +11,7 @@ import Dialog from './../Dialog.js';
 export default class Profile extends Component {
     constructor(props) {
         super(props);
-
+        console.log(this.props.userInfo)
         this.state = {
             user: this.props.userInfo,
             open: false,

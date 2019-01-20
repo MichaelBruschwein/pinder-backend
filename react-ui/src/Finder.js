@@ -24,6 +24,7 @@ class MediaCard extends React.Component {
     constructor(props) {
         super(props)
         this.classes = props;
+        console.log(this.props.matches.id)
         this.state = {
             userToBeDisplayed: {
                 name: "loading please wait...",
@@ -34,9 +35,11 @@ class MediaCard extends React.Component {
                 bio: ""
             },
             isUserOne: false,
-            userId: this.props.matches.id
+            userId: this.props.matches.id,
+            sadPuppy:false
         }
         this.likesUser = this.likesUser.bind(this)
+        this.getNewMatch = this.getNewMatch.bind(this)
     }
     componentDidMount() {
         //grabs the data of all the matched users
@@ -46,7 +49,10 @@ class MediaCard extends React.Component {
         }).then((response) => {
             console.log(response.data)
             if (response.data.message==="empty"){
-                alert("Thats ruff, there are no more matches")
+                this.setState({
+                    sadPuppy:true
+                })
+                // alert("Thats ruff, there are no more matches")
                 //reroute here
             }else{
                 this.setState({
@@ -65,6 +71,7 @@ class MediaCard extends React.Component {
             isUser2: this.state.isUserOne
         }).then((response) => {
             console.log(response)
+            this.getNewMatch()
             // if (response.data.message==="matched"){
             //     alert("HEY Hey hey")
             // }
@@ -73,10 +80,35 @@ class MediaCard extends React.Component {
         })
 
     }
+    getNewMatch(){
+        axios.post('/match', {
+            id: this.state.userId
+        }).then((response) => {
+            console.log(response.data)
+            if (response.data.message==="empty"){
+                this.setState({
+                    sadPuppy:true
+                })
+                // alert("Thats ruff, there are no more matches")
+                //reroute here
+            }else{
+                this.setState({
+                    userToBeDisplayed: response.data.userToBeDisplayed,
+                    isUserOne: response.data.isUserOne
+                })
+            }
+            
+        })
+    }
 
     render() {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
+        }else if(this.state.sadPuppy){
+           return(<div>
+               <h1> That's Ruff No New Matches Please Check Back Later</h1>
+               <img src="https://i.ytimg.com/vi/R7K-crxH2J0/hqdefault.jpg"></img>
+               </div>)
         } else {
             return (
                 <div
