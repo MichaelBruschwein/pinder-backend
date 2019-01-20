@@ -7,11 +7,13 @@ export default class PhotoUploader extends Component {
   state = { selectedFile: null };
 
   fileChangedHandler = event => {
+
+    console.log(event.target.files[0])
     this.setState({ selectedFile: event.target.files[0] });
   };
 
-  uploadHandler = () => {
-    console.log(this.state.selectedFile);
+  uploadHandler = (e) => {
+    ///console.log(this.state.selectedFile);
     const formData = new FormData();
     formData.append(
       "myFile",
