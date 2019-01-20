@@ -7,11 +7,13 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Dialog from './../Dialog.js';
+import PhotoUploader from '../PhotoUploader';
+import '../Register.css';
 
 export default class Profile extends Component {
     constructor(props) {
         super(props);
-
+        console.log(this.props.userInfo)
         this.state = {
             user: this.props.userInfo,
             open: false,
@@ -22,6 +24,7 @@ export default class Profile extends Component {
         this.deleteProfile = this.deleteProfile.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
         this.profileItems = this.profileItems.bind(this);
+        this.getUrl = this.getUrl.bind(this);
     }
 
     _handleFocus(key, text) {
@@ -38,6 +41,13 @@ export default class Profile extends Component {
         this.props.updateState(this.state)
     }
 
+    getUrl(url) {
+        this.setState({
+          url: url
+        });
+        console.log(this.state)
+      }
+    
     deleteProfile(user) {
         axios.delete(`/deleteUser/${user.id}`, {})
             .then((response) => {
@@ -59,7 +69,8 @@ export default class Profile extends Component {
             city: user.city,
             state: user.state,
             age: user.age,
-            bio: user.bio
+            bio: user.bio,
+            url: user.url
         })
             .then((response) => {
                 console.log('Updated Profile')
@@ -84,14 +95,17 @@ export default class Profile extends Component {
                         displayValue = val;
                     }
                     // Emit the following keys
-                    if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
+                    if (keyName === 'url') {
+                        return(<div><img src={displayValue} alt="profile pic"/></div>)
+
+                    } else if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
                         // key is important for react to keep track of what updated
                         return (<div key={i.toString()}></div>)
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
                         return (
                             // key is important for react to keep track of what updated
-                            <div className='row' key={i.toString()}> 
+                            <div className='row' key={i.toString()}>
                                 <div className="column">
                                     <span className="label">{keyName} </span>
                                     <Divider />
@@ -122,6 +136,7 @@ export default class Profile extends Component {
                     style={{ paddingTop: '5%' }}>
                     <Card className="card">
                         {this.profileItems()}
+                        <PhotoUploader getUrl={this.getUrl}/>
                         <Grid container justify="space-between">
                             <Grid item>
                                 <Dialog

@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log(this.rememberMe)
     return (
       <Router>
         <div className="App">

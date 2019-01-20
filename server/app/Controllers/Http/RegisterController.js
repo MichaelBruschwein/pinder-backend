@@ -16,7 +16,8 @@ class RegisterController {
             city: request.input('city'),
             state: request.input('state'),
             age: request.input('age'),
-            bio: request.input('bio')
+            bio: request.input('bio'),
+            url: request.input('url')
         })
 
         //response.send(request.input('username'))

@@ -17,6 +17,7 @@ class UserSchema extends Schema {
       table.string('state', 80).notNullable()
       table.integer('age').notNullable()
       table.string('bio', 500)
+      table.string('url', 500)
       table.timestamps()
     })
   }

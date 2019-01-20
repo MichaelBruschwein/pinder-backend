@@ -1,6 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
-
+const Drive = use('Drive')
 class UserController {
     // this part is needed for login remembering
     async login({ request, auth, response }) {
@@ -19,26 +19,13 @@ class UserController {
             return response.json({ message: "Please try again we weren't able to login" })
         }
     }
-    // async login({ request, auth, response }) {
-    //     const { email, password } = request.all()
-    //     await auth.attempt(email, password)
-    //     const user = await User.findBy("email", email)
-    //     await auth.generate(user)
-    //     response.send(user)
-
-    //     // try {
-    //     //     await auth.getUser()
-    //     //   } catch (error) {
-    //     //     response.send('Missing or invalid api token')
-    //     //   }
-    // }
     show({ auth, params }) {
         if (auth.user.id !== Number(params.id)) {
             return 'You cannot see someone else\'s profile'
         }
         return auth.user
     }
-    async getUserById({params:{id},response}){
+    async getUserById({ params: { id }, response }) {
         let user = await User.find(id)
         response.send(user)
     }
@@ -77,6 +64,8 @@ class UserController {
         userToUpdate.state = state
         userToUpdate.age = age
         userToUpdate.bio = bio
+        userToUpdate.url = url
+
 
         await userToUpdate.save()
         let users = await User.all()
@@ -85,7 +74,14 @@ class UserController {
         })
 
     }
-
+    async imageUpload({ request, response }) {
+        request.multipart.file('profile_pic', {}, async (file) => {
+            await Drive.disk('s3').put(file.clientName, file.stream)
+            const url = Drive.disk('s3').getUrl(file.clientName)
+            response.send({url})
+        })
+        await request.multipart.process()
+    }
 }
 
-module.exports = UserController
+module.exports = UserController 
