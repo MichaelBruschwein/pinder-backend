@@ -44,24 +44,7 @@ class MediaCard extends React.Component {
     componentDidMount() {
         //grabs the data of all the matched users
         //change to only grab one match
-        axios.post('/match', {
-            id: this.state.userId
-        }).then((response) => {
-            console.log(response.data)
-            if (response.data.message==="empty"){
-                this.setState({
-                    sadPuppy:true
-                })
-                // alert("Thats ruff, there are no more matches")
-                //reroute here
-            }else{
-                this.setState({
-                    userToBeDisplayed: response.data.userToBeDisplayed,
-                    isUserOne: response.data.isUserOne
-                })
-            }
-            
-        })
+        this.getNewMatch()
     }
     likesUser(like) {
         axios.put('/like', {
