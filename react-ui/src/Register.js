@@ -58,7 +58,7 @@ class TextFields extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.checkForm = this.checkForm.bind(this)
-
+    this.getUrl = this.getUrl.bind(this)
   };
 
   handleChange = name => event => {
@@ -120,6 +120,10 @@ class TextFields extends React.Component {
       })
       // return <Redirect to='/login' />
     }
+  }
+
+  getUrl(url) {
+    console.log(url)
   }
 
 
@@ -270,8 +274,8 @@ class TextFields extends React.Component {
                 Submit
           </Button>
             </Card>
-            <PhotoUploader />
           </form>
+           <PhotoUploader getUrl={this.getUrl}/>
         </div>
       );
     }
