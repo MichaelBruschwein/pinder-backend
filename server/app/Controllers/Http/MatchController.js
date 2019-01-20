@@ -13,7 +13,7 @@ class MatchController {
         const id = parseInt(request.input('id'))
         let allUsers = await Database.query().table('users').whereNot('id', id)
         let pendingMatches = await Database.query().table('matches').where('user2_id', id).where('user2_approval', null)
-        let userToBeDisplayed = await User.find(pendingMatches[0].user1_id)
+        let userToBeDisplayed = await User.find(pendingMatches[0].user1_id) //have to write logic if undefined skip it
 
         //user 6 is logged in
         //user 4 and user 6 are in matches already
