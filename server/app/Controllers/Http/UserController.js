@@ -1,6 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
-
+const Drive = use('Drive')
 class UserController {
     // this part is needed for login remembering
     async login({ request, auth, response }) {
@@ -77,6 +77,7 @@ class UserController {
         userToUpdate.state = state
         userToUpdate.age = age
         userToUpdate.bio = bio
+    
 
         await userToUpdate.save()
         let users = await User.all()
@@ -85,6 +86,11 @@ class UserController {
         })
 
     }
+     async imageUpload({request}){
+        request.multipart.file('profile_pic', {}, async (file) => {
+            await Drive.disk('s3').put(file.clientName, file.stream)
+          })
+     }
 
 }
 
