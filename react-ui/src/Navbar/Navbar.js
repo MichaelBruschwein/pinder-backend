@@ -36,7 +36,7 @@ class Navbar extends React.Component {
           <AppBar position="static">
             <Toolbar>
               <Link to="/">
-                <Button variant="contained" color="secondary">Pinder</Button></Link>
+                <Button variant="contained" color="secondary"><span className="paw">Pinder</span></Button></Link>
               <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
               </Typography>
               <Link to="/register"><Button color="inherit">Register</Button></Link>
