@@ -32,7 +32,8 @@ class MediaCard extends React.Component {
                 age: "",
                 city: "",
                 state: "",
-                bio: ""
+                bio: "",
+                url:""
             },
             isUserOne: false,
             userId: this.props.matches.id,
@@ -107,7 +108,7 @@ class MediaCard extends React.Component {
                             <CardActionArea>
                                 <CardMedia
                                     className={this.props.classes.media}
-                                    image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
+                                    image={this.state.userToBeDisplayed.url}
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>

@@ -7,6 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Dialog from './../Dialog.js';
+import PhotoUploader from '../PhotoUploader';
+import '../Register.css';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -22,6 +24,7 @@ export default class Profile extends Component {
         this.deleteProfile = this.deleteProfile.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
         this.profileItems = this.profileItems.bind(this);
+        this.getUrl = this.getUrl.bind(this);
     }
 
     _handleFocus(key, text) {
@@ -38,6 +41,13 @@ export default class Profile extends Component {
         this.props.updateState(this.state)
     }
 
+    getUrl(url) {
+        this.setState({
+          url: url
+        });
+        console.log(this.state)
+      }
+    
     deleteProfile(user) {
         axios.delete(`/deleteUser/${user.id}`, {})
             .then((response) => {
@@ -126,6 +136,7 @@ export default class Profile extends Component {
                     style={{ paddingTop: '5%' }}>
                     <Card className="card">
                         {this.profileItems()}
+                        <PhotoUploader getUrl={this.getUrl}/>
                         <Grid container justify="space-between">
                             <Grid item>
                                 <Dialog
