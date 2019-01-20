@@ -26,7 +26,7 @@ class MediaCard extends React.Component {
         super(props)
         this.classes = props;
         this.state = {
-            user2: {
+            userToBeDisplayed: {
                 name: "loading please wait...",
                 sex: "loading please wait...",
                 age: "loading please wait...",
@@ -34,6 +34,7 @@ class MediaCard extends React.Component {
                 state: "loading please wait...",
                 bio: "loading please wait..."
             },
+            userColumn: false,
             userId: this.props.matches.id
         }
         this.likesUser = this.likesUser.bind(this)
@@ -44,18 +45,19 @@ class MediaCard extends React.Component {
         axios.post('/match', {
             id: this.state.userId
         }).then((response) => {
-            console.log(response.data.user2)
+            console.log(response.data)
             this.setState({
-                user2: response.data.user2
+                userToBeDisplayed: response.data.userToBeDisplayed,
+                userColumn: response.data.userColumn
             })
         })
     }
     likesUser(like) {
-        console.log(this.state.userId, this.state.user2)
         axios.put('/like', {
             user1: this.state.userId,
-            user2: this.state.user2.id,
-            like: like
+            user2: this.state.userToBeDisplayed.id,
+            like: like,
+            isUser2: this.state.userColumn
         }).then((response) => {
             console.log(response)
         }).catch((error) => {
@@ -86,11 +88,11 @@ class MediaCard extends React.Component {
                                 />
                                 <CardContent>
 
-                                    {this.state.user2.name},
-                                    {this.state.user2.sex},
-                                    {this.state.user2.age},
-                                    {this.state.user2.city + " " + this.state.user2.state},
-                                    {this.state.user2.bio}
+                                    {this.state.userToBeDisplayed.name},
+                                    {this.state.userToBeDisplayed.sex},
+                                    {this.state.userToBeDisplayed.age},
+                                    {this.state.userToBeDisplayed.city + " " + this.state.userToBeDisplayed.state},
+                                    {this.state.userToBeDisplayed.bio}
 
                                 </CardContent>
                             </CardActionArea>

@@ -5,22 +5,36 @@ const Database = use('Database')
 
 
 class MatchController {
+    //Sue-Doe. 
+    //check to see if matches have been created.
+    //if we have a match, send that first before we create. would also eliminate problem of when we refresh page it wont go to next one
 
     async match({ request, response, auth }) {
         const id = parseInt(request.input('id'))
-        let allUsers = await Database.query().table('users').whereNot('id',id)
-        console.log(allUsers)
+        let allUsers = await Database.query().table('users').whereNot('id', id)
+        let pendingMatches = await Database.query().table('matches').where('user2_id', id).where('user2_approval', null)
+        let userToBeDisplayed = await User.find(pendingMatches[0].user1_id)
+
+        //user 6 is logged in
+        //user 4 and user 6 are in matches already
+        //
         //qtyUsers is the quantity of all the users, except us
-        let matchesForUser = await Database.query().table('matches').where('user1_id', id).orWhere('user2_id',id)
+        let matchesForUser = await Database.query().table('matches').where('user1_id', id).orWhere('user2_id', id)
+
         //Creating an array of numbers for each instance that it finds an ID for either user1 or user2()
-        if (allUsers.length === matchesForUser.length) {
-            response.send("that's ruff man, no more matches!")
-        } else {
-            await this.findUserTwo(id,allUsers,response)
+        if (pendingMatches.length > 0) {
+            // let match = pendingMatches[0]
+            response.send({ match: pendingMatches[0], userToBeDisplayed, userColumn: false })
+            return
+            if (allUsers.length === matchesForUser.length) {
+                response.send("that's ruff man, no more matches!")
+            } else {
+                await this.findUserTwo(id, allUsers, response)
+            }
         }
     }
 
-    async findUserTwo(id,allUsers,response) {
+    async findUserTwo(id, allUsers, response) {
         let randomNumber = Math.floor(Math.random() * allUsers.length)
         let user2 = allUsers[randomNumber]
         //Checks to see if a table exist for the user to user2 relationship
@@ -34,29 +48,46 @@ class MatchController {
         //turn this into a function
         if (matchExists1.length || matchExists2.length) {
             //conditional to make sure we havent checked all the matches already
-            await this.findUserTwo(id,allUsers,response) //recursive call until a new match
+            await this.findUserTwo(id, allUsers, response) //recursive call until a new match
         } else {
             let match = await Match.create({
                 user1_id: id,
                 user2_id: user2.id
             })
-            response.send({ match, user2 })
+            response.send({ match, user2, userColumn: false })
         }
     }
 
 
-
-    async like({ request, response}) {
+    //Sue-Doe: 
+    //We need a conditional around the matchToUpdate
+    //if the user that's logged in "likes"
+    async like({ request, response }) {
         const like = request.input('like')
+
         const user1 = request.input('user1')
         const user2 = request.input('user2')
-        let findUserToUpdate = await Database.query()
-            .table('matches')
-            .where('user1_id', user1)
-            .where('user2_id', user2)
-        console.log(findUserToUpdate)
-        var matchToUpdate = await Match.find(findUserToUpdate[0].id)
-        matchToUpdate.user1_approval = like
+
+
+        const isUser2 = request.input('isUser2')
+        let findUserToUpdate =null
+        let matchToUpdate =null
+        console.log(isUser2)
+        if (isUser2) {
+            findUserToUpdate = await Database.query()
+                .table('matches')
+                .where('user1_id', user1)
+                .where('user2_id', user2)
+                matchToUpdate = await Match.find(findUserToUpdate[0].id)
+                matchToUpdate.user1_approval = like
+        } else {
+            findUserToUpdate = await Database.query()
+                .table('matches')
+                .where('user1_id', user2)
+                .where('user2_id', user1)
+                matchToUpdate = await Match.find(findUserToUpdate[0].id)
+                matchToUpdate.user2_approval = like
+        }
         await matchToUpdate.save()
         response.send('User was liked')
     }
