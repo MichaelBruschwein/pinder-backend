@@ -89,7 +89,8 @@ class UserController {
     async imageUpload({ request, response }) {
         request.multipart.file('profile_pic', {}, async (file) => {
             await Drive.disk('s3').put(file.clientName, file.stream)
-            response.send('file may be uploaded')
+            const url = Drive.disk('s3').getUrl(file.clientName)
+            response.send(url)
         })
         await request.multipart.process()
     }
