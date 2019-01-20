@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import axios from 'axios';
 import PhotoUploader from './PhotoUploader';
 import { Redirect } from 'react-router-dom';
-
+import './Register.css';
 
 const styles = theme => ({
   container: {
@@ -54,7 +54,8 @@ class TextFields extends React.Component {
       city: '',
       state: '',
       age: '',
-      bio: ''
+      bio: '',
+      url: 'http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg'
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.checkForm = this.checkForm.bind(this)
@@ -103,27 +104,30 @@ class TextFields extends React.Component {
       }).then(() => {
 
       }).catch((error) => { console.log(error) })
-      this.setState({
-        registered: true,
-        name: '',
-        username: '',
-        email: '',
-        confirm_email: '',
-        password: '',
-        confirm_password: '',
-        species: '',
-        sex: '',
-        city: '',
-        state: '',
-        age: '',
-        bio: ''
-      })
+      // this.setState({
+      //   registered: true,
+      //   name: '',
+      //   username: '',
+      //   email: '',
+      //   confirm_email: '',
+      //   password: '',
+      //   confirm_password: '',
+      //   species: '',
+      //   sex: '',
+      //   city: '',
+      //   state: '',
+      //   age: '',
+      //   bio: ''
+      // })
       // return <Redirect to='/login' />
     }
   }
 
   getUrl(url) {
-    console.log(url)
+    this.setState({
+      url: url
+    });
+    console.log(this.state)
   }
 
 
@@ -275,6 +279,7 @@ class TextFields extends React.Component {
           </Button>
             </Card>
           </form>
+          <img className="profileImage" src={this.state.url} alt="profile image" />
            <PhotoUploader getUrl={this.getUrl}/>
         </div>
       );
