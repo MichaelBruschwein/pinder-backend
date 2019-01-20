@@ -7,7 +7,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
@@ -15,63 +14,86 @@ import axios from 'axios'
 
 const styles = {
     card: {
-        maxWidth: 750,
+        maxWidth: 850,
     },
     media: {
-        height: 450,
+        paddingTop: '56.25%',
     },
 };
 class MediaCard extends React.Component {
     constructor(props) {
         super(props)
         this.classes = props;
+        console.log(this.props.matches.id)
         this.state = {
-            counter: 0,
-            matchesFound:1,
-            // matchesUserData: [{
-            //     name: "loading please wait...",
-            //     sex: "loading please wait...",
-            //     age: "loading please wait...",
-            //     city: "loading please wait...",
-            //     state: "loading please wait...",
-            //     bio: "loading please wait..."
-            // }],
-            matchesUserData: this.props.matches.id
+            userToBeDisplayed: {
+                name: "loading please wait...",
+                sex: "",
+                age: "",
+                city: "",
+                state: "",
+                bio: "",
+                url:""
+            },
+            isUserOne: false,
+            userId: this.props.matches.id,
+            sadPuppy:false
         }
         this.likesUser = this.likesUser.bind(this)
+        this.getNewMatch = this.getNewMatch.bind(this)
     }
-    componentDidMount(){
-        axios.post('/match',{
-            id:this.state.matchesUserData
-        }).then((response)=>{
-            console.log(response)
-            axios.get(`/user/${response.data[0]}`)
-            .then((response)=>{
-                this.setState({
-                    matchesUserData:this.state.matchesUserData,
-                    matchesFound:response.data
-                })
-            })
-        })
+    componentDidMount() {
+        //grabs the data of all the matched users
+        //change to only grab one match
+        this.getNewMatch()
     }
-    likesUser() {
-        console.log(this.state.matchesUserData,this.state.matchesFound)
-        axios.put('/like',{
-            user1:this.state.matchesUserData,
-            user2:this.state.matchesFound.id
-        }).then((response)=>{
+    likesUser(like) {
+        axios.put('/like', {
+            user1: this.state.userId,
+            user2: this.state.userToBeDisplayed.id,
+            like: like,
+            isUser2: this.state.isUserOne
+        }).then((response) => {
             console.log(response)
-        }).catch((error)=>{
+            this.getNewMatch()
+            // if (response.data.message==="matched"){
+            //     alert("HEY Hey hey")
+            // }
+        }).catch((error) => {
             console.log(error)
+        })
+
+    }
+    getNewMatch(){
+        axios.post('/match', {
+            id: this.state.userId
+        }).then((response) => {
+            console.log(response.data)
+            if (response.data.message==="empty"){
+                this.setState({
+                    sadPuppy:true
+                })
+                // alert("Thats ruff, there are no more matches")
+                //reroute here
+            }else{
+                this.setState({
+                    userToBeDisplayed: response.data.userToBeDisplayed,
+                    isUserOne: response.data.isUserOne
+                })
+            }
+            
         })
     }
 
     render() {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
-        } else if(this.state.matchesFound.length === 0){
-            return <div><h1> no matches found try refreshing page</h1></div>
-        }else{
+        }else if(this.state.sadPuppy){
+           return(<div>
+               <h1> That's Ruff No New Matches Please Check Back Later</h1>
+               <img src="https://i.ytimg.com/vi/R7K-crxH2J0/hqdefault.jpg"></img>
+               </div>)
+        } else {
             return (
                 <div
                     style={{
@@ -86,19 +108,17 @@ class MediaCard extends React.Component {
                             <CardActionArea>
                                 <CardMedia
                                     className={this.props.classes.media}
-                                    image="http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg"
+                                    image={this.state.userToBeDisplayed.url}
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {this.state.matchesFound.name},
-                                    {this.state.matchesFound.sex},
-                                    {this.state.matchesFound.age},
-                                    {this.state.matchesFound.city + " " + this.state.matchesFound.state}
-                                    </Typography>
-                                    <Typography component="p">
-                                        {this.state.matchesFound.bio}
-                                    </Typography>
+
+                                    {this.state.userToBeDisplayed.name},
+                                    {this.state.userToBeDisplayed.sex},
+                                    {this.state.userToBeDisplayed.age},
+                                    {this.state.userToBeDisplayed.city + " " + this.state.userToBeDisplayed.state},
+                                    {this.state.userToBeDisplayed.bio}
+
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
@@ -106,13 +126,13 @@ class MediaCard extends React.Component {
                                     container
                                     alignItems="flex-end"
                                 >
-                                    <Button size="large" variant="contained" color="secondary">
+                                    <Button onClick={(e)=>this.likesUser(false)} size="large" variant="contained" color="secondary">
                                         Dislike
-        </Button>
+                                    </Button>
                                 </Grid>
-                                <Button onClick={this.likesUser} size="large" variant="contained" color="primary">
+                                <Button onClick={(e)=>this.likesUser(true)} size="large" variant="contained" color="primary">
                                     Like
-        </Button>
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>

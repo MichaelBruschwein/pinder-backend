@@ -5,11 +5,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios';
 import PhotoUploader from './PhotoUploader';
 import { Redirect } from 'react-router-dom';
-
+import './Register.css';
 
 const styles = theme => ({
   container: {
@@ -54,11 +53,12 @@ class TextFields extends React.Component {
       city: '',
       state: '',
       age: '',
-      bio: ''
+      bio: '',
+      url: 'http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg'
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.checkForm = this.checkForm.bind(this)
-
+    this.getUrl = this.getUrl.bind(this)
   };
 
   handleChange = name => event => {
@@ -88,7 +88,7 @@ class TextFields extends React.Component {
       alert("please make sure that your emails match")
     } else if (this.state.password !== this.state.confirm_password) {
       alert("please make sure that your passwords match")
-    } else { // axios.put call to backend.
+    } else { 
       axios.post('/user', {
         name: this.state.name,
         username: this.state.username,
@@ -99,27 +99,19 @@ class TextFields extends React.Component {
         city: this.state.city,
         state: this.state.state,
         age: this.state.age,
-        bio: this.state.bio
+        bio: this.state.bio,
+        url: this.state.url
       }).then(() => {
 
       }).catch((error) => { console.log(error) })
-      this.setState({
-        registered: true,
-        name: '',
-        username: '',
-        email: '',
-        confirm_email: '',
-        password: '',
-        confirm_password: '',
-        species: '',
-        sex: '',
-        city: '',
-        state: '',
-        age: '',
-        bio: ''
-      })
-      // return <Redirect to='/login' />
     }
+  }
+
+  getUrl(url) {
+    this.setState({
+      url: url
+    });
+    console.log(this.state)
   }
 
 
@@ -260,18 +252,17 @@ class TextFields extends React.Component {
                 fullWidth
               />
               <Button
-                // type="click"
                 fullWidth
                 variant="contained"
                 color="primary"
-                // className={classes.submit}
                 onClick={this.checkForm}
               >
                 Submit
           </Button>
             </Card>
-            <PhotoUploader />
           </form>
+          <img className="profileImage" src={this.state.url} alt="profile image" />
+           <PhotoUploader getUrl={this.getUrl}/>
         </div>
       );
     }

@@ -38,3 +38,6 @@ Route.put('/updateUser/:id', "UserController.updateUser")
 Route.get('/findPets', "FinderController.findPets")
 
 Route.put('/like', 'MatchController.like')
+
+Route.post('/imageUpload', 'UserController.imageUpload')
+

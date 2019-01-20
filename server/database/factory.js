@@ -25,7 +25,8 @@ Factory.blueprint('App/Models/User', async (faker, i, data) => {
         city: data.city,
         state: data.state,
         age: data.age,
-        bio: data.bio
+        bio: data.bio,
+        url: data.url
     }
 
 })

@@ -31,14 +31,14 @@ class ItsAMatch extends React.Component {
         if (!this.props.userStatus) {
             return <Redirect to='/login' />
         } else {
+            console.log(this.props.users)
             return (
-
                 <div
                     style={{
                         paddingTop: '5%'
                     }}
-                    >
-                <Card>
+                >
+                    <Card>
                         <CardHeader
                             title="Congratulations its a Match!"
                         >
@@ -108,7 +108,7 @@ class ItsAMatch extends React.Component {
                     </Card>
 
                 </div>
-                
+
 
             );
         }
