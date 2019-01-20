@@ -38,7 +38,7 @@ class UserController {
         }
         return auth.user
     }
-    async getUserById({params:{id},response}){
+    async getUserById({ params: { id }, response }) {
         let user = await User.find(id)
         response.send(user)
     }
@@ -77,7 +77,7 @@ class UserController {
         userToUpdate.state = state
         userToUpdate.age = age
         userToUpdate.bio = bio
-    
+
 
         await userToUpdate.save()
         let users = await User.all()
@@ -86,12 +86,13 @@ class UserController {
         })
 
     }
-     async imageUpload({request}){
+    async imageUpload({ request, response }) {
         request.multipart.file('profile_pic', {}, async (file) => {
             await Drive.disk('s3').put(file.clientName, file.stream)
-          })
-     }
-
+            response.send('file may be uploaded')
+        })
+        await request.multipart.process()
+    }
 }
 
 module.exports = UserController
