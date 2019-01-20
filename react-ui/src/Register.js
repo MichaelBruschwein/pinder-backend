@@ -5,7 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios';
 import PhotoUploader from './PhotoUploader';
 import { Redirect } from 'react-router-dom';
@@ -89,7 +88,7 @@ class TextFields extends React.Component {
       alert("please make sure that your emails match")
     } else if (this.state.password !== this.state.confirm_password) {
       alert("please make sure that your passwords match")
-    } else { // axios.put call to backend.
+    } else { 
       axios.post('/user', {
         name: this.state.name,
         username: this.state.username,
@@ -100,26 +99,11 @@ class TextFields extends React.Component {
         city: this.state.city,
         state: this.state.state,
         age: this.state.age,
-        bio: this.state.bio
+        bio: this.state.bio,
+        url: this.state.url
       }).then(() => {
 
       }).catch((error) => { console.log(error) })
-      // this.setState({
-      //   registered: true,
-      //   name: '',
-      //   username: '',
-      //   email: '',
-      //   confirm_email: '',
-      //   password: '',
-      //   confirm_password: '',
-      //   species: '',
-      //   sex: '',
-      //   city: '',
-      //   state: '',
-      //   age: '',
-      //   bio: ''
-      // })
-      // return <Redirect to='/login' />
     }
   }
 
@@ -268,11 +252,9 @@ class TextFields extends React.Component {
                 fullWidth
               />
               <Button
-                // type="click"
                 fullWidth
                 variant="contained"
                 color="primary"
-                // className={classes.submit}
                 onClick={this.checkForm}
               >
                 Submit

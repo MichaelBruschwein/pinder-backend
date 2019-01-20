@@ -59,7 +59,8 @@ export default class Profile extends Component {
             city: user.city,
             state: user.state,
             age: user.age,
-            bio: user.bio
+            bio: user.bio,
+            url: user.url
         })
             .then((response) => {
                 console.log('Updated Profile')
@@ -84,14 +85,17 @@ export default class Profile extends Component {
                         displayValue = val;
                     }
                     // Emit the following keys
-                    if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
+                    if (keyName === 'url') {
+                        return(<div><img src={displayValue} alt="profile pic"/></div>)
+
+                    } else if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
                         // key is important for react to keep track of what updated
                         return (<div key={i.toString()}></div>)
                         // if you wanted to use these properties you could do so here. but we dont want to display them
                     } else {
                         return (
                             // key is important for react to keep track of what updated
-                            <div className='row' key={i.toString()}> 
+                            <div className='row' key={i.toString()}>
                                 <div className="column">
                                     <span className="label">{keyName} </span>
                                     <Divider />
