@@ -65,9 +65,13 @@ class MediaCard extends React.Component {
             isUser2: this.state.isUserOne
         }).then((response) => {
             console.log(response)
+            // if (response.data.message==="matched"){
+            //     alert("HEY Hey hey")
+            // }
         }).catch((error) => {
             console.log(error)
         })
+
     }
 
     render() {
