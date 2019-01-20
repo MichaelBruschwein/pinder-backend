@@ -74,7 +74,21 @@ class MatchController {
             matchToUpdate.user2_approval = like
         }
         await matchToUpdate.save()
-        response.send('User was liked')
+        let usersMatched = await Database.query()
+        .table('matches')
+        .where('user1_id', user1)
+        .orWhere('user1_id',user2)
+        .where('user2_id', user2)
+        .orWhere('user2_id',user1)
+        .where('user1_approval',1)
+        .where('user2_approval',1)
+
+        console.log(usersMatched)
+        if(usersMatched.length){
+            response.send("users matched")
+        }else{
+        response.send("user was liked")
+        }
     }
 }
 module.exports = MatchController
