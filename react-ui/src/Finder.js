@@ -7,7 +7,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
@@ -28,13 +27,13 @@ class MediaCard extends React.Component {
         this.state = {
             userToBeDisplayed: {
                 name: "loading please wait...",
-                sex: "loading please wait...",
-                age: "loading please wait...",
-                city: "loading please wait...",
-                state: "loading please wait...",
-                bio: "loading please wait..."
+                sex: "",
+                age: "",
+                city: "",
+                state: "",
+                bio: ""
             },
-            userColumn: false,
+            isUserOne: false,
             userId: this.props.matches.id
         }
         this.likesUser = this.likesUser.bind(this)
@@ -46,10 +45,16 @@ class MediaCard extends React.Component {
             id: this.state.userId
         }).then((response) => {
             console.log(response.data)
-            this.setState({
-                userToBeDisplayed: response.data.userToBeDisplayed,
-                userColumn: response.data.userColumn
-            })
+            if (response.data.message==="empty"){
+                alert("Thats ruff, there are no more matches")
+                //reroute here
+            }else{
+                this.setState({
+                    userToBeDisplayed: response.data.userToBeDisplayed,
+                    isUserOne: response.data.isUserOne
+                })
+            }
+            
         })
     }
     likesUser(like) {
@@ -57,7 +62,7 @@ class MediaCard extends React.Component {
             user1: this.state.userId,
             user2: this.state.userToBeDisplayed.id,
             like: like,
-            isUser2: this.state.userColumn
+            isUser2: this.state.isUserOne
         }).then((response) => {
             console.log(response)
         }).catch((error) => {
