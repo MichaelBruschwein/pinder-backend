@@ -16,5 +16,28 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/register', 'RegisterController.create').as('register.create')
-Route.post('/register', 'RegisterController.store').as('register.store')
+
+Route.post('/user', 'RegisterController.store')
+Route
+  .get('users/:id', 'RegisterController.show')
+  .middleware('auth')
+
+Route.post('/loginn', 'UserController.login')
+
+Route.post('/match', 'MatchController.match')
+// Route.post('/handleLogin', 'RegisterController.login' )
+
+Route.get('/user', "UserController.getUser")
+
+Route.get('/user/:id', 'UserController.getUserById')
+
+Route.delete('/deleteUser/:id', "UserController.deleteUser")
+
+Route.put('/updateUser/:id', "UserController.updateUser")
+
+Route.get('/findPets', "FinderController.findPets")
+
+Route.put('/like', 'MatchController.like')
+
+Route.post('/imageUpload', 'UserController.imageUpload')
+

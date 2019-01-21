@@ -8,7 +8,7 @@ module.exports = {
   |--------------------------------------------------------------------------
   | Authenticator
   |--------------------------------------------------------------------------
-  |
+  |git
   | Authentication is a combination of serializer and scheme with extra
   | config to define on how to authenticate a user.
   |
@@ -30,7 +30,7 @@ module.exports = {
   session: {
     serializer: 'lucid',
     model: 'App/Models/User',
-    scheme: 'session',
+    scheme: 'basic',
     uid: 'email',
     password: 'password'
   },
@@ -51,7 +51,7 @@ module.exports = {
   basic: {
     serializer: 'lucid',
     model: 'App/Models/User',
-    scheme: 'basic',
+    scheme: 'session',
     uid: 'email',
     password: 'password'
   },

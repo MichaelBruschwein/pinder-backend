@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from "react-router-dom";
+import axios from "axios"
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   main: {
@@ -45,57 +47,90 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
 });
-
-function Login(props) {
-  const { classes } = props;
-
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          {/* <FormControlLabel
+class Login extends React.Component {
+  constructor(props) {
+    super(props)
+    this.classes = props;
+    this.state = {
+      email: "",
+      password: ""
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+  handleSubmit() {
+    axios.post('/loginn', {
+      email: this.state.email,
+      password: this.state.password,
+    }).then(function (response) {
+      if (response.data.message === "success") {
+        this.props.userLogin(response.data)
+      } else{
+        alert("We were unable to verify your credentials please try again")
+      }
+    }.bind(this))
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  render() {
+    if (this.props.userStatus === true) {
+      return <Redirect to='/profile' />
+    } else {
+      return (
+        <main className={this.props.classes.main}>
+          <CssBaseline />
+          <Paper className={this.props.classes.paper}>
+            <Avatar className={this.props.classes.avatar}>
+              <LockIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={this.props.classes.form}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Email Address</InputLabel>
+                <Input id="email" onChange={this.handleChange('email')} name="email" autoComplete="email" autoFocus />
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input name="password" onChange={this.handleChange('password')} type="password" id="password" autoComplete="current-password" />
+              </FormControl>
+              {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign in
+              <Button
+                // type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={this.props.classes.submit}
+                onClick={this.handleSubmit}
+              >
+                Sign in
           </Button>
-          <Link to="/register">
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Not a Member? Click Here to Register
+              <Link to="/register">
+                <Button
+                  // type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={this.props.classes.submit}
+                >
+                  Not a Member? Click Here to Register
           </Button>
-          </Link>
-        </form>
-      </Paper>
-    </main>
-  );
+              </Link>
+            </form>
+          </Paper>
+        </main>
+      );
+    }
+  }
 }
 
 Login.propTypes = {

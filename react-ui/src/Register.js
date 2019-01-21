@@ -5,8 +5,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-
+import axios from 'axios';
+import PhotoUploader from './PhotoUploader';
+import { Redirect } from 'react-router-dom';
+import './Register.css';
 
 const styles = theme => ({
   container: {
@@ -25,35 +27,38 @@ const styles = theme => ({
   },
 });
 const sex = [
-    {
-      value: 'Male',
-      label: 'Male',
-    },
-    {
-      value: 'Female',
-      label: 'Female',
-    }
-  ];
-  
+  {
+    value: 'Male',
+    label: 'Male',
+  },
+  {
+    value: 'Female',
+    label: 'Female',
+  }
+];
+
 class TextFields extends React.Component {
-    constructor(){
-        super()
-        this.state = {
-            name: '',
-            username:'',
-            email:'',
-            confirm_email:'',
-            password:'',
-            confirm_password:'',
-            species:'',
-            sex:'',
-            location:'',
-            age:0,
-            bio:''
+  constructor() {
+    super()
+    this.state = {
+      registered: false,
+      name: '',
+      username: '',
+      email: '',
+      confirm_email: '',
+      password: '',
+      confirm_password: '',
+      species: '',
+      sex: '',
+      city: '',
+      state: '',
+      age: '',
+      bio: '',
+      url: 'http://www.reptilegardens.com/assets/images/gallery/images/agama_copy.jpg'
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.checkForm = this.checkForm.bind(this)
-
+    this.getUrl = this.getUrl.bind(this)
   };
 
   handleChange = name => event => {
@@ -61,186 +66,206 @@ class TextFields extends React.Component {
       [name]: event.target.value,
     });
   };
-  checkForm(){
-    //check to see if all input feilds have some value entered.
-    // console.log(Object.values(this.state))
-    Object.values(this.state).forEach((v)=>{
-      if (v.length < 1){
-        alert("Please Make Sure All Forms Are Filled Out")
+  checkForm() {
+    axios.get('/').then((error) => { console.log(error) })
+    let counter = 0;
+    Object.values(this.state).forEach((v) => {
+      if (v.length < 1) {
+        counter++;
       }
     })
-    //we want to go over each input to see if there is a value there.
-    //if there is a value there contine moving through all values.
-    //if there isnt a value there alert user that there must be a value there in order to contine submiting.
-    //if both conditions are met submit the form to database to add the user.
+    if (counter >= 1) {
+      console.log(counter)
+      alert("please make sure all forms are filled out")
+    } else if (counter === 0) {
+      this.handleSubmit()
+    }
+    counter = 0;
   }
-  handleSubmit(){
-      console.log(this.state)
-      if (this.state.email === this.state.confirm_email && this.state.password === this.state.confirm_password){
-        console.log("hello")
-      }else{
-        console.log("not the same")
-      }
-      this.setState({
-            name: '',
-            username:'',
-            email:'',
-            confirm_email:'',
-            password:'',
-            confirm_password:'',
-            species:'',
-            sex:'',
-            city:'',
-            state:'',
-            age:0,
-            bio:''
-      })
-      // axios.put call to backend.
-      console.log(this.state)
+
+  handleSubmit() {
+    if (this.state.email !== this.state.confirm_email) {
+      alert("please make sure that your emails match")
+    } else if (this.state.password !== this.state.confirm_password) {
+      alert("please make sure that your passwords match")
+    } else { 
+      axios.post('/user', {
+        name: this.state.name,
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        species: this.state.species,
+        sex: this.state.sex,
+        city: this.state.city,
+        state: this.state.state,
+        age: this.state.age,
+        bio: this.state.bio,
+        url: this.state.url
+      }).then(() => {
+
+      }).catch((error) => { console.log(error) })
+    }
   }
-  
+
+  getUrl(url) {
+    this.setState({
+      url: url
+    });
+    console.log(this.state)
+  }
+
 
   render() {
     const { classes } = this.props;
-    return (
-      <form className={classes.container} noValidate autoComplete="off">
-      <Card>
-        <TextField
-        required
-          id="Name"
-          label="Name (ex. John Doe)"
-          value={this.state.name}
-          onChange={this.handleChange('name')}
-          margin="normal"
-          fullWidth
-        />
-        <TextField
-          id="Username"
-          label="Username (ex. DogLover77)"
-          value={this.state.username}
-          onChange={this.handleChange('username')}
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Email"
-          label="Email (ex. John@gmail.com)"
-          value={this.state.email}
-          onChange={this.handleChange('email')}
-          type="email"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Email-Confirmation"
-          label="Confirm Email"
-          value={this.state.confirm_email}
-          onChange={this.handleChange('confirm_email')}
-          type="email"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Password"
-          label="Password"
-          value={this.state.password}
-          onChange={this.handleChange('password')}
-          type="password"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Password-Confirmation"
-          label="Confirm Password"
-          value={this.state.confirm_password}
-          onChange={this.handleChange('confirm_password')}
-          type="password"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Species"
-          label="Species (ex. Cat)"
-          value={this.state.species}
-          onChange={this.handleChange('species')}
-          type="text"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Sex"
-          select
-          label="Sex"
-          value={this.state.sex}
-          onChange={this.handleChange('sex')}
-          margin="normal"
-          fullWidth
-          required
-          >
-          {sex.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="City"
-          label="City (ex. Bozeman)"
-          value={this.state.city}
-          onChange={this.handleChange('city')}
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="State"
-          label="State (ex. MT)"
-          value={this.state.state}
-          onChange={this.handleChange('state')}
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Age"
-          label="Age of Pet"
-          value={this.state.age}
-          onChange={this.handleChange('age')}
-          type="number"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          id="Bio"
-          label="Bio (Limit 500 Characters)"
-          value={this.state.bio}
-          onChange={this.handleChange('bio')}
-          type="text"
-          margin="normal"
-          multiline
-          required
-          fullWidth
-        />
-        <Button
-            // type="click"
-            fullWidth
-            variant="contained"
-            color="primary"
-            // className={classes.submit}
-            onClick={this.checkForm}
-          >
-            Submit
+    if (this.state.registered === true) {
+      return <Redirect to='/login' />
+    } else {
+      return (
+        <div
+          style={{
+            paddingTop: '5%'
+          }}
+        >
+          <form className={classes.container} noValidate autoComplete="off">
+            <Card>
+              <TextField
+                required
+                id="Name"
+                label="Name (ex. John Doe)"
+                value={this.state.name}
+                onChange={this.handleChange('name')}
+                margin="normal"
+                fullWidth
+              />
+              <TextField
+                id="Username"
+                label="Username (ex. DogLover77)"
+                value={this.state.username}
+                onChange={this.handleChange('username')}
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Email"
+                label="Email (ex. John@gmail.com)"
+                value={this.state.email}
+                onChange={this.handleChange('email')}
+                type="email"
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Email-Confirmation"
+                label="Confirm Email"
+                value={this.state.confirm_email}
+                onChange={this.handleChange('confirm_email')}
+                type="email"
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Password"
+                label="Password"
+                value={this.state.password}
+                onChange={this.handleChange('password')}
+                type="password"
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Password-Confirmation"
+                label="Confirm Password"
+                value={this.state.confirm_password}
+                onChange={this.handleChange('confirm_password')}
+                type="password"
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Species"
+                label="Species (ex. Cat)"
+                value={this.state.species}
+                onChange={this.handleChange('species')}
+                type="text"
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Sex"
+                select
+                label="Sex"
+                value={this.state.sex}
+                onChange={this.handleChange('sex')}
+                margin="normal"
+                fullWidth
+                required
+              >
+                {sex.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                id="City"
+                label="City (ex. Bozeman)"
+                value={this.state.city}
+                onChange={this.handleChange('city')}
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="State"
+                label="State (ex. MT)"
+                value={this.state.state}
+                onChange={this.handleChange('state')}
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Age"
+                label="Age of Pet"
+                value={this.state.age}
+                onChange={this.handleChange('age')}
+                type="number"
+                margin="normal"
+                fullWidth
+                required
+              />
+              <TextField
+                id="Bio"
+                label="Bio (Limit 500 Characters)"
+                value={this.state.bio}
+                onChange={this.handleChange('bio')}
+                type="text"
+                margin="normal"
+                multiline
+                required
+                fullWidth
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={this.checkForm}
+              >
+                Submit
           </Button>
-          </Card>
-      </form>
-    );
+            </Card>
+          </form>
+          <img className="profileImage" src={this.state.url} alt="profile image" />
+           <PhotoUploader getUrl={this.getUrl}/>
+        </div>
+      );
+    }
   }
 }
 

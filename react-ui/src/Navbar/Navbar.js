@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
 import "./Navbar.css"
@@ -17,6 +17,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  palette: {
+    type: 'dark',
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -24,23 +27,44 @@ const styles = {
 };
 
 
-function Navbar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-            <Link to="/"><Button variant="contained" color="secondary">Pinder</Button></Link>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-          </Typography>
-          <Link to="/finder"><Button color="inherit">Finder</Button></Link>
-          <Link to="/matches"><Button color="inherit">Matches</Button></Link>
-          <Link to="/register"><Button color="inherit">Register</Button> </Link>
-          <Link to="/login"><Button color="inherit">Login / Logout</Button></Link>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class Navbar extends React.Component {
+  render() {
+
+    if (!this.props.userStatus) { // User isn't logged in
+      return (
+        <div className={this.props.classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Link to="/">
+                <Button variant="contained" color="secondary"><span className="paw">Pinder</span></Button></Link>
+              <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
+              </Typography>
+              <Link to="/register"><Button color="inherit">Register</Button></Link>
+              <Link to="/login" ><Button color="inherit">Login</Button></Link>
+            </Toolbar>
+          </AppBar>
+        </div>
+      )
+    } else { //User is logged in
+      return (
+        <div className={this.props.classes.root}>
+          <AppBar className="appbar" position="static">
+            <Toolbar>
+              <Link to="/">
+              
+                <Button variant="contained" color="secondary"><span className="paw">Pinder</span></Button></Link>
+              <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
+              </Typography>
+              <Link to="/finder"><Button color="inherit">Finder</Button></Link>
+              <Link to="/matches"><Button color="inherit">Matches</Button></Link>
+              <Link to="/profile"><Button color="inherit">Profile</Button></Link>
+              <Link to="/login" ><Button onClick={this.props.logout} color="inherit">Logout</Button></Link>
+            </Toolbar>
+          </AppBar>
+        </div>
+      )
+    }
+  }
 }
 
 Navbar.propTypes = {
