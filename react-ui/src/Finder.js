@@ -24,7 +24,6 @@ class MediaCard extends React.Component {
     constructor(props) {
         super(props)
         this.classes = props;
-        console.log(this.props.matches.id)
         this.state = {
             userToBeDisplayed: {
                 name: "loading please wait...",
@@ -54,11 +53,10 @@ class MediaCard extends React.Component {
             like: like,
             isUser2: this.state.isUserOne
         }).then((response) => {
-            console.log(response)
             this.getNewMatch()
-            // if (response.data.message==="matched"){
-            //     alert("HEY Hey hey")
-            // }
+            if (response.data.message==="matched"){
+                alert("HEY Hey hey")
+            }
         }).catch((error) => {
             console.log(error)
         })
@@ -68,7 +66,6 @@ class MediaCard extends React.Component {
         axios.post('/match', {
             id: this.state.userId
         }).then((response) => {
-            console.log(response.data)
             if (response.data.message==="empty"){
                 this.setState({
                     sadPuppy:true
