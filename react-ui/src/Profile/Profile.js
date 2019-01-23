@@ -7,8 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Dialog from './../Dialog.js';
-import PhotoUploader from '../PhotoUploader';
-import '../ProfilePic.css';
+import PhotoUploader from '../PhotoUploader/PhotoUploader';
+import '../App.css';
 
 export default class Profile extends Component {
     constructor(props) {

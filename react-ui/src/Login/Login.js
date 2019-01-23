@@ -15,6 +15,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from "react-router-dom";
 import axios from "axios"
 import { Redirect } from 'react-router-dom'
+import '../App.css';
 
 const styles = theme => ({
   main: {

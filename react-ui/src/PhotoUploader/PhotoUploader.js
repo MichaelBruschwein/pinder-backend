@@ -1,7 +1,7 @@
 // import React from 'react';
 import React, { Component } from "react";
 import axios from "axios";
-
+import '../App.css';
 ///prevent refresh of page
 //make spot in database for url
 //require url to be completed

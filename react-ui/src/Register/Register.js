@@ -6,9 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import axios from 'axios';
-import PhotoUploader from './PhotoUploader';
+import PhotoUploader from '../PhotoUploader/PhotoUploader';
 import { Redirect } from 'react-router-dom';
-import './ProfilePic.css';
+import '../App.css';
 
 const styles = theme => ({
   container: {

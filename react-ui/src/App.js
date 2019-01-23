@@ -1,32 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Login from './Login'
-import Register from './Register'
-import Finder from './Finder'
+import Login from './Login/Login.js'
+import Register from './Register/Register.js'
+import Finder from './Finder/Finder.js'
 import Navbar from './Navbar/Navbar.js';
-import Matches from './Matches';
-import Home from './Home';
-// import axios from 'axios'
-import Profile from './Profile/Profile';
+import Matches from './Matches/Matches.js';
+import Profile from './Profile/Profile.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {} from '@material-ui/core/colors'
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faPaw } from '@fortawesome/free-solid-svg-icons';
-// library.add(faPaw);
 
-
-
-// Trying to do the effing paw. THe new one.
-// import IconButton from '@material-ui/core/IconButton';
-// import SvgIcon from '@material-ui/core/SvgIcon';
-
-// <IconButton aria-hidden=true;>
-//   <SvgIcon>
-//     <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" />
-//   </SvgIcon>
-// </IconButton>
-// End of paw newness that doesn't work yet. YET.
 
 const theme = createMuiTheme({
   palette: {
@@ -70,11 +53,6 @@ class App extends Component {
   }
 
   updateState(userData) {
-    // this.setState({
-
-    //   user: userData.user
-
-    // })
     this.setState(prevState => (
       {
         ...prevState,
@@ -113,7 +91,7 @@ class App extends Component {
         <div className="App">
           <MuiThemeProvider theme={theme}>
             <Navbar userStatus={this.state.userLoggedIn} logout={this.userLogout} />
-            <Route exact path="/" render={(props) => <Home {...props} userStatus={this.state.userLoggedIn} />} />
+            <Route exact path="/" render={(props) => <Login {...props} userLogin={this.userLogin}  userStatus={this.state.userLoggedIn} />} />
             <Route path="/login" render={(props) => <Login {...props} userLogin={this.userLogin} userStatus={this.state.userLoggedIn} />} />
             <Route path="/register" render={(props) => <Register {...props} userStatus={this.state.userLoggedIn} />} />
             <Route path="/finder" render={(props) => <Finder {...props} matches={this.state.user} userStatus={this.state.userLoggedIn} />} />
