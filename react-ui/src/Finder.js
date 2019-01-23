@@ -14,10 +14,12 @@ import axios from 'axios'
 
 const styles = {
     card: {
-        maxWidth: 850,
+        maxWidth: 1590,
     },
+    // formatting the pic below... on finder page, kind of?
     media: {
-        paddingTop: '56.25%',
+        paddingTop: '75.25%',
+        paddingBottom: '-76%',
     },
 };
 class MediaCard extends React.Component {

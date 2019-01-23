@@ -39,7 +39,7 @@ class Navbar extends React.Component {
                 <Button variant="contained" color="secondary"><span className="paw">Pinder</span></Button></Link>
               <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
               </Typography>
-              <Link to="/register"><Button color="inherit">Register</Button></Link>
+              <Link to="/register"><Button color="inherit" >Register</Button></Link>
               <Link to="/login" ><Button color="inherit">Login</Button></Link>
             </Toolbar>
           </AppBar>
@@ -52,10 +52,10 @@ class Navbar extends React.Component {
             <Toolbar>
               <Link to="/">
               
-                <Button variant="contained" color="secondary"><span className="paw">Pinder</span></Button></Link>
+                <Button variant="contained" color="secondary"><span className="thewordpinder">Pinder</span></Button></Link>
               <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
               </Typography>
-              <Link to="/finder"><Button color="inherit">Finder</Button></Link>
+              <Link to="/finder"><Button color="inherit" >Finder</Button></Link>
               <Link to="/matches"><Button color="inherit">Matches</Button></Link>
               <Link to="/profile"><Button color="inherit">Profile</Button></Link>
               <Link to="/login" ><Button onClick={this.props.logout} color="inherit">Logout</Button></Link>

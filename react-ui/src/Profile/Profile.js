@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Dialog from './../Dialog.js';
 import PhotoUploader from '../PhotoUploader';
-import '../Register.css';
+import '../ProfilePic.css';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -96,7 +96,7 @@ export default class Profile extends Component {
                     }
                     // Emit the following keys
                     if (keyName === 'url') {
-                        return(<div><img src={displayValue} alt="profile pic"/></div>)
+                        return(<div><img className = 'profileImage' src={displayValue} alt="profile pic"/></div>)
 
                     } else if (keyName === 'id' || keyName === 'created_at' || keyName === 'updated_at') {
                         // key is important for react to keep track of what updated

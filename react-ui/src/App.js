@@ -10,15 +10,44 @@ import Home from './Home';
 // import axios from 'axios'
 import Profile from './Profile/Profile';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { green, blue } from '@material-ui/core/colors'
+import {} from '@material-ui/core/colors'
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faPaw } from '@fortawesome/free-solid-svg-icons';
+// library.add(faPaw);
+
+
+
+// Trying to do the effing paw. THe new one.
+// import IconButton from '@material-ui/core/IconButton';
+// import SvgIcon from '@material-ui/core/SvgIcon';
+
+// <IconButton aria-hidden=true;>
+//   <SvgIcon>
+//     <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" />
+//   </SvgIcon>
+// </IconButton>
+// End of paw newness that doesn't work yet. YET.
 
 const theme = createMuiTheme({
   palette: {
-    type: 'light',
-    primary: green,
-    secondary: blue,
+    primary: {
+      // light: '#00695f',
+      light: 'ff1a8c',
+      main: '#009688',
+      // dark: '#33ab9f',
+      dark: '339ba5',
+      contrastText: '#000',
+    },
+    secondary: {
+      light: '#005b64',
+      main: '#ff3385',
+      dark: '#ff9d00',
+      contrastText: '#000',
+    },
   },
 });
+
+
 class App extends Component {
   constructor() {
     super()

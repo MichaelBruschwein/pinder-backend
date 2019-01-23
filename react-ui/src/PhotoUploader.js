@@ -47,7 +47,7 @@ export default class PhotoUploader extends Component {
         <input type="file" onChange={this.fileChangedHandler} />
 
         <button onClick={this.uploadHandler}>Upload Photo!</button>
-
+        
       </div>
     );
   }

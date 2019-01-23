@@ -8,7 +8,7 @@ import Card from '@material-ui/core/Card';
 import axios from 'axios';
 import PhotoUploader from './PhotoUploader';
 import { Redirect } from 'react-router-dom';
-import './Register.css';
+import './ProfilePic.css';
 
 const styles = theme => ({
   container: {
