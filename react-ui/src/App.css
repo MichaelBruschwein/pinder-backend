@@ -31,21 +31,19 @@
   }
 }
 
-
 .profileImage{
   width: 400px;
   height: 250px;
   padding-right: 150px;
 }
 
-/* {
-  "palette": {
-      "primary1Color": "#00acc1",
-      "primary2Color": "#00bcd4",
-      "primary3Color": "#fb8c00"
-  }
-} */
-
-.button {
-  color: yellow;
+.card{
+  box-shadow: 5px 10px rgb(7, 138, 138);
+  border-style: solid;
+  border-width: 0.6px;
+  border-radius: 15px 50px;;
+  box-shadow: 20px 20px 10px darkcyan;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+

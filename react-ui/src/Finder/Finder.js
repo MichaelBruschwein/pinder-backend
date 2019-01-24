@@ -8,9 +8,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { Redirect } from 'react-router-dom'
-import axios from 'axios'
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import '../App.css';
+import './Finder.css';
 
 const styles = {
     card: {
@@ -93,7 +94,7 @@ class MediaCard extends React.Component {
         }else if(this.state.sadPuppy){
            return(<div>
                <h1> That's Ruff No New Matches Please Check Back Later</h1>
-               <img src="https://i.ytimg.com/vi/R7K-crxH2J0/hqdefault.jpg"></img>
+               <img src="https://i.ytimg.com/vi/R7K-crxH2J0/hqdefault.jpg" alt="cute dog"></img>
                </div>)
         } else {
             return (

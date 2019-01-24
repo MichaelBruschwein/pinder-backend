@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import { CardHeader } from '@material-ui/core';
 import { Redirect } from 'react-router-dom'
 import '../App.css';
+import './Matches.css';
 
 
 const styles = {
