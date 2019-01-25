@@ -69,12 +69,8 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
-      if (response.data.message === "success") {
-        this.props.userLogin(response.data)
-      } else{
-        alert("We were unable to verify your credentials please try again")
-      }
-    }.bind(this))
+      localStorage.setItem('pinder_token', JSON.stringify(response.data.access_token.token));
+    })
       .catch((error) => {
         console.log(error)
       })

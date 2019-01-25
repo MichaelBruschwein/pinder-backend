@@ -30,7 +30,7 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor() {
     super()
-    this.rememberMe = localStorage.getItem('remember_me')
+    this.rememberMe = localStorage.getItem('pinder_token')
     this.rememberMe = JSON.parse(this.rememberMe)
     if (this.rememberMe === null) {
       this.state = {
@@ -61,9 +61,8 @@ class App extends Component {
   userLogin(userData) {
     var testObject = {
       token: userData.access_token.token,
-      user: userData.user
     };
-    localStorage.setItem('remember_me', JSON.stringify(testObject));
+    localStorage.setItem('pinder_token', JSON.stringify(testObject));
     this.updateState(userData) // broken out into a seperate function so it can be used to set state from other components
     this.setState({
       userLoggedIn: true,
