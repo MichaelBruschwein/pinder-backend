@@ -9,8 +9,10 @@ class UserController {
         try {
             if (await auth.attempt(email, password)) {
                 let user = await User.findBy('email', email)
+                // await auth.attempt(email, password)
+                // let user = await auth.getUser()
                 let accessToken = await auth.generate(user)
-                return response.json({ "message": "success", "user": user, "access_token": accessToken })
+                return response.json({ "message": "success", "access_token": accessToken })
             }
 
         }
@@ -78,7 +80,7 @@ class UserController {
         request.multipart.file('profile_pic', {}, async (file) => {
             await Drive.disk('s3').put(file.clientName, file.stream)
             const url = Drive.disk('s3').getUrl(file.clientName)
-            response.send({url})
+            response.send({ url })
         })
         await request.multipart.process()
     }
