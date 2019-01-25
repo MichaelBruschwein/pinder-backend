@@ -47,7 +47,9 @@ class Profile extends Component {
           {
             headers: {'Authorization': `Bearer ${localStorage.getItem('pinder_token')}`}
           }).then((response) => {
+              console.log(response.data.user)
             this.setState({ user: response.data.user })
+            console.log(this.state)
         }).catch((err) => {
              alert(err)
             this.props.history.push('/login')
@@ -113,6 +115,7 @@ class Profile extends Component {
         return (
             Object.values(this.state.user).map(
                 (val) => {
+                    console.log(val)
                     let keyName = Object.keys(this.state.user)[i]
                     i++
 

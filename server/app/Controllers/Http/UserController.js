@@ -32,7 +32,7 @@ class UserController {
         response.send(user)
     }
 
-    async getUser({ request, response,auth }) {
+    async getUser({ request, response, auth }) {
         try{
             let user = await auth.getUser()
             response.send({user:user})

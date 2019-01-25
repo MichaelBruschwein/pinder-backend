@@ -26,6 +26,7 @@ const styles = {
 class MediaCard extends React.Component {
     constructor(props) {
         super(props)
+        console.log('in finder constructor')
         this.classes = props;
         this.state = {
             userToBeDisplayed: {
@@ -35,18 +36,27 @@ class MediaCard extends React.Component {
                 city: "",
                 state: "",
                 bio: "",
-                url:""
+                url: ""
             },
             isUserOne: false,
-            userId: this.props.matches.id,
-            sadPuppy:false
+            userId: null,
+            sadPuppy: false
         }
         this.likesUser = this.likesUser.bind(this)
         this.getNewMatch = this.getNewMatch.bind(this)
     }
     componentDidMount() {
-        //grabs the data of all the matched users
-        //change to only grab one match
+        // axios.get('/user', 
+        //   {
+        //     headers: {'Authorization': `Bearer ${localStorage.getItem('pinder_token')}`}
+        //   }).then((response) => {
+        //       console.log(response.data.user)
+        //     this.setState({ userId: response.data.user.id })
+        //     console.log(this.state)
+        // }).catch((err) => {
+        //      alert(err)
+        //     this.props.history.push('/login')
+        // })
         this.getNewMatch()
     }
     likesUser(like) {
@@ -57,7 +67,7 @@ class MediaCard extends React.Component {
             isUser2: this.state.isUserOne
         }).then((response) => {
             this.getNewMatch()
-            if (response.data.message==="matched"){
+            if (response.data.message === "matched") {
                 alert("HEY Hey hey")
             }
         }).catch((error) => {
@@ -65,34 +75,33 @@ class MediaCard extends React.Component {
         })
 
     }
-    getNewMatch(){
-        axios.post('/match', {
-            id: this.state.userId
-        }).then((response) => {
-            if (response.data.message==="empty"){
-                this.setState({
-                    sadPuppy:true
-                })
-                // alert("Thats ruff, there are no more matches")
-                //reroute here
-            }else{
-                this.setState({
-                    userToBeDisplayed: response.data.userToBeDisplayed,
-                    isUserOne: response.data.isUserOne
-                })
-            }
-            
-        })
+    getNewMatch() {
+        axios.get('/match',
+            {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('pinder_token')}` }
+            }).then((response) => {
+                if (response.data.message === "empty") {
+                    this.setState({
+                        sadPuppy: true
+                    })
+                    // alert("Thats ruff, there are no more matches")
+                    //reroute here
+                } else {
+                    this.setState({
+                        userToBeDisplayed: response.data.userToBeDisplayed,
+                        isUserOne: response.data.isUserOne
+                    })
+                }
+
+            })
     }
 
     render() {
-        if (!this.props.userStatus) {
-            return <Redirect to='/login' />
-        }else if(this.state.sadPuppy){
-           return(<div>
-               <h1> That's Ruff No New Matches Please Check Back Later</h1>
-               <img src="https://i.ytimg.com/vi/R7K-crxH2J0/hqdefault.jpg" alt="cute dog"></img>
-               </div>)
+        if (this.state.sadPuppy) {
+            return (<div>
+                <h1> That's Ruff No New Matches Please Check Back Later</h1>
+                <img src="https://i.ytimg.com/vi/R7K-crxH2J0/hqdefault.jpg" alt="cute dog"></img>
+            </div>)
         } else {
             return (
                 <div
@@ -126,11 +135,11 @@ class MediaCard extends React.Component {
                                     container
                                     alignItems="flex-end"
                                 >
-                                    <Button onClick={(e)=>this.likesUser(false)} size="large" variant="contained" color="secondary">
+                                    <Button onClick={(e) => this.likesUser(false)} size="large" variant="contained" color="secondary">
                                         Dislike
                                     </Button>
                                 </Grid>
-                                <Button onClick={(e)=>this.likesUser(true)} size="large" variant="contained" color="primary">
+                                <Button onClick={(e) => this.likesUser(true)} size="large" variant="contained" color="primary">
                                     Like
                                 </Button>
                             </CardActions>
