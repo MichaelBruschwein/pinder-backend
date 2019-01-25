@@ -69,16 +69,16 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password,
     }).then(function (response) {
-      localStorage.setItem('pinder_token', JSON.stringify(response.data.access_token.token));
+      localStorage.setItem('pinder_token', response.data.access_token.token);
     })
       .catch((error) => {
         console.log(error)
       })
   }
   render() {
-    if (this.props.userStatus === true) {
-      return <Redirect to='/profile' />
-    } else {
+    // if (this.props.userStatus === true) {
+    //   return <Redirect to='/profile' />
+    // } else {
       return (
         <main className={this.props.classes.main}>
           <CssBaseline />
@@ -129,7 +129,7 @@ class Login extends React.Component {
       );
     }
   }
-}
+// }
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,

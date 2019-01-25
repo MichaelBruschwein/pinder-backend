@@ -32,11 +32,14 @@ class UserController {
         response.send(user)
     }
 
-    async getUser({ request, response }) {
-        let users = await User.all()
-        response.send({
-            users: users
-        })
+    async getUser({ request, response,auth }) {
+        try{
+            let user = await auth.getUser()
+            response.send({user:user})
+        }
+        catch{
+            response.send("token expired")
+        }
     }
 
     async createUser({ request, response }) {

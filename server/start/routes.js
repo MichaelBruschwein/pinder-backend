@@ -27,7 +27,7 @@ Route.post('/loginn', 'UserController.login')
 Route.post('/match', 'MatchController.match')
 // Route.post('/handleLogin', 'RegisterController.login' )
 
-Route.get('/user', "UserController.getUser")
+Route.get('/user', "UserController.getUser").middleware('auth')
 
 Route.get('/user/:id', 'UserController.getUserById')
 
