@@ -21,25 +21,20 @@ a {
     padding-bottom: 0;
     padding-top: 0;
     background-image: url('./pawprint.svg');
-    /* background-image: ; */
-    /* FontAwesomeIcon */
     color: white;
     text-shadow: 8px;
     margin-top: 50px;
     letter-spacing: 6px;
     font-size: 40px;
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
-
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 :hover {
-    color: purple;
-    /* font-size: 120%; */
-    font-family: serif;
-
+    color: black;
+    /* font-size: 50%; */
 }
-.container{
+/* .container{
     padding-top: 9px;
-}
+} */
 

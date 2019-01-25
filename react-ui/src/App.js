@@ -10,7 +10,6 @@ import Profile from './Profile/Profile.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {} from '@material-ui/core/colors'
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -27,7 +26,6 @@ const theme = createMuiTheme({
     },
   },
 });
-
 
 class App extends Component {
   constructor() {
