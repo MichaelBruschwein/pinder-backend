@@ -26,7 +26,6 @@ const styles = {
 class MediaCard extends React.Component {
     constructor(props) {
         super(props)
-        console.log('in finder constructor')
         this.classes = props;
         this.state = {
             userToBeDisplayed: {

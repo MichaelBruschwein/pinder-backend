@@ -5,10 +5,8 @@ const Database = use('Database')
 
 class MatchController {
     async match({ request, response, auth}) {
-        console.log('in matchcontroller')
         try {
             let user = await auth.getUser()
-            console.log(user.id)
             const id = user.id
             // const id = parseInt(request.input('id'))
             //allUsers everyone except logged in user
