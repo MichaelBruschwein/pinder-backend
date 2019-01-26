@@ -14,9 +14,11 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from "react-router-dom";
 import axios from "axios"
-import { Redirect } from 'react-router-dom'
 import '../App.css';
 import './Login.css';
+import {
+  withRouter,Redirect
+} from 'react-router-dom'
 
 const styles = theme => ({
   main: {
@@ -55,7 +57,8 @@ class Login extends React.Component {
     this.classes = props;
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      userStatus:null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -68,17 +71,18 @@ class Login extends React.Component {
     axios.post('/loginn', {
       email: this.state.email,
       password: this.state.password,
-    }).then(function (response) {
+    }).then((response)=> {
       localStorage.setItem('pinder_token', response.data.access_token.token);
+      this.props.history.push('/profile')
     })
       .catch((error) => {
         console.log(error)
       })
   }
   render() {
-    // if (this.props.userStatus === true) {
-    //   return <Redirect to='/profile' />
-    // } else {
+    if (this.props.userStatus === true) {
+      return <Redirect to='/profile' />
+    } else {
       return (
         <main className={this.props.classes.main}>
           <CssBaseline />
@@ -129,10 +133,10 @@ class Login extends React.Component {
       );
     }
   }
-// }
+}
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default withRouter(withStyles(styles)(Login));
