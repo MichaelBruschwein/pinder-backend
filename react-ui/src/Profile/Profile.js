@@ -120,6 +120,7 @@ class Profile extends Component {
                     } else {
                         displayValue = val;
                     }
+                    console.log(displayValue.toString())
                     // Emit the following keys
                     if (keyName === 'url') {
                         return (<div><img className='profileImage' src={displayValue} alt="profile pic" /></div>)
@@ -138,6 +139,7 @@ class Profile extends Component {
                                 </div>
                                 <div className="column">
                                     <EditableLabel
+                                        key={displayValue.toString()}
                                         text={displayValue.toString()}
                                         labelClassName='myLabelClass'
                                         inputClassName='myInputClass'
