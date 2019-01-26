@@ -45,17 +45,6 @@ class MediaCard extends React.Component {
         this.getNewMatch = this.getNewMatch.bind(this)
     }
     componentDidMount() {
-        // axios.get('/user', 
-        //   {
-        //     headers: {'Authorization': `Bearer ${localStorage.getItem('pinder_token')}`}
-        //   }).then((response) => {
-        //       console.log(response.data.user)
-        //     this.setState({ userId: response.data.user.id })
-        //     console.log(this.state)
-        // }).catch((err) => {
-        //      alert(err)
-        //     this.props.history.push('/login')
-        // })
         this.getNewMatch()
     }
     likesUser(like) {
@@ -88,7 +77,9 @@ class MediaCard extends React.Component {
                 } else {
                     this.setState({
                         userToBeDisplayed: response.data.userToBeDisplayed,
-                        isUserOne: response.data.isUserOne
+                        isUserOne: response.data.isUserOne,
+                        userId:response.data.userCurrentlyLoggedIn.id
+
                     })
                 }
 

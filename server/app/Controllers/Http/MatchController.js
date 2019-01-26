@@ -26,34 +26,34 @@ class MatchController {
             }
 
             if (user2LoggedInPendingMatches.length > 0) {
-                response.send({ match: user2LoggedInPendingMatches[0], userToBeDisplayed, isUserOne: false })
+                response.send({ match: user2LoggedInPendingMatches[0], userToBeDisplayed, isUserOne: false,userCurrentlyLoggedIn:user })
                 return
             } else if (user1LoggedInPendingMatches.length > 0) {
-                response.send({ match: user1LoggedInPendingMatches[0], userToBeDisplayed, isUserOne: true })
+                response.send({ match: user1LoggedInPendingMatches[0], userToBeDisplayed, isUserOne: true, userCurrentlyLoggedIn:user })
                 return
             } else if (allUsers.length === matchesForUser.length) {//all the rows in matches have already been made so there are no new matches available
                 response.send({ message: "empty" })
             } else {
-                await this.findUserTwo(id, allUsers, response)
+                await this.findUserTwo(id, allUsers, response,user)
             }
         } catch(e){
             response.send('invalid token' + e)
         }
     }
 
-    async findUserTwo(id, allUsers, response) {
+    async findUserTwo(id, allUsers, response,user) {
         let randomNumber = Math.floor(Math.random() * allUsers.length)
         let userToBeDisplayed = allUsers[randomNumber]
         let matchExists1 = await Database.query().table('matches').where('user1_id', id).where('user2_id', userToBeDisplayed.id)
         let matchExists2 = await Database.query().table('matches').where('user1_id', userToBeDisplayed.id).where('user2_id', id)
         if (matchExists1.length || matchExists2.length) {
-            await this.findUserTwo(id, allUsers, response)
+            await this.findUserTwo(id, allUsers, response,user)
         } else {
             let match = await Match.create({
                 user1_id: id,
                 user2_id: userToBeDisplayed.id
             })
-            response.send({ match, userToBeDisplayed, isUserOne: true })
+            response.send({ match, userToBeDisplayed, isUserOne: true, userCurrentlyLoggedIn:user })
         }
     }
 
