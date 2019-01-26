@@ -261,7 +261,7 @@ class TextFields extends React.Component {
           </Button>
             </Card>
           </form>
-          <img className="profileImage" src={this.state.url} alt="profile image" />
+          <img className="profileImage" src={this.state.url} alt="profile" />
            <PhotoUploader getUrl={this.getUrl}/>
         </div>
       );

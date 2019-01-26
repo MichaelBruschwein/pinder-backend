@@ -17,7 +17,7 @@ import axios from "axios"
 import '../App.css';
 import './Login.css';
 import {
-  withRouter,Redirect
+  withRouter
 } from 'react-router-dom'
 
 const styles = theme => ({
@@ -74,15 +74,13 @@ class Login extends React.Component {
     }).then((response)=> {
       localStorage.setItem('pinder_token', response.data.access_token.token);
       this.props.history.push('/profile')
+      this.props.login()
     })
       .catch((error) => {
         console.log(error)
       })
   }
   render() {
-    if (this.props.userStatus === true) {
-      return <Redirect to='/profile' />
-    } else {
       return (
         <main className={this.props.classes.main}>
           <CssBaseline />
@@ -133,7 +131,7 @@ class Login extends React.Component {
       );
     }
   }
-}
+// }
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,

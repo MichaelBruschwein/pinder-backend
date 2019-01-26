@@ -30,7 +30,7 @@ export default class PhotoUploader extends Component {
       this.state.selectedFile.name
     );
       //axios call to the backend that posts it to S3 pinder bucket, then pings back as a url response
-    const url = axios.post("/imageUpload", formData, {
+    axios.post("/imageUpload", formData, {
       onUploadProgress: progressEvent => {
         console.log(progressEvent.loaded / progressEvent.total);
       }
