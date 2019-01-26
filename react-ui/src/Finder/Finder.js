@@ -109,7 +109,7 @@ class MediaCard extends React.Component {
                                     image={this.state.userToBeDisplayed.url}
                                     title="Contemplative Reptile"
                                 />
-                                <CardContent>
+                                <CardContent className="card">
 
                                     {this.state.userToBeDisplayed.name},
                                     {this.state.userToBeDisplayed.sex},
