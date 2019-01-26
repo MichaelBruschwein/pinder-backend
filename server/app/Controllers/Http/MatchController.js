@@ -36,8 +36,8 @@ class MatchController {
             } else {
                 await this.findUserTwo(id, allUsers, response)
             }
-        } catch{
-            response.send('invalid token')
+        } catch(e){
+            response.send('invalid token' + e)
         }
     }
 

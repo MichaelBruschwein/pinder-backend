@@ -37,7 +37,7 @@ class App extends Component {
           <MuiThemeProvider theme={theme}>
             <Navbar/>
             {/* use profile to manage login */}
-            <Route exact path="/" component={Login}/>
+            <Route exact path="/" component={Profile}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/finder" component={Finder}/>

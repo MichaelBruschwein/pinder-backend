@@ -1,6 +1,7 @@
 'use strict'
 const User = use('App/Models/User')
 const Drive = use('Drive')
+console.log("test")
 class UserController {
     // this part is needed for login remembering
     //
@@ -18,8 +19,8 @@ class UserController {
 
         }
         catch (e) {
-
-            return response.json({ message: "Please try again we weren't able to login" })
+            return e
+            // return response.json({ message: "Please try again we weren't able to login" })
         }
     }
     show({ auth, params }) {
@@ -34,11 +35,11 @@ class UserController {
     }
 
     async getUser({ request, response, auth }) {
-        try{
+        try {
             let user = await auth.getUser()
-            response.send({user:user})
+            response.send({ user: user })
         }
-        catch{
+        catch(e){
             response.send("token expired")
         }
     }
