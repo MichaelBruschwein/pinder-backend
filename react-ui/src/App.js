@@ -24,6 +24,14 @@ const theme = createMuiTheme({
       dark: '#ff9d00',
       contrastText: '#000',
     },
+    button:{
+      backgroundColor: 'orange',
+      textColor: 'gray',
+      height: 50,
+      width: 100,
+      borderRadius: 35,
+      opacity: 50
+    },
   },
 });
 

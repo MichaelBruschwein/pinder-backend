@@ -18,9 +18,17 @@ import { withStyles } from '@material-ui/core/styles';
 const styleSheet = {
     button:{
         backgroundColor: 'orange',
-        textColor: 'gray'
-        
-    }
+        textColor: 'gray',
+        height: 50,
+        width: 100,
+        borderRadius: 35,
+        opacity: 50,
+      },
+    card: {
+        maxWidth: 1590,
+        borderRadius: 35, 
+        backgroundColor: 'dim gray',
+    },
 }
 
 class Profile extends Component {
@@ -169,7 +177,8 @@ class Profile extends Component {
         return (
             <div className="container"
                 style={{ paddingTop: '5%' }}>
-                <Card className="card">
+                <Card className={this.props.classes.card}>
+                {/* className={this.props.classes.button} */}
                     {this.profileItems()}
                     <PhotoUploader getUrl={this.getUrl} />
                     <Grid container justify="space-between">

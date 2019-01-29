@@ -12,9 +12,6 @@ import "./Navbar.css"
 import '../App.css';
 import './pawprint.css'
 
-
-
-
 const styles = {
   button:{
     backgroundColor: 'orange',
