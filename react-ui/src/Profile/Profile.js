@@ -12,6 +12,16 @@ import '../App.css';
 import {
     withRouter
 } from 'react-router-dom'
+import { orange } from '@material-ui/core/colors';
+import { withStyles } from '@material-ui/core/styles';
+
+const styleSheet = {
+    button:{
+        backgroundColor: 'orange',
+        textColor: 'gray'
+        
+    }
+}
 
 class Profile extends Component {
     constructor(props) {
@@ -156,6 +166,7 @@ class Profile extends Component {
         )
     }
     render() {
+        console.log(this.props)
         return (
             <div className="container"
                 style={{ paddingTop: '5%' }}>
@@ -194,4 +205,4 @@ class Profile extends Component {
     }
 }
 
-export default withRouter(Profile)
+export default withRouter(withStyles(styleSheet)(Profile))
