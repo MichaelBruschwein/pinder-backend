@@ -38,7 +38,7 @@ const styles = {
 
 class Navbar extends React.Component {
   render() {
-    if (!this.props.userStatus) { // User isn't logged in
+    if (!this.props.userLoggedIn) { // User isn't logged in
       return (
         <div className={this.props.classes.root}>
           <AppBar position="static">

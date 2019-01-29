@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Profile.css';
 import EditableLabel from 'react-inline-editing';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -130,7 +130,6 @@ class Profile extends Component {
                     } else {
                         displayValue = val;
                     }
-                    console.log(displayValue.toString())
                     // Emit the following keys
                     if (keyName === 'url') {
                         return (<div><img className='profileImage' src={displayValue} alt="profile pic" /></div>)
