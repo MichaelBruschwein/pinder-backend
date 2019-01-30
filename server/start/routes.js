@@ -19,7 +19,7 @@ const Route = use('Route')
 
 Route.post('/user', 'RegisterController.store')
 
-Route.post('/imageUpload', 'UserController.imageUpload').middleware('auth')
+Route.post('/imageUpload', 'UserController.imageUpload')
 // Route
 //   .get('users/:id', 'RegisterController.show')
 //   .middleware('auth')
